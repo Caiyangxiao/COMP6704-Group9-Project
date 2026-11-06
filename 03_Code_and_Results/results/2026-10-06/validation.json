@@ -1,0 +1,28 @@
+{
+  "orthogonal_ISTA": {
+    "max_coefficient_error": 1.1102230246251565e-15
+  },
+  "orthogonal_FISTA": {
+    "max_coefficient_error": 1.1102230246251565e-15
+  },
+  "orthogonal_CD": {
+    "max_coefficient_error": 4.440892098500626e-16
+  },
+  "reference": {
+    "objective": 1.6313958790812375,
+    "residual": 1.5353146353264214e-14,
+    "dual_gap": 1.7929361699013195e-13
+  },
+  "reference_ISTA": {
+    "relative_objective_difference": 1.0940290810300162e-12,
+    "residual": 6.43032940947342e-07
+  },
+  "reference_FISTA": {
+    "relative_objective_difference": 1.564687523702546e-12,
+    "residual": 8.686862519658697e-07
+  },
+  "reference_CD": {
+    "relative_objective_difference": 1.5720373085216082e-13,
+    "residual": 3.2979003905952643e-07
+  }
+}

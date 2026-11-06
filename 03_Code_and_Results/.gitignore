@@ -1,0 +1,10 @@
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.aux
+*.out
+*.toc
+*.log
+!output/report_build/report.log

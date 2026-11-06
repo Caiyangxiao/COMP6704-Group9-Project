@@ -1,0 +1,348 @@
+{
+  "generator": "scripts/plot_four_solver_results.py",
+  "source_results": "results/2026-11-06-four-solvers",
+  "methods": [
+    "ISTA",
+    "FISTA",
+    "CD",
+    "ADMM"
+  ],
+  "colors": {
+    "ISTA": "#2563A6",
+    "FISTA": "#CF7A26",
+    "CD": "#258365",
+    "ADMM": "#805AB1"
+  },
+  "matplotlib_version": "3.10.9",
+  "numpy_version": "2.2.6",
+  "fit_models": false,
+  "png_dpi": 220,
+  "uncertainty": "Sample SD across three independent instance medians where applicable; timing repeats are not independent datasets.",
+  "inputs": [
+    {
+      "path": "data/manifest.json",
+      "sha256": "20014b86519f68ff169411b3964a6d27a951916c0e69480b048ce31b342dd8cc"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/extended/coefficient_path_data.json",
+      "sha256": "a7ed380184e7381de1e9e3f7f05fe4ed83b1be6ef7d0467e697cd71fb7ba1191"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/extended/summary.json",
+      "sha256": "c1b9f359c4a0c30d6ac4d14e51c5b1c433bc0bcb037d6c48c51a8f79311c6e5e"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/extended/trace_corr_0.99_seed10_ADMM.csv",
+      "sha256": "bfae1d30e8ecb897cb256561a20e7c47e15b33abc95b5b38abc30e258c476f67"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/extended/trace_corr_0.99_seed10_CD.csv",
+      "sha256": "5dea3299ff74699ccfd161a08d19749b86d615319d02c17db217e9324e577d46"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/extended/trace_corr_0.99_seed10_FISTA.csv",
+      "sha256": "8922a24dc36248afd2105d136fdfbdfd81431662700218d47eee5749668b0254"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/extended/trace_corr_0.99_seed10_ISTA.csv",
+      "sha256": "9566119ad5195ec864d84df5495c5d1d0947d1e2481de30cf201bed468961393"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/coefficients_diabetes_CD.npz",
+      "sha256": "d47045c32e3dd94be790252f99b57af63de35eb842515bd75c0ab137507e4189"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/coefficients_synthetic_seed0_CD.npz",
+      "sha256": "6b4aee795130e0751d76a099ed8701956616f2697d98ddd19786158c4f7209e3"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/coefficients_synthetic_seed1_CD.npz",
+      "sha256": "287adc5df42c0eba4114e29e8510615c7538b60580f8078f1acb514986144499"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/coefficients_synthetic_seed2_CD.npz",
+      "sha256": "e879f9b21bfcea4e52a5a8cbd70f9deda90efa2f2bbfe3888f3ef12deebfadf8"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/optimization_results.csv",
+      "sha256": "cedb1efec4055b87205ebd9d50a4ce25b8d33771522dafabac0912cbedbe4bc5"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/regularization_results.csv",
+      "sha256": "f155d711ab6afc385329cb1dea26f1fff23f07a0afe4a6e352b317b9c9b7e5b5"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/timing_repeats.csv",
+      "sha256": "6cd1e64649e9bc7b3abdb9d1e837376a2ff415acfa5853a0e495b513afe3f3e0"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_diabetes_ADMM.csv",
+      "sha256": "8b3a69ed7d7e401d88375dce935517cd939599db4cf74cc11bdf0d78482c60cd"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_diabetes_CD.csv",
+      "sha256": "481bf82ac3348beb2f760ba5214eab623e36ab0280960ab85ffefdb1414e7143"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_diabetes_FISTA.csv",
+      "sha256": "a581f7034f463f6b43dc77e3b6525f552abaed88d70d13e38088f04312f8b0ec"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_diabetes_ISTA.csv",
+      "sha256": "beb91113af4227c6cf845daf0ff4076277d72b3c760f440017360f7fc380b8c1"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_synthetic_seed0_ADMM.csv",
+      "sha256": "289790659f5f0dd82428f10aeb51330e32c81a5203a033ffc5117cc3da4af8b5"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_synthetic_seed0_CD.csv",
+      "sha256": "8e09a29c77e7148e234cdde217f183e895a2551ef61e3887455cfed14d2f7fe3"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_synthetic_seed0_FISTA.csv",
+      "sha256": "d21f4ced71d43a8605b2d929f3ccf00a6b5a517cd0cf08b90874f1909df3a972"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/main/trace_synthetic_seed0_ISTA.csv",
+      "sha256": "9c9081d7e47379d389fe85bf8785f32f2f93c99f6ecee7bc717b2014ef6d0342"
+    },
+    {
+      "path": "results/2026-11-06-four-solvers/sensitivity/sensitivity_results.csv",
+      "sha256": "1b3db0c9943f70ba0c319fd1f25d32579cb0afb6ab995d7c965200d7a8c49ad4"
+    }
+  ],
+  "figures": [
+    {
+      "name": "convergence",
+      "description": "Objective against elapsed time on two fixed inputs; each curve uses the median-time repetition. ADMM setup and all methods' monitoring are included.",
+      "files": [
+        {
+          "name": "convergence.pdf",
+          "bytes": 21098,
+          "sha256": "cade6ef5ecc98be55fe9c28973dc95422acb5015a9788e0a69709f8a842dd675"
+        },
+        {
+          "name": "convergence.png",
+          "bytes": 89366,
+          "sha256": "12fadb584c46364bb44302f7b86e905f32b13bd8cebdd601a13877930bc7ab45"
+        },
+        {
+          "name": "convergence.svg",
+          "bytes": 36582,
+          "sha256": "993e218836fac3d4d29027d3ba35aec4a99ebcf513ef7647b9613ffff3d1d4dc"
+        }
+      ]
+    },
+    {
+      "name": "stationarity",
+      "description": "Common original-objective stationarity residual versus rounds; one CD round is a full sweep. Dashed line: 1e-6. ADMM is evaluated at its returned z coefficients.",
+      "files": [
+        {
+          "name": "stationarity.pdf",
+          "bytes": 22189,
+          "sha256": "5864409419f2bfa42e49d6426398904eac8ca5c6c58676e79534fecc98b51ee8"
+        },
+        {
+          "name": "stationarity.png",
+          "bytes": 111637,
+          "sha256": "fa5bd960878fc846626be7b12eea02e0b07fd27b2d5bb0891d2a8b8db96ed858"
+        },
+        {
+          "name": "stationarity.svg",
+          "bytes": 64895,
+          "sha256": "c2733904cc111ccd47b1090ba1bb2cdf5f980740d9fc9f9ff2df607e09ed52b2"
+        }
+      ]
+    },
+    {
+      "name": "timing_repetitions",
+      "description": "All five timings for each of the four main instances. Small horizontal offsets distinguish repetitions and carry no meaning; black bars show medians. Repetitions are not independent datasets.",
+      "files": [
+        {
+          "name": "timing_repetitions.pdf",
+          "bytes": 19635,
+          "sha256": "aa47073f654556b4188861c54b469117381ace0d79ae749f6fc9d6c68c0d630c"
+        },
+        {
+          "name": "timing_repetitions.png",
+          "bytes": 104916,
+          "sha256": "2916b32d1bae7cd7c2c385e28885a5ffecfeebe84c69d59a66df69236bcc48b5"
+        },
+        {
+          "name": "timing_repetitions.svg",
+          "bytes": 44828,
+          "sha256": "15afa250bc778a19575c33f3d9af516355ff777d460f7a9aa035c4ffa1a8562c"
+        }
+      ]
+    },
+    {
+      "name": "efficiency_summary",
+      "description": "Main benchmark solver times. Synthetic bars: means and sample SD of three instance medians, each from five repeats. Diabetes has a single split and no across-instance error bar.",
+      "files": [
+        {
+          "name": "efficiency_summary.pdf",
+          "bytes": 13656,
+          "sha256": "86dfffa034dd211afca62352cf0fe7786735d0eb2f3dc86c0217c20114a8e0bc"
+        },
+        {
+          "name": "efficiency_summary.png",
+          "bytes": 45511,
+          "sha256": "ee6364a5d6f1612d1e17b725d9314b41ba4046ade1274cd7e2d2921aa6967450"
+        },
+        {
+          "name": "efficiency_summary.svg",
+          "bytes": 19577,
+          "sha256": "00b158e91aeef4aa7e687a89a7a0e1b7aaac204022580e07f0bc4d89dc90350a"
+        }
+      ]
+    },
+    {
+      "name": "correlation_comparison",
+      "description": "Paired block-correlation study. Time/round points show means and sample SD across three instances (five repeats per instance). Bottom left is seed 10 only; bottom right is the mean full-Gram condition number. Correlation levels are equally spaced categorical positions.",
+      "files": [
+        {
+          "name": "correlation_comparison.pdf",
+          "bytes": 29955,
+          "sha256": "3b5ea83e95a9f799d2e63bdaa5fc51f698c80fc4ec8c69317cbbd002275c1ec8"
+        },
+        {
+          "name": "correlation_comparison.png",
+          "bytes": 211728,
+          "sha256": "97b172872c29f19164d820a48c7b1b708a3b502af32704ae0f512a81eb355f7b"
+        },
+        {
+          "name": "correlation_comparison.svg",
+          "bytes": 114076,
+          "sha256": "02a5d462db9a72a4eee94cb81d8a7b58e7fc679d59bb2706fea3d989bd80f367"
+        }
+      ]
+    },
+    {
+      "name": "dimension_comparison",
+      "description": "Independent-feature dimension study. Points show means and sample SD across three instance medians (five timings per instance). ADMM factorization is included; shared spectral setup is excluded.",
+      "files": [
+        {
+          "name": "dimension_comparison.pdf",
+          "bytes": 20588,
+          "sha256": "32ceac5907fa0a91742d6846230360bf67dae4774133d9ac2b46671d21478e56"
+        },
+        {
+          "name": "dimension_comparison.png",
+          "bytes": 105041,
+          "sha256": "cf6900fdb46b33bfc552ea621d6bac7f58ee504745d5119e7c0edc69fca8d35b"
+        },
+        {
+          "name": "dimension_comparison.svg",
+          "bytes": 47892,
+          "sha256": "dacb680915437c0faeb46af2133d8a728cf3cffdc673993128ba83be0c501157"
+        }
+      ]
+    },
+    {
+      "name": "coefficient_analysis",
+      "description": "CD coefficients at lambda/lambda_max=0.1. Synthetic panel shows generating values and mean \u00b1 sample SD over three instances in original units, displaying the first ten of fifty coefficients. Diabetes coefficients are standardized, with no known true support.",
+      "files": [
+        {
+          "name": "coefficient_analysis.pdf",
+          "bytes": 15927,
+          "sha256": "215f6d80be4967d4839d002b3e50f41cbd34d2580eda7aeee06ccde7c7282964"
+        },
+        {
+          "name": "coefficient_analysis.png",
+          "bytes": 73507,
+          "sha256": "e2aa76305fe591d20dff79abaa8e936598309d670ab152c4aaf4df4e79027d0e"
+        },
+        {
+          "name": "coefficient_analysis.svg",
+          "bytes": 35302,
+          "sha256": "554f644c2e438238e0e0e64fffeb236910661f96e4cd8cd75b61c8730a7799ba"
+        }
+      ]
+    },
+    {
+      "name": "regularization",
+      "description": "CD penalty sensitivity at four prespecified lambda ratios. Synthetic values are means and sample SD across three instances; Diabetes has one split. Test scores are descriptive and are not used to select lambda.",
+      "files": [
+        {
+          "name": "regularization.pdf",
+          "bytes": 19431,
+          "sha256": "6a88539568ae742de98af03d26bed665542d3c8b483db01873e4294d4e500bc1"
+        },
+        {
+          "name": "regularization.png",
+          "bytes": 107740,
+          "sha256": "7558a1b93d562a95114e58084e80658580530f262c2781cc3812380ad788b0b9"
+        },
+        {
+          "name": "regularization.svg",
+          "bytes": 60640,
+          "sha256": "970d86827123e3ff354cb96cd061025404d4a5584d223e013578a81a3a71ab33"
+        }
+      ]
+    },
+    {
+      "name": "coefficient_paths",
+      "description": "CD cold-start paths over 34 prespecified penalties. Colored synthetic curves correspond to the five true active coefficients; colored Diabetes curves are variables selected at ratio 0.1, not known ground truth. Gray curves are the remaining coefficients.",
+      "files": [
+        {
+          "name": "coefficient_paths.pdf",
+          "bytes": 23263,
+          "sha256": "0e31e96fe5b21e9be137fb8809d1e22c869e1c803f087db63cde71eeb053cedf"
+        },
+        {
+          "name": "coefficient_paths.png",
+          "bytes": 171130,
+          "sha256": "1d0dc28128857ae32dfbed32cba62b3b4b06a03f71f2849a64e17aef2e74cc29"
+        },
+        {
+          "name": "coefficient_paths.svg",
+          "bytes": 117954,
+          "sha256": "2b5431e14c901976937498350ea66d4bbe67ce7c398bd817809a12cffc18a37f"
+        }
+      ]
+    },
+    {
+      "name": "admm_penalty_sensitivity",
+      "description": "ADMM algorithmic-penalty sensitivity (beta, saved as rho in CSV), distinct from the model lambda. Each saved value is the median of three repeated cold starts. Correlated-design points show mean and sample SD across three instance medians; the two original inputs have no across-instance SD. Main comparisons prespecify beta=1.",
+      "files": [
+        {
+          "name": "admm_penalty_sensitivity.pdf",
+          "bytes": 20282,
+          "sha256": "15c1a98239582eb851c4955ef1d207a103ed29a21ea67a9f21c9e2161941c8dc"
+        },
+        {
+          "name": "admm_penalty_sensitivity.png",
+          "bytes": 98567,
+          "sha256": "a5aa81a8a01d229cacc8459b4cc3090b3498ab274faedaf7a4c55cb1f9f07122"
+        },
+        {
+          "name": "admm_penalty_sensitivity.svg",
+          "bytes": 44836,
+          "sha256": "415acf1eab3acc76f8c20021dfa9c420609fe6c260bd9a4a74e9afc609e0c1f5"
+        }
+      ]
+    },
+    {
+      "name": "setup_cost",
+      "description": "Solver time decomposed into the saved solver-specific setup component and the remainder (iterations and monitoring). Main instance medians are summarized within each dataset family; ADMM setup includes Gram construction and Cholesky factorization.",
+      "files": [
+        {
+          "name": "setup_cost.pdf",
+          "bytes": 16923,
+          "sha256": "8259ac122409a3092a2cbc6b024e5ffe2046dc90fba882cb4c5738b806c1c101"
+        },
+        {
+          "name": "setup_cost.png",
+          "bytes": 56327,
+          "sha256": "5300c5b9d29d5813903bdaabd2bb1f15b834b2e62f8268b17ad840bdac6d9d8c"
+        },
+        {
+          "name": "setup_cost.svg",
+          "bytes": 22968,
+          "sha256": "e23f80b581a6d4efe4dd4ce2e44a2627bca71e316e1b88c2f488aaa230b81dd2"
+        }
+      ]
+    }
+  ]
+}

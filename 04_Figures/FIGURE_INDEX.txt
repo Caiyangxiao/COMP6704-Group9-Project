@@ -1,0 +1,20 @@
+图索引 — 2026-11-06 四算法版
+
+当前图在 four_solvers/，代码目录镜像在03_Code_and_Results/output/figures/four_solvers/。
+绘图源：03_Code_and_Results/scripts/plot_four_solver_results.py。
+每组包括PNG（220dpi）、SVG、矢量PDF；数据来源和校验和见figure_manifest.json。
+
+convergence：同一Lasso目标随时间的变化，包含ADMM准备成本
+stationarity：四算法公共停止残差R随完整轮数的变化
+timing_repetitions：四个原始实例的全部五次计时与中位数
+efficiency_summary：主比较时间与轮数
+correlation_comparison：相关性下的时间、轮数、残差和条件数
+dimension_comparison：特征数量与时间/轮数
+coefficient_analysis：合成数据真系数/估计系数与Diabetes标准化系数
+regularization：模型lambda对测试MSE和非零数的影响
+coefficient_paths：34个lambda的系数路径、训练与测试误差
+admm_penalty_sensitivity：ADMM beta=0.1/1/10，固定模型lambda
+setup_cost：ADMM冷启动准备与迭代时间
+
+presentation/与original_benchmark/保留历史三算法图，仅作追溯。
+新报告直接引用Python生成的vector PDF，不再用旧TikZ坐标重绘。

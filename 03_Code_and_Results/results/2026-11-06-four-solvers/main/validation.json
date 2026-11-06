@@ -1,0 +1,39 @@
+{
+  "orthogonal_ISTA": {
+    "max_coefficient_error": 1.1102230246251565e-15
+  },
+  "orthogonal_FISTA": {
+    "max_coefficient_error": 1.1102230246251565e-15
+  },
+  "orthogonal_CD": {
+    "max_coefficient_error": 4.440892098500626e-16
+  },
+  "orthogonal_ADMM": {
+    "max_coefficient_error": 1.1641554387153974e-10
+  },
+  "reference": {
+    "objective": 1.6313958790812373,
+    "residual": 1.512399491515579e-14,
+    "dual_gap": 1.794120407794253e-13
+  },
+  "reference_ISTA": {
+    "max_coefficient_error": 1.5044080714510244e-06,
+    "relative_objective_difference": 1.0938929739037375e-12,
+    "residual": 6.43032940947342e-07
+  },
+  "reference_FISTA": {
+    "max_coefficient_error": 1.883363879962019e-06,
+    "relative_objective_difference": 1.5648236308288252e-12,
+    "residual": 8.686862519658697e-07
+  },
+  "reference_CD": {
+    "max_coefficient_error": 6.883670089496974e-07,
+    "relative_objective_difference": 1.5720373085216085e-13,
+    "residual": 3.2979003905952643e-07
+  },
+  "reference_ADMM": {
+    "max_coefficient_error": 1.8830944186198906e-06,
+    "relative_objective_difference": 1.97273668828677e-12,
+    "residual": 8.611033462727759e-07
+  }
+}

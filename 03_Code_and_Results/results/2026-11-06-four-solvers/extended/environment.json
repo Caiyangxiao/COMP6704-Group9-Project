@@ -1,0 +1,223 @@
+{
+  "python": "3.10.12",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "sklearn": "1.7.2",
+  "matplotlib": "3.10.9",
+  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+      "version": "0.3.28",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libgomp",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/scikit_learn.libs/libgomp-a34b3233.so.1.0.0",
+      "version": null
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+      "version": "0.3.29",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "thread_environment": {
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "datasets": [
+    {
+      "name": "corr_0_seed10",
+      "L": 1.7785371558211596,
+      "condition": 4.224904265380942,
+      "spectral_seconds": 0.0004644270002245321
+    },
+    {
+      "name": "corr_0.5_seed10",
+      "L": 6.397770067203942,
+      "condition": 28.25905224210244,
+      "spectral_seconds": 0.0004152639999119856
+    },
+    {
+      "name": "corr_0.9_seed10",
+      "L": 10.270753064119704,
+      "condition": 225.93822508117327,
+      "spectral_seconds": 0.0009167390003312903
+    },
+    {
+      "name": "corr_0.99_seed10",
+      "L": 11.19717567620788,
+      "condition": 2455.213453704173,
+      "spectral_seconds": 0.0008966420000433573
+    },
+    {
+      "name": "corr_0_seed11",
+      "L": 1.7539097900278604,
+      "condition": 3.822821331114642,
+      "spectral_seconds": 0.0004009330000371847
+    },
+    {
+      "name": "corr_0.5_seed11",
+      "L": 6.281151728612243,
+      "condition": 27.414490966326298,
+      "spectral_seconds": 0.0009198489997288561
+    },
+    {
+      "name": "corr_0.9_seed11",
+      "L": 10.318594717575529,
+      "condition": 225.61107530816628,
+      "spectral_seconds": 0.0005916690001868119
+    },
+    {
+      "name": "corr_0.99_seed11",
+      "L": 11.351751650064527,
+      "condition": 2478.413822733268,
+      "spectral_seconds": 0.0007326390000343963
+    },
+    {
+      "name": "corr_0_seed12",
+      "L": 1.8357766304722174,
+      "condition": 4.223223726450256,
+      "spectral_seconds": 0.0005302459999256826
+    },
+    {
+      "name": "corr_0.5_seed12",
+      "L": 6.632542852325528,
+      "condition": 30.617886305957143,
+      "spectral_seconds": 0.00044393700000000536
+    },
+    {
+      "name": "corr_0.9_seed12",
+      "L": 10.459063827121009,
+      "condition": 239.25239467420684,
+      "spectral_seconds": 0.00041010800032381667
+    },
+    {
+      "name": "corr_0.99_seed12",
+      "L": 11.200518217816985,
+      "condition": 2544.7025385514917,
+      "spectral_seconds": 0.0011004729999513074
+    },
+    {
+      "name": "dim_50_seed10",
+      "L": 1.536638357964838,
+      "condition": 2.5648692794966386,
+      "spectral_seconds": 0.0004906720000690257
+    },
+    {
+      "name": "dim_100_seed10",
+      "L": 1.8251267542601024,
+      "condition": 4.312707522832785,
+      "spectral_seconds": 0.001434791000065161
+    },
+    {
+      "name": "dim_300_seed10",
+      "L": 2.5491374535909195,
+      "condition": 16.119154227562294,
+      "spectral_seconds": 0.01482151000027443
+    },
+    {
+      "name": "dim_600_seed10",
+      "L": 3.4259164960377126,
+      "condition": 177.7215702809044,
+      "spectral_seconds": 0.040361369000038394
+    },
+    {
+      "name": "dim_50_seed11",
+      "L": 1.493869128976964,
+      "condition": 2.576975014166828,
+      "spectral_seconds": 0.0004150869999648421
+    },
+    {
+      "name": "dim_100_seed11",
+      "L": 1.7794062896073501,
+      "condition": 4.164501168163524,
+      "spectral_seconds": 0.0022354959996846446
+    },
+    {
+      "name": "dim_300_seed11",
+      "L": 2.565653585476736,
+      "condition": 16.12476036776415,
+      "spectral_seconds": 0.01466083700006493
+    },
+    {
+      "name": "dim_600_seed11",
+      "L": 3.44646947594706,
+      "condition": 183.2846953413309,
+      "spectral_seconds": 0.043476360000113345
+    },
+    {
+      "name": "dim_50_seed12",
+      "L": 1.5483131026621888,
+      "condition": 2.7731696136561848,
+      "spectral_seconds": 0.0008534359999430308
+    },
+    {
+      "name": "dim_100_seed12",
+      "L": 1.8344791203376325,
+      "condition": 4.352528373516646,
+      "spectral_seconds": 0.0031453710003006563
+    },
+    {
+      "name": "dim_300_seed12",
+      "L": 2.5216369218365102,
+      "condition": 15.738770177321788,
+      "spectral_seconds": 0.009134114999596932
+    },
+    {
+      "name": "dim_600_seed12",
+      "L": 3.395489677962351,
+      "condition": 186.3186768802101,
+      "spectral_seconds": 0.04717921800011027
+    }
+  ],
+  "source_sha256": {
+    "src/optimizers.py": "cf1a9aab88696f582488c71544679d126079acdaad9074634cdd95cb95f9ed95",
+    "scripts/run_experiments.py": "5ab5157270837651856c357fabb39eef1219c22501fce3cf4dbaa1deab335db7",
+    "scripts/run_extended_experiments.py": "23066014ba1546aa08c9acab115fc9f6c064d0c8afda7eb8de10fa999bfdf1f6",
+    "scripts/run_admm_sensitivity.py": "eae7c58616834097ed3f595aad3ffcb6fcc5484a541dd5d5ea198560b92bfd07",
+    "experiment_plan_admm.md": "e9e20e437dbe429846af2ff174d2c540dc9ca02b5511472b9c32ca555be1ced5",
+    "requirements-admm.txt": "0a4f0e9a373d634cdc383b17616ebe1c926eb297d22298c0075a09358ca84b8c"
+  },
+  "input_sha256": {
+    "corr_0.5_seed10.npz": "49e03ed7078dc08a122e8017a2b573bbc2701399e42aa42c14e01e3cc67d8bbb",
+    "corr_0.5_seed11.npz": "d89000d7d98ae1835d7c282197d8c4e27071b2c9905370d6604762a655ff8e84",
+    "corr_0.5_seed12.npz": "d3175780e09b749bb42f1aa490e0a52a69bee8a771c0581cb9a510c16c405800",
+    "corr_0.99_seed10.npz": "c5b2445dd78ce7353c92c9bb02eb40efb7a2b8079f312ce5fc348954d9c75829",
+    "corr_0.99_seed11.npz": "efa6f5bd6f91909761779865c994a7d544385bb6b01849c8c2c296fce4901d01",
+    "corr_0.99_seed12.npz": "3810ee031f6aacba60dc706a3924637c3e57f268246e6e126a42b8e338a1fdaf",
+    "corr_0.9_seed10.npz": "9bdba50809379e7e43b822125e349209fdf75ec76fb442c046789bddb3830c99",
+    "corr_0.9_seed11.npz": "036a6eaa95210cb5b2346645802520faca583c4c13d4cbbe4633667bc6afbece",
+    "corr_0.9_seed12.npz": "e467d58a6334a63fe36374eeaddafb547a6667e10eccb934d4318d9ff2ee7dbf",
+    "corr_0_seed10.npz": "68e909356994fb7bad2dcfa805a94dfb30fe954b629dd6ef0e2d7ef6b77e291e",
+    "corr_0_seed11.npz": "a6ed1235c0d61de3e8d2e3680afa28fb50cbd2309ddcaeeeca3e32d639cd9515",
+    "corr_0_seed12.npz": "dcdff8e1538491d5bf49484577093b4dd7bee294a08a77864e15706674fa0860",
+    "dim_100_seed10.npz": "6f167645daf3480359ec2467b0f4189fd9e67105ec0b76fbf1b111846af63075",
+    "dim_100_seed11.npz": "fe15447152120f0b375aa2ecbbf2d74e8e053d64411ebc7d407e6c332508efd4",
+    "dim_100_seed12.npz": "c5df13906ddbce545ccdc84d3665c1381d2f192388babb3702bac07f701939f2",
+    "dim_300_seed10.npz": "c36a0c9bf6e600a9766e1239ed87d34c52634dc1cd811635e1b7d2fcdd13991c",
+    "dim_300_seed11.npz": "26b17d724c4dd9851395832c475a15ad11a151215f5449397daff012d036afca",
+    "dim_300_seed12.npz": "e3829fcd550742aeb6287e32e43cb1fe850dc03dca871569139086e814b4bc61",
+    "dim_50_seed10.npz": "c589e7b3d77dc116826c78fe0e2ab224f3038003bedc32f59fb838e0a2e5c529",
+    "dim_50_seed11.npz": "c4c28aed6d2645bffc1fe06a2e79aacbf0325ef5550bb77118ef2078afbee8d0",
+    "dim_50_seed12.npz": "48127ee080da8fa90b7eaab78222ed50771b336ab37d365c78375dfdcbde8cbc",
+    "dim_600_seed10.npz": "83ea956d1a01557d7553caec52fc59f1fe35cd58027c44ce33a609efb00e8d85",
+    "dim_600_seed11.npz": "f82bec15e40d6564afd986bc4fab8ef3f607652032ec90600218892d48d55f59",
+    "dim_600_seed12.npz": "4242555694944eb2e34e946cc869f51c9f90f2c7c20589b2193dfddec2a57676"
+  }
+}

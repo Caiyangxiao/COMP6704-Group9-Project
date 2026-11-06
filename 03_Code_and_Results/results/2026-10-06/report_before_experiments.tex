@@ -1,0 +1,384 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.18}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\soft}{\mathcal{S}}
+\newcommand{\pending}{\textit{Not run}}
+\title{\textbf{Classical Optimization Algorithms for Lasso Regression}\\
+\large A Review and Planned Empirical Comparison}
+\author{COMP6704 Group Project\\Topic: Convex Optimization}
+\date{Pre-experiment draft \quad 5 October 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Lasso regression combines a least-squares loss with an $\ell_1$ penalty to fit a linear model with sparse coefficients. Although its training objective is convex, the penalty is not differentiable at zero, and different algorithms exploit its structure in different ways. This report reviews iterative shrinkage-thresholding (ISTA), accelerated iterative shrinkage-thresholding (FISTA), and cyclic coordinate descent. We organize the comparison by update mechanism, work per iteration, and convergence properties. Basic analysis explains convexity, soft thresholding, and the distinction between optimization accuracy and predictive performance. A small experimental protocol uses synthetic sparse regression data and the Diabetes regression dataset with fixed splits and common stopping checks. The literature review, input data, and result tables are prepared; optimizer experiments have not been run. Consequently, practical speed rankings and empirical conclusions remain open.
+\end{abstract}
+
+\section{Introduction}
+Linear regression is a useful setting for studying optimization because the model, training objective, and prediction task can be stated explicitly. When many candidate variables are available, fitting the observations is only part of the task: a model with fewer nonzero coefficients can also be easier to inspect. Lasso addresses this requirement by penalizing the sum of absolute coefficient values, combining coefficient shrinkage with variable selection \cite{tibshirani1996}.
+
+The optimization question is how to solve this specified training problem efficiently. Convexity rules out suboptimal local minima, but it does not make all algorithms equally fast. In particular, the $\ell_1$ penalty is not differentiable at zero. An algorithm must handle this property rather than apply ordinary smooth gradient descent to the complete objective.
+
+We study three classical methods: ISTA, FISTA, and cyclic coordinate descent. The central question is: \emph{when solving the same Lasso objective to a common optimization tolerance, how do their convergence behavior and computational costs differ?} A separate question concerns the model: \emph{how does the regularization parameter change the number of selected variables and test error?} Keeping these questions separate prevents an optimizer's early stopping behavior from being mistaken for an intrinsic predictive advantage.
+
+\subsection{Scope and literature selection}
+The review covers squared-loss Lasso for linear regression. It excludes generalized linear models, other penalties, and distributed optimization. Sources were selected for their direct relevance to the model, the three updates, or their theoretical interpretation. The selection is a focused review of representative classical methods, rather than an exhaustive or systematic review of all Lasso solvers.
+
+Table~\ref{tab:literature} identifies the role of each source. The original Lasso formulation and iterative thresholding work establish the problem and basic update. FISTA provides the acceleration comparison; regularized regression and coordinate descent references explain coordinate updates. The proximal algorithms monograph connects these methods through a common mathematical framework. Least angle regression (LARS) supplies context on regularization paths and the Diabetes data \cite{efron2004}. LARS is discussed as related work, but is not a fourth benchmark: computing a path across regularization strengths is a different task from solving one fixed-parameter problem.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}YY@{}}
+\toprule
+Source & Role in the review & Limit of its use here\\
+\midrule
+Tibshirani (1996) \cite{tibshirani1996} & Lasso, shrinkage, and variable selection & Original simulations are not our results\\
+Daubechies et al.\ (2004) \cite{daubechies2004} & Iterative thresholding for inverse problems & Infinite-dimensional proofs are outside scope\\
+Beck and Teboulle (2009) \cite{beck2009} & ISTA and FISTA objective-error bounds & Bounds do not imply a measured time ranking\\
+Friedman et al.\ (2010) \cite{friedman2010} & Coordinate updates and residual maintenance & A production solver has additional optimizations\\
+Parikh and Boyd (2014) \cite{parikh2014} & Proximal operators and composite objectives & Broader splitting methods are not benchmarked\\
+Wright (2015) \cite{wright2015} & Coordinate descent variants and assumptions & Randomized-method rates are not transferred to cyclic updates\\
+Efron et al.\ (2004) \cite{efron2004} & LARS, paths, and Diabetes data context & Path-solving performance is outside scope\\
+\bottomrule
+\end{tabularx}
+\caption{Literature selection and the specific role of each reference.}
+\label{tab:literature}
+\end{table}
+
+\section{The Lasso Training Problem}
+\subsection{Objective and preprocessing}
+Let $X\in\R^{n\times d}$ contain training features, $y\in\R^n$ contain responses, and $w\in\R^d$ contain coefficients. We use the normalization
+\begin{equation}
+ F(w)=g(w)+h(w)
+ =\frac{1}{2n}\|Xw-y\|_2^2+\lambda\|w\|_1,\qquad\lambda>0.
+ \label{eq:objective}
+\end{equation}
+The first term measures training fit; the second encourages sparse coefficients. This normalization is used throughout the report and planned implementation. A different scaling of the squared loss would require a corresponding change in the penalty and update formulas.
+
+Features are centered and scaled using training-set means and population standard deviations. The response is centered using its training mean. These transformations let the formulas omit an unpenalized intercept. Predictions on new observations use the same feature transformation and add back the training response mean. Constant training features are removed. The test set supplies no preprocessing statistics.
+
+Standardization matters because the penalty acts on coefficients, whose numerical values depend on feature units. It is part of the model definition, not an algorithm-specific speed adjustment. All methods therefore receive identical transformed inputs. Estimated coefficients are converted back to original units when compared with known synthetic coefficients.
+
+\subsection{Convexity, existence, and optimality}
+The smooth part has gradient and Hessian
+\begin{equation}
+\nabla g(w)=\frac{X^\top(Xw-y)}{n},
+\qquad \nabla^2g(w)=\frac{X^\top X}{n}\succeq0.
+\label{eq:gradient}
+\end{equation}
+Hence $g$ is convex. The norm $\|w\|_1$ is also convex, so $F$ is convex. Since $\lambda>0$, $F(w)$ grows without bound as $\|w\|_2$ grows without bound; a minimizer exists. Full column rank of $X$ is a sufficient condition for strong convexity and a unique coefficient solution. Convexity alone does not guarantee uniqueness, especially in problems with more features than samples.
+
+At zero, the subgradient of $|u|$ is the interval $[-1,1]$. The appropriate optimality condition is therefore
+\begin{equation}
+0\in\nabla g(w^\star)+\lambda\partial\|w^\star\|_1.
+\label{eq:optimality}
+\end{equation}
+For a nonzero coordinate, $\nabla_jg(w^\star)=-\lambda\operatorname{sign}(w_j^\star)$. For a zero coordinate, $|\nabla_jg(w^\star)|\leq\lambda$. These conditions explain how exact zeros can be compatible with optimality and provide a basis for implementation checks \cite{parikh2014}.
+
+\subsection{Why the penalty produces sparse coefficients}
+Lasso and ridge both shrink coefficients, but their penalties differ. Ridge uses a squared $\ell_2$ norm, while Lasso uses an $\ell_1$ norm. In two dimensions, the $\ell_1$ constraint has corners on the coordinate axes. Contact between a loss contour and such a corner can produce a zero coefficient. This geometry illustrates sparsity; it does not prove that every dataset yields the correct set of relevant variables \cite{tibshirani1996}.
+
+An orthogonal design gives a direct algebraic example. If $X^\top X/n=I$ and $v=X^\top y/n$, the solution is
+\begin{equation}
+w^\star=\soft_\lambda(v),\qquad
+\soft_\tau(v)_j=\operatorname{sign}(v_j)\max\{|v_j|-\tau,0\}.
+\label{eq:soft}
+\end{equation}
+For illustration, $v=(1.2,-0.4,0.1)$ and $\lambda=0.3$ give $w^\star=(0.9,-0.1,0)$. This is an analytic example, not an experimental measurement. A larger penalty can remove weak coefficients but also introduces shrinkage bias. It need not improve test error monotonically.
+
+\section{A Simple Comparison of Update Mechanisms}
+The organizing principle is how each method uses the same objective, rather than a list of unrelated algorithm names. We compare three dimensions: the variables updated, the information used to construct the update, and the work needed to complete one pass. Table~\ref{tab:taxonomy} defines these dimensions before the detailed derivations. FISTA remains a proximal-gradient method; its distinguishing feature is extrapolation from previous iterates.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{.13\linewidth}YYY@{}}
+\toprule
+Method & Update unit & Information and mechanism & Dense work per pass\\
+\midrule
+ISTA & All coefficients & Gradient at current point; soft thresholding & $O(nd)$\\
+FISTA & All coefficients & Gradient at extrapolated point; soft thresholding & $O(nd)$ plus $O(d)$ extrapolation\\
+Cyclic CD & One coefficient at a time & Current partial residual; exact scalar minimization & $O(n)$ per coordinate; $O(nd)$ per sweep\\
+\bottomrule
+\end{tabularx}
+\caption{Method comparison for dense inputs without a precomputed Gram matrix. A CD sweep updates all $d$ coordinates.}
+\label{tab:taxonomy}
+\end{table}
+
+\subsection{ISTA}
+For a vector $v$, the proximal subproblem for the $\ell_1$ penalty is
+\begin{equation}
+\operatorname*{arg\,min}_u\left\{\frac12\|u-v\|_2^2+\tau\|u\|_1\right\}
+=\soft_\tau(v).
+\end{equation}
+It separates across coordinates. For a positive scalar solution, differentiation gives $u=v-\tau$; for a negative solution, $u=v+\tau$. If $|v|\leq\tau$, zero satisfies the subgradient condition. This yields the soft-thresholding formula in Eq.~\eqref{eq:soft} \cite{parikh2014}.
+
+The gradient of $g$ is Lipschitz continuous with constant $L=\|X\|_2^2/n$, where $\|X\|_2$ is the spectral norm. For $0<\eta\leq1/L$, replacing $g$ with its local linear approximation and a quadratic upper bound gives
+\begin{equation}
+w^{k+1}=\soft_{\eta\lambda}\bigl(w^k-\eta\nabla g(w^k)\bigr).
+\label{eq:ista}
+\end{equation}
+ISTA takes a gradient step for fitting and a thresholding step for the penalty. Iterative thresholding was developed for linear inverse problems with sparsity constraints \cite{daubechies2004}; the finite-dimensional regression update is the case used here.
+
+ISTA is simple to implement and, with the stated step size, has a nonincreasing objective. Its dominant dense operations are $Xw$ and $X^\top(Xw-y)$; a full $d\times d$ matrix need not be stored. The main limitation is its basic objective-error bound, discussed below. A needlessly small step can also increase the number of updates.
+
+\subsection{FISTA}
+FISTA uses the same proximal operation at an extrapolated point \cite{beck2009}. With $z^1=w^0$, $t_1=1$, and $\eta=1/L$, the standard recurrence is
+\begin{align}
+w^k&=\soft_{\eta\lambda}\bigl(z^k-\eta\nabla g(z^k)\bigr),\\
+t_{k+1}&=\frac{1+\sqrt{1+4t_k^2}}{2},\\
+z^{k+1}&=w^k+\frac{t_k-1}{t_{k+1}}(w^k-w^{k-1}), \qquad k\geq1.
+\end{align}
+The extrapolation incorporates the recent direction of movement. It adds vector operations while retaining the same matrix-vector products as ISTA.
+
+For convex composite objectives with a Lipschitz-continuous smooth gradient, an existing minimizer, exact proximal updates, and step size $1/L$, the standard bounds are
+\begin{align}
+F(w^k)-F^\star&\leq\frac{L\|w^0-w^\star\|_2^2}{2k}
+&&\text{(ISTA)},\\
+F(w^k)-F^\star&\leq\frac{2L\|w^0-w^\star\|_2^2}{(k+1)^2}
+&&\text{(FISTA)}.
+\label{eq:rates}
+\end{align}
+These are objective-error bounds, not coefficient-error or elapsed-time bounds. They describe a worst-case guarantee and do not imply that every FISTA iterate improves on ISTA. Standard FISTA can have a nonmonotone objective. Our planned comparison uses this standard version without restart or monotonicity modifications, so that the algorithm being evaluated is unambiguous.
+
+\subsection{Cyclic coordinate descent}
+Coordinate descent fixes all coefficients except one and minimizes the resulting scalar objective. Write $x_j$ for column $j$ of $X$ and use the latest available coefficients to define
+\begin{equation}
+r^{(j)}=y-\sum_{\ell\ne j}x_\ell w_\ell.
+\end{equation}
+The coordinate subproblem and solution are
+\begin{equation}
+\min_u\frac{1}{2n}\|r^{(j)}-x_ju\|_2^2+\lambda|u|,
+\qquad
+w_j\leftarrow
+\frac{\soft_\lambda(x_j^\top r^{(j)}/n)}{\|x_j\|_2^2/n}.
+\label{eq:cd}
+\end{equation}
+This is a one-dimensional soft-thresholding update. With unit-variance centered columns, the denominator equals one. The general formula remains useful for checking scaling \cite{friedman2010}.
+
+An efficient implementation maintains $r=y-Xw$. Before updating coordinate $j$, it forms $r^{(j)}=r+x_jw_j$; after updating, it sets $r=r^{(j)}-x_jw_j$. Each coordinate then costs $O(n)$ for dense data, and a full sweep costs $O(nd)$. Recomputing the complete prediction for every coordinate would add unnecessary work and distort the algorithm comparison.
+
+Exact coordinate minimization makes the objective nonincreasing. There is no global gradient step size to select, but convergence theory still has assumptions, and update order matters. Wright distinguishes cyclic, randomized, smooth, and regularized coordinate methods \cite{wright2015}. A rate established for a randomized method is not automatically a rate for our cyclic Lasso implementation. We therefore do not attach a universal rate or practical speed ranking to this method.
+
+\section{Strengths, Weaknesses, and Comparison Limits}
+Table~\ref{tab:tradeoffs} summarizes properties supported by the updates and literature. It states what the methods offer and what must still be tested. It does not rank measured performance.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{.13\linewidth}YY@{}}
+\toprule
+Method & Supported strength & Limitation or open empirical question\\
+\midrule
+ISTA & Simple vector update; monotone objective with an appropriate step & $O(1/k)$ basic objective bound; step size affects progress\\
+FISTA & $O(1/k^2)$ objective bound with little extra work per update & Standard objective may oscillate; time benefit is instance-dependent\\
+Cyclic CD & Exact scalar updates; residual maintenance; no global gradient step & Sequential updates and correlated features can affect progress; implementation matters\\
+\bottomrule
+\end{tabularx}
+\caption{Mechanism-based advantages and limitations. Empirical strengths and weaknesses will be assessed after the planned runs.}
+\label{tab:tradeoffs}
+\end{table}
+
+Three distinctions are essential. First, one coordinate update is not comparable to one full gradient update. A CD sweep is the appropriate unit for supplementary pass-count plots, and elapsed time is the primary cost measure. Second, identical asymptotic work does not imply identical execution time: matrix-vector products, sequential loops, data layout, and stopping checks have different practical costs. Third, faster optimization does not necessarily improve the statistical model. With a fixed objective and sufficient accuracy, methods should achieve similar objective values; coefficient equality additionally requires uniqueness.
+
+The regularization strength governs the fit--sparsity trade-off. Evaluating different $\lambda$ values is therefore a model study, not an optimizer ranking. An observed difference in test error at a fixed $\lambda$ should first be checked against optimization residuals and stopping accuracy. Likewise, sparse coefficients do not by themselves establish reliable recovery of the true variables when observations are noisy or features are strongly related.
+
+\section{Prepared Data and Experimental Protocol}
+\subsection{Data}
+The inputs have been prepared, but no optimizer has been run. Table~\ref{tab:data} gives the actual file dimensions and fixed split sizes. Raw numerical features, targets, and split membership are saved locally; scaling is deliberately deferred until the training split is selected.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}lrrrrY@{}}
+\toprule
+Input & Samples & Features & Train & Test & Purpose\\
+\midrule
+Synthetic seed 0 & 300 & 50 & 240 & 60 & Sparse regression\\
+Synthetic seed 1 & 300 & 50 & 240 & 60 & Same generation rule\\
+Synthetic seed 2 & 300 & 50 & 240 & 60 & Same generation rule\\
+Diabetes & 442 & 10 & 353 & 89 & Real regression example\\
+\bottomrule
+\end{tabularx}
+\caption{Prepared inputs. These counts describe datasets, not experimental outcomes.}
+\label{tab:data}
+\end{table}
+
+For each synthetic instance, entries of the raw matrix are independent standard-normal draws. The first five true coefficients are $(2,-1.5,1,-2,1.5)$ and the remaining 45 are zero. Responses satisfy $y=Xw_{\mathrm{true}}+\varepsilon$, with independent normal noise of standard deviation $0.5$. Generation seeds are 0, 1, and 2. These are proposed task settings, not findings about real-world feature relevance.
+
+The Diabetes dataset has 442 observations, ten baseline variables, and a continuous response measuring disease progression after one year \cite{efron2004}. It is a regression dataset, despite its name. The local copy uses raw feature and target files from the official scikit-learn repository, pinned to release 1.9.1 \cite{sklearn_data}. It provides a small real-data demonstration, not a large-scale speed benchmark.
+
+For a dataset with $N$ rows, a separate NumPy \texttt{default\_rng} generator permutes row indices with the recorded split seed. The first $\lceil0.2N\rceil$ indices form the test set; all others form the training set. Split seeds equal the generation seeds for synthetic data and zero for Diabetes. The saved membership, rather than a later library split call, is authoritative. The manifest records source URLs, file hashes, array sizes, seeds, and the data-preparation environment. Ground-truth support is known for synthetic data only.
+
+\subsection{Common settings and stopping check}
+The settings in Table~\ref{tab:settings} are fixed before performance measurements. Set
+\begin{equation}
+\lambda_{\max}=\frac{\|X^\top y\|_\infty}{n}.
+\end{equation}
+By Eq.~\eqref{eq:optimality}, $w=0$ is an optimum when $\lambda\geq\lambda_{\max}$. This scale is computed from transformed training data. The main comparison uses $\lambda=0.1\lambda_{\max}$; this is a declared setting rather than an assertion of predictive optimality.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{.28\linewidth}Y@{}}
+\toprule
+Setting & Planned value\\
+\midrule
+Initial coefficients & $w^0=0$ for every method\\
+Main penalty & $\lambda/\lambda_{\max}=0.1$\\
+ISTA and FISTA step & $1/L$, with $L=\|X\|_2^2/n$\\
+Coordinate rule & Fixed cyclic order, one complete sweep per round\\
+Stopping threshold & Common normalized residual $R(w)\leq10^{-6}$\\
+Iteration limit & 10000 full-vector updates or complete sweeps\\
+Timing repeats & Five runs per instance; report median time\\
+Penalty demonstration & Ratios $0.01$, $0.1$, $0.5$, and $1$ using CD\\
+\bottomrule
+\end{tabularx}
+\caption{Declared protocol. All training quantities are calculated after the fixed split and training-only preprocessing.}
+\label{tab:settings}
+\end{table}
+
+A common stopping check is needed because small parameter changes do not necessarily imply comparable optimization accuracy. Define the proximal-gradient mapping and normalized residual
+\begin{align}
+G_L(w)&=L\left[w-\soft_{\lambda/L}
+                  \left(w-\frac{\nabla g(w)}{L}\right)\right],\\
+R(w)&=\frac{\|G_L(w)\|_\infty}
+{\max\{1,\|X^\top y/n\|_\infty\}}.
+\label{eq:residual}
+\end{align}
+The mapping equals zero exactly when the optimality condition holds \cite{parikh2014}. Its norm is a first-order residual, not a certified upper bound on objective error. The planned tolerance therefore specifies a shared stationarity check rather than a proof of identical finite objective error. It is evaluated after every full-vector update or CD sweep, using the returned coefficient vector, not the FISTA extrapolation point. A method that reaches its iteration limit without meeting the threshold is recorded as not converged.
+
+\subsection{Comparison and measurement}
+The first experiment compares methods at the fixed penalty. The main plot shows training objective against elapsed time. Supplementary plots may show the objective against updates or sweeps, with the units clearly named. Report the final objective, normalized residual, full passes, elapsed time, and convergence status. Test mean squared error (MSE) and the number of nonzero coefficients describe the fitted model and are reported separately.
+
+Timing includes algorithm-specific preparation and the common objective and residual checks, but excludes data loading, shared preprocessing, and plotting. The shared spectral-norm calculation is recorded separately. For a fair comparison, the implementations use direct matrix-vector products and residual maintenance, without a precomputed Gram matrix or additional screening. Five timing repetitions on the same input reduce short-run variability; they are not five independent datasets. Synthetic results are summarized over the three instances, with each instance's individual values retained. The single Diabetes split does not support an estimate of uncertainty across test splits.
+
+The second experiment illustrates the regularization effect. Cyclic CD solves the four declared penalty ratios to the same tolerance. Plot test MSE and the number of coefficients with $|w_j|>10^{-6}$. The threshold defines a reporting convention in standardized coefficient units. The test set is used for descriptive evaluation, not to choose a winning penalty and then report its test score as an unbiased model-selection result.
+
+\subsection{Minimal implementation validation}
+Before formal runs, only two checks are planned. First, all implementations are compared with Eq.~\eqref{eq:soft} on a small orthogonal-design instance. This tests normalization and thresholding against an analytic solution. Second, one synthetic instance is compared with scikit-learn Lasso at a tighter tolerance, using \texttt{alpha} equal to $\lambda$ and \texttt{fit\_intercept=False} on centered inputs \cite{sklearn_data}. The comparison uses the objective and the common residual rather than library-specific iteration counts.
+
+These checks validate the implemented updates. They do not establish a general speed ranking. Additional debugging is warranted if objectives, residuals, or outputs disagree materially; an extra test suite is not part of the present plan.
+
+\section{Tables for the Subsequent Experiments}
+The following tables are empty result templates. Every \emph{Not run} entry is intentionally unfilled and must be replaced with actual measurements. The dataset sizes and declared settings above are the only prepared numerical information. No literature benchmark numbers are substituted for this project's experiments.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}llYYYYY@{}}
+\toprule
+Data & Method & Time (s) & Passes & Final $F$ & Final $R$ & Status\\
+\midrule
+Synthetic & ISTA & \pending & \pending & \pending & \pending & \pending\\
+Synthetic & FISTA & \pending & \pending & \pending & \pending & \pending\\
+Synthetic & CD & \pending & \pending & \pending & \pending & \pending\\
+Diabetes & ISTA & \pending & \pending & \pending & \pending & \pending\\
+Diabetes & FISTA & \pending & \pending & \pending & \pending & \pending\\
+Diabetes & CD & \pending & \pending & \pending & \pending & \pending\\
+\bottomrule
+\end{tabularx}
+\caption{Planned optimization results at $\lambda=0.1\lambda_{\max}$. For synthetic data, summarize the three instances and retain individual results; use mean and standard deviation for numerical summaries. Time for each instance is the median of five repetitions. Status lists the number of converged instances. Passes are complete updates or CD sweeps.}
+\label{tab:optimization_results}
+\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{.88\linewidth}{@{}llYY@{}}
+\toprule
+Data & Method & Test MSE & Nonzero coefficients\\
+\midrule
+Synthetic & ISTA & \pending & \pending\\
+Synthetic & FISTA & \pending & \pending\\
+Synthetic & CD & \pending & \pending\\
+Diabetes & ISTA & \pending & \pending\\
+Diabetes & FISTA & \pending & \pending\\
+Diabetes & CD & \pending & \pending\\
+\bottomrule
+\end{tabularx}
+\caption{Planned prediction and sparsity summaries at the main penalty. Synthetic values summarize three instances; Diabetes values describe one fixed split. Counts use $|w_j|>10^{-6}$.}
+\label{tab:prediction_results}
+\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{.88\linewidth}{@{}lcYY@{}}
+\toprule
+Data & $\lambda/\lambda_{\max}$ & Test MSE & Nonzero coefficients\\
+\midrule
+Synthetic & 0.01 & \pending & \pending\\
+Synthetic & 0.1 & \pending & \pending\\
+Synthetic & 0.5 & \pending & \pending\\
+Synthetic & 1 & \pending & \pending\\
+Diabetes & 0.01 & \pending & \pending\\
+Diabetes & 0.1 & \pending & \pending\\
+Diabetes & 0.5 & \pending & \pending\\
+Diabetes & 1 & \pending & \pending\\
+\bottomrule
+\end{tabularx}
+\caption{Planned model study using CD. This table concerns the penalty, not optimizer superiority.}
+\label{tab:penalty_results}
+\end{table}
+
+After the runs, the discussion should answer concrete questions. Does FISTA reduce the time to the stated residual tolerance, and do nonmonotone objective changes affect its progress? Does CD's scalar-update structure translate into a time advantage at these sizes? Do test errors agree when optimization residuals are small? Does the penalty remove variables while increasing shrinkage error? Any answer must cite the corresponding curve or measured row. If a ranking changes across datasets or differences are small, report that directly rather than select a favorable subset.
+
+\section{Limitations and Current Conclusions}
+The review establishes that Lasso is a convex composite training problem with a simple thresholding operation. ISTA uses that operation after a gradient step, FISTA adds extrapolation with a stronger worst-case objective bound, and CD solves scalar subproblems using partial residuals. This explains their different mechanisms and identifies appropriate comparison units. It does not establish their empirical ranking.
+
+The planned study is deliberately small. Two task types and one real-data split cannot characterize all feature correlations, sparsity levels, or large-scale settings. The planned basic NumPy implementations will reflect language and data-layout choices, so results should describe the implemented methods rather than claim to rank every optimized solver. The synthetic setup has a known sparse generating model, whereas the real dataset does not supply a known correct support set. Finally, a small optimization residual is not evidence that the fitted model has discovered causal effects or minimizes population prediction error.
+
+At this stage, the supported conclusion is methodological: fair comparison requires a shared objective, preprocessing, initialization, stopping check, and timing definition. The data and reporting structure are ready for the group's subsequent experiments. Practical strengths and weaknesses, numerical conclusions, and the final empirical abstract will be completed from those measurements.
+
+\begin{thebibliography}{9}
+\bibitem{tibshirani1996}
+R. Tibshirani. Regression shrinkage and selection via the lasso.
+\emph{Journal of the Royal Statistical Society: Series B (Methodological)},
+vol. 58, no. 1, pp. 267--288, 1996.
+\url{https://doi.org/10.1111/j.2517-6161.1996.tb02080.x}.
+\bibitem{daubechies2004}
+I. Daubechies, M. Defrise, and C. De Mol.
+An iterative thresholding algorithm for linear inverse problems with a sparsity constraint.
+\emph{Communications on Pure and Applied Mathematics},
+vol. 57, no. 11, pp. 1413--1457, 2004.
+\url{https://doi.org/10.1002/cpa.20042}.
+\bibitem{beck2009}
+A. Beck and M. Teboulle.
+A fast iterative shrinkage-thresholding algorithm for linear inverse problems.
+\emph{SIAM Journal on Imaging Sciences}, vol. 2, no. 1, pp. 183--202, 2009.
+\url{https://doi.org/10.1137/080716542}.
+\bibitem{friedman2010}
+J. H. Friedman, T. Hastie, and R. Tibshirani.
+Regularization paths for generalized linear models via coordinate descent.
+\emph{Journal of Statistical Software}, vol. 33, no. 1, pp. 1--22, 2010.
+\url{https://doi.org/10.18637/jss.v033.i01}.
+\bibitem{parikh2014}
+N. Parikh and S. Boyd. Proximal algorithms.
+\emph{Foundations and Trends in Optimization}, vol. 1, no. 3, 2014.
+\url{https://doi.org/10.1561/2400000003}.
+\bibitem{wright2015}
+S. J. Wright. Coordinate descent algorithms.
+\emph{Mathematical Programming}, vol. 151, no. 1, pp. 3--34, 2015.
+\url{https://doi.org/10.1007/s10107-015-0892-3}.
+\bibitem{efron2004}
+B. Efron, T. Hastie, I. Johnstone, and R. Tibshirani.
+Least angle regression. \emph{The Annals of Statistics},
+vol. 32, no. 2, pp. 407--451, 2004.
+\url{https://doi.org/10.1214/009053604000000067}.
+\bibitem{sklearn_data}
+scikit-learn developers. Diabetes dataset and Lasso,
+official dataset files (release 1.9.1) and documentation, accessed 5 October 2026.
+\url{https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html};
+\url{https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html}.
+\end{thebibliography}
+\end{document}

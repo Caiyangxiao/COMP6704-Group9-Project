@@ -1,0 +1,506 @@
+[
+  {
+    "dataset": "corr_0.5_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.5_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.5_seed12",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.99_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.99_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.99_seed12",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 2.220446049250313e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.9_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.3322676295501878e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.9_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0.9_seed12",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "corr_0_seed12",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_100_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_100_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 3.552713678800501e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_100_seed12",
+    "fields": {
+      "X": {
+        "array_equal": false,
+        "max_abs_difference": 4.440892098500626e-16
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_300_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_300_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 3.552713678800501e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_300_seed12",
+    "fields": {
+      "X": {
+        "array_equal": false,
+        "max_abs_difference": 4.440892098500626e-16
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_50_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_50_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 3.552713678800501e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_50_seed12",
+    "fields": {
+      "X": {
+        "array_equal": false,
+        "max_abs_difference": 4.440892098500626e-16
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_600_seed10",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_600_seed11",
+    "fields": {
+      "X": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 3.552713678800501e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  },
+  {
+    "dataset": "dim_600_seed12",
+    "fields": {
+      "X": {
+        "array_equal": false,
+        "max_abs_difference": 4.440892098500626e-16
+      },
+      "y": {
+        "array_equal": false,
+        "max_abs_difference": 1.7763568394002505e-15
+      },
+      "train_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      },
+      "test_indices": {
+        "array_equal": true,
+        "max_abs_difference": 0.0
+      }
+    }
+  }
+]

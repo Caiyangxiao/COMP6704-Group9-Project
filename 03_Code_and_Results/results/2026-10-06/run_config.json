@@ -1,0 +1,69 @@
+{
+  "python": "3.12.14",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "numpy": "2.3.5",
+  "sklearn": "1.9.1",
+  "matplotlib": "3.11.2",
+  "threadpools": [
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "/Users/kejia-polyu/Library/Mobile Documents/com~apple~CloudDocs/PolyU/Course/COMP6704/lasso-project/.venv/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+      "version": null
+    }
+  ],
+  "configuration": {
+    "main_lambda_ratio": 0.1,
+    "lambda_ratios": [
+      0.01,
+      0.1,
+      0.5,
+      1.0
+    ],
+    "tolerance": 1e-06,
+    "max_rounds": 10000,
+    "timing_repeats": 5,
+    "nonzero_threshold": 1e-06,
+    "blas_threads": 1,
+    "objective": "squared_loss/(2*n) + lambda*L1"
+  },
+  "datasets": {
+    "diabetes": {
+      "L": 3.95355766151456,
+      "lambda_max": 45.256762513086024,
+      "spectral_seconds": 0.0030703339999718082,
+      "train_samples": 353,
+      "test_samples": 89
+    },
+    "synthetic_seed0": {
+      "L": 2.0862174579630515,
+      "lambda_max": 2.021516142621518,
+      "spectral_seconds": 0.0007142910000084157,
+      "train_samples": 240,
+      "test_samples": 60
+    },
+    "synthetic_seed1": {
+      "L": 1.9481325376931309,
+      "lambda_max": 2.18340355577199,
+      "spectral_seconds": 0.00029445900008795434,
+      "train_samples": 240,
+      "test_samples": 60
+    },
+    "synthetic_seed2": {
+      "L": 1.9654465422783125,
+      "lambda_max": 2.4934398829557285,
+      "spectral_seconds": 0.0002777919999061851,
+      "train_samples": 240,
+      "test_samples": 60
+    }
+  },
+  "input_checksums": {
+    "diabetes": "f66a5bf70302b7de32638f266c950d4c85bbf7119e26f12ed1a26b2c4d9e4306",
+    "synthetic_seed0": "f936294375f135fb0bae563b0d52e1453333b58c1f88eee0574eec07dfca3477",
+    "synthetic_seed1": "33a0c6bbd75c2be994e33e7f377377f9f1b6bb9dde7a403e1a6fd2c7b0df9919",
+    "synthetic_seed2": "814eda27556ad10b15885fd5306b52edce209322a317fcb238f7a41a63b26f78"
+  }
+}

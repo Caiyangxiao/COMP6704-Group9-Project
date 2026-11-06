@@ -1,0 +1,107 @@
+{
+  "python": "3.10.12",
+  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "numpy": "2.2.6",
+  "sklearn": "1.7.2",
+  "scipy": "1.15.3",
+  "matplotlib": "3.10.9",
+  "source_sha256": {
+    "src/optimizers.py": "cf1a9aab88696f582488c71544679d126079acdaad9074634cdd95cb95f9ed95",
+    "scripts/run_experiments.py": "5ab5157270837651856c357fabb39eef1219c22501fce3cf4dbaa1deab335db7",
+    "scripts/run_extended_experiments.py": "23066014ba1546aa08c9acab115fc9f6c064d0c8afda7eb8de10fa999bfdf1f6",
+    "scripts/run_admm_sensitivity.py": "eae7c58616834097ed3f595aad3ffcb6fcc5484a541dd5d5ea198560b92bfd07",
+    "requirements-admm.txt": "0a4f0e9a373d634cdc383b17616ebe1c926eb297d22298c0075a09358ca84b8c",
+    "experiment_plan_admm.md": "e9e20e437dbe429846af2ff174d2c540dc9ca02b5511472b9c32ca555be1ced5"
+  },
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+      "version": "0.3.29",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libgomp",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/scikit_learn.libs/libgomp-a34b3233.so.1.0.0",
+      "version": null
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+      "version": "0.3.28",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "configuration": {
+    "main_lambda_ratio": 0.1,
+    "lambda_ratios": [
+      0.01,
+      0.1,
+      0.5,
+      1.0
+    ],
+    "tolerance": 1e-06,
+    "max_rounds": 10000,
+    "timing_repeats": 5,
+    "nonzero_threshold": 1e-06,
+    "blas_threads": 1,
+    "objective": "squared_loss/(2*n) + lambda*L1",
+    "methods": [
+      "ISTA",
+      "FISTA",
+      "CD",
+      "ADMM"
+    ],
+    "admm_rho": 1.0,
+    "timing_includes": "solver setup, factorization if applicable, updates, objective/history and common residual",
+    "timing_excludes": "data loading, preprocessing, shared spectral calculation and plotting"
+  },
+  "datasets": {
+    "diabetes": {
+      "L": 3.95355766151456,
+      "lambda_max": 45.25676251308602,
+      "spectral_seconds": 0.0002235470001323847,
+      "train_samples": 353,
+      "test_samples": 89
+    },
+    "synthetic_seed0": {
+      "L": 2.0862174579630515,
+      "lambda_max": 2.021516142621518,
+      "spectral_seconds": 0.00021986399997331318,
+      "train_samples": 240,
+      "test_samples": 60
+    },
+    "synthetic_seed1": {
+      "L": 1.9481325376931302,
+      "lambda_max": 2.1834035557719895,
+      "spectral_seconds": 0.00021905999983573565,
+      "train_samples": 240,
+      "test_samples": 60
+    },
+    "synthetic_seed2": {
+      "L": 1.9654465422783114,
+      "lambda_max": 2.493439882955728,
+      "spectral_seconds": 0.00037146400018173154,
+      "train_samples": 240,
+      "test_samples": 60
+    }
+  },
+  "input_checksums": {
+    "diabetes": "f66a5bf70302b7de32638f266c950d4c85bbf7119e26f12ed1a26b2c4d9e4306",
+    "synthetic_seed0": "f936294375f135fb0bae563b0d52e1453333b58c1f88eee0574eec07dfca3477",
+    "synthetic_seed1": "33a0c6bbd75c2be994e33e7f377377f9f1b6bb9dde7a403e1a6fd2c7b0df9919",
+    "synthetic_seed2": "814eda27556ad10b15885fd5306b52edce209322a317fcb238f7a41a63b26f78"
+  }
+}

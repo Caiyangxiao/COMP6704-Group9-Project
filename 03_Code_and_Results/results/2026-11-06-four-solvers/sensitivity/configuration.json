@@ -1,0 +1,21 @@
+{
+  "rhos": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "repeats": 3,
+  "lambda_ratio": 0.1,
+  "tolerance": 1e-06,
+  "max_rounds": 10000,
+  "initialization": "x=z=u=0",
+  "datasets": [
+    "synthetic_seed0",
+    "diabetes",
+    "corr_0.99_seed10",
+    "corr_0.99_seed11",
+    "corr_0.99_seed12"
+  ],
+  "stopping": "same normalized proximal-gradient residual R(z) <= tolerance",
+  "timing": "setup, factorization, iteration and monitoring included; shared spectral setup excluded"
+}

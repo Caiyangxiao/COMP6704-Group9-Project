@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-07",
+  "group": 9,
+  "topic": "Convex Optimization",
+  "report_pages": 17,
+  "guide_pages": 12,
+  "report_figures": 10,
+  "report_tables": 11,
+  "reference_entries": 20,
+  "report_source_sha256": "d86c0e769df324f2077c93def6d28fdd960aabe05773388c83114cb4a9297ace",
+  "csv_rows": {
+    "2026-10-06": {
+      "timing_repeats.csv": 60,
+      "optimization_results.csv": 12,
+      "regularization_results.csv": 16
+    },
+    "2026-10-07-extended": {
+      "timing_repeats.csv": 360,
+      "optimization_results.csv": 72,
+      "path_results.csv": 68
+    }
+  },
+  "verification": {
+    "original_input_sha256": true,
+    "extended_input_sha256": true,
+    "copied_core_sources_sha256": true,
+    "python_source_parse": true,
+    "pdf_all_pages_visually_reviewed": true,
+    "formal_experiments_rerun_for_packaging": false
+  },
+  "exclusions": [
+    ".venv",
+    "cache",
+    "course PDFs and other-group rosters",
+    "older export archives"
+  ],
+  "student_id_format": "Uppercase R for all four current author IDs"
+}

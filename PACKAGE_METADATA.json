@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-06",
+  "group": 9,
+  "topic": "Convex Optimization",
+  "revision": "four-solvers-with-ADMM",
+  "methods": [
+    "ISTA",
+    "FISTA",
+    "CD",
+    "ADMM"
+  ],
+  "report": "02_Report/Lasso_Project_Report.pdf",
+  "report_pages": 14,
+  "report_figures": 9,
+  "report_tables": 8,
+  "reference_entries": 20,
+  "report_source_sha256": "85dbeb5def54c1e6b206a642113c04ee6cb5ff593a42299a70a94f5a44d94487",
+  "report_pdf_sha256": "0b6e2dd1e4dd0e15f2f94d92a75f21e23c97833e5e8aecb708657bfd686bfbeb",
+  "report_pdf_bytes": 263873,
+  "generated_figure_groups": 11,
+  "figure_formats": [
+    "png",
+    "svg",
+    "pdf"
+  ],
+  "current_result_root": "03_Code_and_Results/results/2026-11-06-four-solvers",
+  "csv_rows": {
+    "main": {
+      "optimization_results.csv": 16,
+      "regularization_results.csv": 16,
+      "timing_repeats.csv": 80
+    },
+    "extended": {
+      "optimization_results.csv": 96,
+      "path_results.csv": 68,
+      "timing_repeats.csv": 480
+    },
+    "sensitivity": {
+      "sensitivity_repeats.csv": 45,
+      "sensitivity_results.csv": 15
+    }
+  },
+  "verification": {
+    "six_numerical_tests_passed": true,
+    "primary_timing_runs": 560,
+    "sensitivity_timing_runs": 45,
+    "all_605_timing_runs_converged": true,
+    "penalty_fits_converged": 16,
+    "path_fits_converged": 68,
+    "original_input_sha256": true,
+    "independent_saved_coefficient_solutions_checked": 112,
+    "all_report_pages_rendered_and_visually_reviewed": true,
+    "undefined_references": false,
+    "overfull_boxes": false,
+    "all_33_figure_artifacts_mirrored": true,
+    "historical_results_preserved": true
+  },
+  "runtime": {
+    "python": "3.10.12",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.2",
+    "matplotlib": "3.10.9",
+    "platform": "Linux/WSL2 x86_64",
+    "detected_thread_pools": 3,
+    "threads_per_detected_pool": 1
+  },
+  "pending_submission_items": [
+    "Actual project GitHub URL",
+    "Member-confirmed individual contributions",
+    "Four-solver presentation and combined submission PDF"
+  ],
+  "historical_materials": [
+    "01_Chinese_Guide",
+    "04_Figures/presentation",
+    "04_Figures/original_benchmark",
+    "03_Code_and_Results/results/2026-10-06",
+    "03_Code_and_Results/results/2026-10-07-extended"
+  ],
+  "manifest_excludes": [
+    "FILE_MANIFEST_SHA256.csv",
+    "__pycache__",
+    ".cache",
+    ".venv",
+    ".pytest_cache"
+  ]
+}

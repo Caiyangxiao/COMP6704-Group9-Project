@@ -1,0 +1,72 @@
+{
+  "configuration": {
+    "rhos": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "repeats": 3,
+    "lambda_ratio": 0.1,
+    "tolerance": 1e-06,
+    "max_rounds": 10000,
+    "initialization": "x=z=u=0",
+    "datasets": [
+      "synthetic_seed0",
+      "diabetes",
+      "corr_0.99_seed10",
+      "corr_0.99_seed11",
+      "corr_0.99_seed12"
+    ],
+    "stopping": "same normalized proximal-gradient residual R(z) <= tolerance",
+    "timing": "setup, factorization, iteration and monitoring included; shared spectral setup excluded"
+  },
+  "python": "3.10.12",
+  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+      "version": "0.3.28",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libgomp",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/scikit_learn.libs/libgomp-a34b3233.so.1.0.0",
+      "version": null
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/comp6704-admm-venv/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+      "version": "0.3.29",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "input_sha256": {
+    "corr_0.99_seed10": "c5b2445dd78ce7353c92c9bb02eb40efb7a2b8079f312ce5fc348954d9c75829",
+    "corr_0.99_seed11": "efa6f5bd6f91909761779865c994a7d544385bb6b01849c8c2c296fce4901d01",
+    "corr_0.99_seed12": "3810ee031f6aacba60dc706a3924637c3e57f268246e6e126a42b8e338a1fdaf",
+    "synthetic_seed0": "f936294375f135fb0bae563b0d52e1453333b58c1f88eee0574eec07dfca3477",
+    "diabetes": "f66a5bf70302b7de32638f266c950d4c85bbf7119e26f12ed1a26b2c4d9e4306"
+  },
+  "source_sha256": {
+    "src/optimizers.py": "cf1a9aab88696f582488c71544679d126079acdaad9074634cdd95cb95f9ed95",
+    "scripts/run_admm_sensitivity.py": "eae7c58616834097ed3f595aad3ffcb6fcc5484a541dd5d5ea198560b92bfd07",
+    "requirements-admm.txt": "0a4f0e9a373d634cdc383b17616ebe1c926eb297d22298c0075a09358ca84b8c",
+    "experiment_plan_admm.md": "e9e20e437dbe429846af2ff174d2c540dc9ca02b5511472b9c32ca555be1ced5"
+  },
+  "runs": 45,
+  "converged_runs": 45
+}
