@@ -1,0 +1,2 @@
+# Preserve recorded data, source snapshots, and checksum manifests byte-for-byte.
+* -text

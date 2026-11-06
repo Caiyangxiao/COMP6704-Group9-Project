@@ -134,5 +134,6 @@
     "repository": "https://github.com/Caiyangxiao/COMP6704-Group9-Project"
   },
   "primary_readme": "README.md",
-  "readme_language": "English"
+  "readme_language": "English",
+  "git_byte_preservation": ".gitattributes: * -text"
 }

@@ -5,7 +5,16 @@
 
 This repository presents a reproducible study of four classical algorithms for convex Lasso regression: the Iterative Shrinkage-Thresholding Algorithm (ISTA), the Fast Iterative Shrinkage-Thresholding Algorithm (FISTA), cyclic coordinate descent (CD), and the Alternating Direction Method of Multipliers (ADMM). The study connects mathematical formulation and convergence theory with measured computational efficiency, numerical accuracy, and sparsity. All four implementations solve the same training problems under a common stationarity-based stopping criterion.
 
-[Project report](02_Report/Lasso_Project_Report.pdf) · [Solver implementations](03_Code_and_Results/src/optimizers.py) · [Recorded experiments](03_Code_and_Results/results/2026-11-06-four-solvers/) · [Detailed replication guide](03_Code_and_Results/README.txt)
+[Project report](02_Report/Lasso_Project_Report.pdf) · [Editable presentation](05_Presentation/COMP6704_Group9_Lasso_Presentation.pptx) · [Combined submission](06_Submission/Group9.pdf) · [Solver implementations](03_Code_and_Results/src/optimizers.py) · [Recorded experiments](03_Code_and_Results/results/2026-11-06-four-solvers/)
+
+## Project Materials
+
+| Material | Contents |
+|---|---|
+| [Report](02_Report/Lasso_Project_Report.pdf) | A 15-page manuscript, including references and confirmed author contributions |
+| [Presentation](05_Presentation/COMP6704_Group9_Lasso_Presentation.pptx) | An editable 34-slide deck: 30 main slides, one Q&A slide, and three backup/reference slides |
+| [Bilingual speaker notes](05_Presentation/Speaker_Notes_Bilingual.txt) | Alternative English and Chinese scripts, with a 30-minute presentation plan and a separate 10-minute Q&A |
+| [Combined submission](06_Submission/Group9.pdf) | Report followed by presentation slides: 49 pages, approximately 2.08 MB |
 
 ## Research Objectives
 
@@ -71,12 +80,15 @@ The following runtimes are measured in milliseconds in the recorded numerical en
 - **Accurate solvers produce nearly identical fitted results.** At a fixed model penalty, differences in test error are too small to support a predictive ranking of the optimizers.
 - **Sparsity and estimation accuracy are distinct.** Correct synthetic support recovery coexists with coefficient shrinkage; stronger model penalties can yield smaller models with higher test error.
 
+![Recorded cold runtimes for the four solvers on the synthetic instances and Diabetes](04_Figures/presentation_four_solvers/main_runtime.png)
+
 These findings concern the recorded dense implementations and monitoring protocol. Three synthetic instances, one real-data split, and short timing repetitions support descriptive comparisons rather than general statistical guarantees. The complete analysis and qualifications appear in the [report](02_Report/Lasso_Project_Report.pdf).
 
-## Core Repository Structure
+## Repository Structure
 
 ```text
 .
+├── README.md                    # Academic project overview
 ├── 01_Chinese_Guide/             # Historical supplementary notes
 ├── 02_Report/                   # Project report
 ├── 03_Code_and_Results/
@@ -89,7 +101,10 @@ These findings concern the recorded dense implementations and monitoring protoco
 │   ├── templates/               # Manuscript template and bibliography
 │   ├── requirements-admm.txt     # Recorded numerical environment
 │   └── report.tex               # Generated report source
-├── 04_Figures/                  # Figure copies for sharing and presentation
+├── 04_Figures/                  # Report and projection-ready figures
+├── 05_Presentation/             # Editable slides, PDF, bilingual notes, and timing
+├── 06_Submission/Group9.pdf      # Combined report and presentation
+├── .gitattributes               # Byte-preserving checkout for integrity checks
 ├── FILE_MANIFEST_SHA256.csv      # Package integrity checksums
 └── PACKAGE_METADATA.json         # Release metadata
 ```
@@ -131,7 +146,28 @@ tectonic --keep-logs --outdir ../02_Report report.tex
 
 This produces `02_Report/report.pdf`; after review, it can replace the canonical `Lasso_Project_Report.pdf`. Detailed instructions are available in the [replication guide](03_Code_and_Results/README.txt).
 
+## Presentation and Submission Workflow
+
+Presentation generation reads the frozen experiment records and has a separate dependency set in `03_Code_and_Results/requirements-presentation.txt`. From `03_Code_and_Results`, use a separate Python environment for this workflow:
+
+```bash
+python -m pip install -r requirements-presentation.txt
+python scripts/plot_presentation_assets.py
+python scripts/build_presentation.py
+```
+
+On Windows with Microsoft PowerPoint installed, export the slides and regenerate the combined submission:
+
+```powershell
+powershell -NoProfile -File scripts/export_presentation.ps1
+python scripts/combine_submission.py
+```
+
+The merge preserves searchable text, links, bookmarks, and the original portrait/landscape page sizes. See the [presentation guide](05_Presentation/README.txt) for source files, speaker assignments, and the detailed schedule.
+
 ## Reproducibility Records
+
+Repository attributes disable automatic line-ending conversion so that files retain the exact bytes covered by the SHA-256 manifests. This is required by the input-integrity checks across operating systems.
 
 Saved evidence includes input hashes, fixed split assignments, actual controlled-study inputs, coefficients, raw timing repetitions, representative trajectories, ADMM diagnostics, configurations, environment versions, validation outputs, and source snapshots. The recorded checks include orthogonal closed-form solutions, a tight scikit-learn Lasso reference, the zero-solution threshold, and a rank-deficient underdetermined case. Numerical tests establish correctness within the tested cases; they do not establish a universal runtime ordering.
 
