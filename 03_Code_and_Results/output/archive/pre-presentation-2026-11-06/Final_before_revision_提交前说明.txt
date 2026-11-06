@@ -1,0 +1,24 @@
+﻿COMP6704 Group 9 — 交付说明
+
+主文件：Group9.pdf（报告在前，幻灯片在后）。
+报告：15页，包含参考文献；PPT：23页；合并：38页。
+PDF保留可搜索文字、横竖页面原尺寸及报告/幻灯片目录书签，小于40MB。
+
+提交前尚需完成：
+1. 将报告首页脚注的 [GitHub URL to be supplied by Group 9 before submission] 替换为实际项目仓库链接。用户已说明链接最后提供，当前未编造链接。
+2. PPT备注仍沿用原23分钟讲稿。作业要求30分钟展示+10分钟Q&A；需根据真实展示安排调整讲稿，并确认四位成员均参与展示和答问。
+3. 原材料仅支持共同贡献声明。作业建议每位成员独立实现至少一种算法，现有材料包含ISTA、FISTA、循环CD三种；请核对实际个人实现与验证分工，未在报告中编造第四算法或个人分工。
+
+本次修订：
+- 重组报告结构、润色英文、压缩重复内容，保留10幅图、主要推导与全部已有实验结果。
+- 增加明确的复现命令、输入/结果记录说明，细化复杂度和比较限制。
+- 对照保存的CSV/JSON与代码核对结果；修正正交验证误差末位，未新增实验数据。
+- PPT仅修正Background拼写、PART III Results标题及因报告重编号而变化的4处来源引用。原备注和版式保留。
+
+可编辑文件：COMP6704_Group9_Report.tex、COMP6704_Group9_Slides.pptx。
+报告TeX内嵌绘图数据，可独立编译；支持TeX发行版含amsmath、natbib、pgfplots等常规宏包。
+项目中已验证的编译命令（从Group Project目录）：
+XDG_CACHE_HOME=/tmp/codex-tectonic-cache work/tools/tectonic --keep-logs --outdir final work/report_source/main.tex
+
+补入链接后需要重新编译报告并重新合并PDF；修改TeX本身不会自动更新Group9.pdf。
+原ZIP、原报告、原PPT都未覆盖。修改和核对记录保存在work目录。

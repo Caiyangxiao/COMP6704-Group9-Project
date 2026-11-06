@@ -7,4 +7,4 @@ __pycache__/
 *.out
 *.toc
 *.log
-!output/report_build/report.log
+!output/report_build/*.log

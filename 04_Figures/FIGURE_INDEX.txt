@@ -18,3 +18,8 @@ setup_cost：ADMM冷启动准备与迭代时间
 
 presentation/与original_benchmark/保留历史三算法图，仅作追溯。
 新报告直接引用Python生成的vector PDF，不再用旧TikZ坐标重绘。
+
+PPT专用图：presentation_four_solvers/
+15组图表，每组PNG/SVG/矢量PDF；9张透明公式PNG。
+图表/公式源脚本：03_Code_and_Results/scripts/plot_presentation_assets.py。
+图表采用更大字号；数据只读取冻结结果。对应figure_manifest.json记录来源与校验值。

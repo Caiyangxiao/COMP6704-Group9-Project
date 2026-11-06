@@ -2,7 +2,7 @@
   "date": "2026-11-06",
   "group": 9,
   "topic": "Convex Optimization",
-  "revision": "four-solvers-with-ADMM",
+  "revision": "four-solvers-final-report-and-presentation",
   "methods": [
     "ISTA",
     "FISTA",
@@ -10,13 +10,13 @@
     "ADMM"
   ],
   "report": "02_Report/Lasso_Project_Report.pdf",
-  "report_pages": 14,
+  "report_pages": 15,
   "report_figures": 9,
-  "report_tables": 8,
+  "report_tables": 9,
   "reference_entries": 20,
-  "report_source_sha256": "85dbeb5def54c1e6b206a642113c04ee6cb5ff593a42299a70a94f5a44d94487",
-  "report_pdf_sha256": "0b6e2dd1e4dd0e15f2f94d92a75f21e23c97833e5e8aecb708657bfd686bfbeb",
-  "report_pdf_bytes": 263873,
+  "report_source_sha256": "516f908eddef10ca6c5065f7812f220a90e059a89b53f32b268cfdec3df27447",
+  "report_pdf_sha256": "90b8076ae8f59837583649be7db64d94545ef29231b59b633fbd1fe45834b513",
+  "report_pdf_bytes": 268114,
   "generated_figure_groups": 11,
   "figure_formats": [
     "png",
@@ -53,7 +53,13 @@
     "undefined_references": false,
     "overfull_boxes": false,
     "all_33_figure_artifacts_mirrored": true,
-    "historical_results_preserved": true
+    "historical_results_preserved": true,
+    "all_members_have_speaking_roles": true,
+    "confirmed_contributions_in_report_and_slides": true,
+    "bilingual_notes_match_all_34_slides": true,
+    "combined_49_pages_rendered": true,
+    "presentation_all_pages_visually_reviewed": true,
+    "submission_text_links_and_page_sizes_preserved": true
   },
   "runtime": {
     "python": "3.10.12",
@@ -65,11 +71,9 @@
     "detected_thread_pools": 3,
     "threads_per_detected_pool": 1
   },
-  "pending_submission_items": [
-    "Actual project GitHub URL",
-    "Member-confirmed individual contributions",
-    "Four-solver presentation and combined submission PDF"
-  ],
+  "repository_url": "https://github.com/Caiyangxiao/COMP6704-Group9-Project",
+  "repository_url_source": "provided by the group",
+  "pending_submission_items": [],
   "historical_materials": [
     "01_Chinese_Guide",
     "04_Figures/presentation",
@@ -79,9 +83,56 @@
   ],
   "manifest_excludes": [
     "FILE_MANIFEST_SHA256.csv",
+    ".git",
     "__pycache__",
     ".cache",
     ".venv",
     ".pytest_cache"
-  ]
+  ],
+  "presentation_file": "05_Presentation/COMP6704_Group9_Lasso_Presentation.pptx",
+  "presentation_slides": 34,
+  "main_presentation_slides": 30,
+  "main_presentation_seconds": 1800,
+  "qa_seconds": 600,
+  "backup_slides": 3,
+  "submission_file": "06_Submission/Group9.pdf",
+  "submission_pages": 49,
+  "submission_bytes": 2082727,
+  "submission_sha256": "d58d0cac08c4526037ea2e0ee03b5a11d935c2bfe5dc0ded6cc1ff2987d622d9",
+  "confirmed_team_roles": {
+    "confirmed_by_group": true,
+    "members": [
+      {
+        "name": "CAI Yangxiao",
+        "student_id": "26023041R",
+        "algorithm": "ADMM",
+        "speaking": "Part I: Background"
+      },
+      {
+        "name": "XUE Pengyu",
+        "student_id": "26022951R",
+        "algorithm": "FISTA",
+        "speaking": "Part II: Algorithms and experimental design"
+      },
+      {
+        "name": "ZHANG Kejia",
+        "student_id": "26049131R",
+        "algorithm": "Cyclic CD",
+        "speaking": "Introduction and work overview",
+        "presentation_design": true
+      },
+      {
+        "name": "ZHOU Xiyu",
+        "student_id": "26025265R",
+        "algorithm": "ISTA",
+        "speaking": "Part III: Results and conclusions"
+      }
+    ],
+    "report_writing_and_revision": "All four members",
+    "experimental_design_and_evaluation": "All four members",
+    "presentation_design": "ZHANG Kejia",
+    "repository": "https://github.com/Caiyangxiao/COMP6704-Group9-Project"
+  },
+  "primary_readme": "README.md",
+  "readme_language": "English"
 }

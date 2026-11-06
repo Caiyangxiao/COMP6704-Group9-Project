@@ -1,0 +1,156 @@
+[
+  {
+    "file": "original_1_2.png",
+    "slide": 1,
+    "size": [
+      1280,
+      720
+    ],
+    "position": [
+      0.0,
+      0.0,
+      13.33,
+      7.5
+    ]
+  },
+  {
+    "file": "original_3_2.png",
+    "slide": 3,
+    "size": [
+      1280,
+      720
+    ],
+    "position": [
+      0.0,
+      0.0,
+      13.33,
+      7.5
+    ]
+  },
+  {
+    "file": "original_7_8.png",
+    "slide": 7,
+    "size": [
+      1080,
+      468
+    ],
+    "position": [
+      0.67,
+      2.83,
+      7.79,
+      3.38
+    ]
+  },
+  {
+    "file": "original_10_24.png",
+    "slide": 10,
+    "size": [
+      1672,
+      941
+    ],
+    "position": [
+      0.0,
+      0.0,
+      13.33,
+      7.5
+    ]
+  },
+  {
+    "file": "original_10_22.png",
+    "slide": 10,
+    "size": [
+      826,
+      346
+    ],
+    "position": [
+      0.21,
+      1.15,
+      12.81,
+      5.37
+    ]
+  },
+  {
+    "file": "original_11_4.png",
+    "slide": 11,
+    "size": [
+      823,
+      356
+    ],
+    "position": [
+      0.21,
+      0.99,
+      12.97,
+      5.61
+    ]
+  },
+  {
+    "file": "original_12_7.png",
+    "slide": 12,
+    "size": [
+      821,
+      363
+    ],
+    "position": [
+      0.13,
+      0.92,
+      12.97,
+      5.73
+    ]
+  },
+  {
+    "file": "original_13_4.png",
+    "slide": 13,
+    "size": [
+      818,
+      289
+    ],
+    "position": [
+      0.42,
+      1.7,
+      12.5,
+      4.41
+    ]
+  },
+  {
+    "file": "original_14_4.png",
+    "slide": 14,
+    "size": [
+      820,
+      357
+    ],
+    "position": [
+      0.21,
+      1.31,
+      12.89,
+      5.61
+    ]
+  },
+  {
+    "file": "original_15_4.png",
+    "slide": 15,
+    "size": [
+      819,
+      308
+    ],
+    "position": [
+      0.21,
+      1.54,
+      12.84,
+      4.83
+    ]
+  },
+  {
+    "file": "original_16_4.png",
+    "slide": 16,
+    "size": [
+      824,
+      341
+    ],
+    "position": [
+      0.21,
+      1.31,
+      12.85,
+      5.32
+    ]
+  }
+]

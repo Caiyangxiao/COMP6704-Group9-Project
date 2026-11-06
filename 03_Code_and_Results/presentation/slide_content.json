@@ -1,0 +1,1074 @@
+[
+  {
+    "id": 1,
+    "title": "Classical Optimization Algorithms for Lasso Regression",
+    "part": "Introduction",
+    "speaker": "ZHANG Kejia",
+    "student_id": "26049131R",
+    "seconds": 35,
+    "main_timing": true,
+    "english_notes": "Good afternoon. We are Group Nine. Our project compares four classical algorithms for Lasso regression: ISTA, FISTA, cyclic coordinate descent, and ADMM. All four solve the same optimization problem. Our focus is how their update mechanisms and computational costs interact with the data. Our comparisons concern these recorded implementations. We will explain the theory, describe a common experimental protocol, and then discuss the evidence and limitations.",
+    "chinese_notes": "大家好，我们是第九组。我们的项目比较 Lasso 回归的四种经典算法：ISTA、FISTA、循环坐标下降，以及 ADMM。四种算法求解同一个优化问题。我们关注的是，不同更新机制和计算成本如何与数据结构相互作用。比较结论针对本次记录的实现。接下来，我们会依次介绍理论、统一实验方案，以及实验结果和结论的适用范围。",
+    "visual_cues": [
+      "Briefly introduce all four members; do not read every student ID."
+    ],
+    "source_refs": [
+      "Report title and abstract"
+    ],
+    "main_takeaway": "Four methods, one objective, one common accuracy standard.",
+    "body": [
+      "A review and empirical comparison",
+      "COMP6704 Group Project — Group 9",
+      "CAI Yangxiao · XUE Pengyu · ZHANG Kejia · ZHOU Xiyu"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "cover",
+    "english_word_count": 66,
+    "planned_elapsed_start_seconds": 0,
+    "planned_elapsed_end_seconds": 35,
+    "english_words_per_allocated_minute": 113.1
+  },
+  {
+    "id": 2,
+    "title": "Our Work and Presentation Plan",
+    "part": "Introduction",
+    "speaker": "ZHANG Kejia",
+    "student_id": "26049131R",
+    "seconds": 55,
+    "main_timing": true,
+    "english_notes": "Our presentation follows three connected parts. In Part One, Cai introduces the Lasso motivation, objective, optimality conditions, and soft thresholding. In Part Two, Xue explains the four algorithms, their implementation costs, and our common experimental protocol. In Part Three, Zhou compares the fitted solutions and runtimes, then examines correlation, feature count, and penalty sensitivity. The same objective and stopping criterion connect all three parts. All four members contributed to report writing, revision, experimental design, and evaluation. I designed the slides and am introducing the work. Our aim is to explain what the recorded experiments support, together with their limits. We then welcome questions from the audience.",
+    "chinese_notes": "我们的展示分为三个相互衔接的部分。第一部分由 CAI Yangxiao 介绍 Lasso 的动机、目标函数、最优性条件和软阈值。第二部分由 XUE Pengyu 解释四种算法、实现成本以及统一实验方案。第三部分由 ZHOU Xiyu 比较拟合解和运行时间，并考察相关性、特征数和惩罚敏感性。相同目标和停止标准贯穿三个部分。四位成员共同参与报告撰写与修改、实验设计和实验评估。我负责 PPT 设计，并在这里介绍工作。我们的目标是说明记录的实验支持哪些结论，以及这些结论的限制。展示结束后欢迎现场提问。",
+    "visual_cues": [
+      "Point to the three agenda sections in order: foundations, algorithms and protocol, then results and conclusions. Do not point to an implementation map on this slide."
+    ],
+    "source_refs": [
+      "Report §6, Author contributions; confirmed team responsibilities"
+    ],
+    "main_takeaway": "Independent implementations support a shared experimental comparison.",
+    "body": [
+      "Four implementations: ISTA, FISTA, cyclic CD, ADMM",
+      "Shared report writing, revision, experimental design and evaluation",
+      "Part I: foundations · Part II: algorithms and protocol · Part III: results"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "work_overview",
+    "table": {
+      "columns": [
+        "Member",
+        "Implementation",
+        "Presentation"
+      ],
+      "rows": [
+        [
+          "CAI Yangxiao",
+          "ADMM",
+          "Part I"
+        ],
+        [
+          "XUE Pengyu",
+          "FISTA",
+          "Part II"
+        ],
+        [
+          "ZHANG Kejia",
+          "Cyclic CD",
+          "Introduction; PPT design"
+        ],
+        [
+          "ZHOU Xiyu",
+          "ISTA",
+          "Part III"
+        ]
+      ]
+    },
+    "english_word_count": 106,
+    "planned_elapsed_start_seconds": 35,
+    "planned_elapsed_end_seconds": 90,
+    "english_words_per_allocated_minute": 115.6
+  },
+  {
+    "id": 3,
+    "title": "PART I — Foundations",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 10,
+    "main_timing": true,
+    "english_notes": "I will introduce the modeling motivation, the convex objective, and the thresholding operation shared by our solvers.",
+    "chinese_notes": "下面我介绍建模动机、凸目标函数，以及四种求解器所涉及的软阈值操作。",
+    "visual_cues": [],
+    "source_refs": [
+      "Report §§1–2"
+    ],
+    "main_takeaway": "Why Lasso is a useful convex optimization example.",
+    "body": [],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "divider",
+    "english_word_count": 17,
+    "planned_elapsed_start_seconds": 90,
+    "planned_elapsed_end_seconds": 100,
+    "english_words_per_allocated_minute": 102.0
+  },
+  {
+    "id": 4,
+    "title": "Why Study Lasso?",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 50,
+    "main_timing": true,
+    "english_notes": "Regression can fit a response using many candidate predictors, but a compact model is often easier to interpret. Our synthetic example makes this motivation concrete: there are fifty candidate features, while only five have nonzero generating coefficients. These known coefficients describe how the data were constructed; they are not an algorithm's recovered solution. Lasso encourages sparse fitted coefficients through an absolute-value penalty. This also creates a convex but nonsmooth optimization problem, making the model useful for comparing different solution strategies. However, obtaining a sparse fit does not automatically recover the true variables or remove coefficient shrinkage.",
+    "chinese_notes": "回归可以使用许多候选特征拟合响应，但较精简的模型通常更容易解释。我们的合成数据把这个动机具体化：一共有五十个候选特征，只有五个生成系数非零。这些已知系数说明数据是如何构造的，并不是算法已经恢复出的结果。Lasso 利用绝对值惩罚鼓励稀疏系数，同时形成一个凸但非光滑的优化问题，因此适合比较不同求解策略。不过，得到稀疏模型，并不自动意味着找回真实变量，也不意味着消除了系数收缩。",
+    "visual_cues": [
+      "Use a sparse generating-coefficient illustration; label it “known generating coefficients”."
+    ],
+    "source_refs": [
+      "Report §§1, 4.1; data/manifest.json"
+    ],
+    "main_takeaway": "Sparse modeling provides a clear setting for comparing optimization methods.",
+    "body": [
+      "50 candidate features; only 5 generating coefficients are nonzero",
+      "An ℓ₁ penalty can set fitted coefficients exactly to zero",
+      "Sparse selection and accurate coefficient estimation are different questions"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "sparse_motivation",
+    "english_word_count": 96,
+    "planned_elapsed_start_seconds": 100,
+    "planned_elapsed_end_seconds": 150,
+    "english_words_per_allocated_minute": 115.2
+  },
+  {
+    "id": 5,
+    "title": "The Same Lasso Objective for Every Solver",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 75,
+    "main_timing": true,
+    "english_notes": "The objective has two terms. The squared loss measures training fit, and the L one penalty encourages sparse coefficients. We use the normalization one over two n everywhere. This matters because changing that normalization also changes the gradient and the effective penalty scale. X contains training features, y is the centered response, and w contains the coefficients. Every solver receives exactly the same transformed inputs. We center and standardize features using training means and population standard deviations, then apply those statistics to the test set. Responses are centered using the training mean, which is restored for prediction. This gives an unpenalized intercept without test leakage. We also remove constant training columns. This control is essential because scaling differences can otherwise masquerade as solver differences. Fixing these modeling choices lets us attribute computational differences to the algorithms rather than different training problems.",
+    "chinese_notes": "目标函数包含两项。平方损失衡量训练拟合，L1 惩罚鼓励稀疏系数。我们始终采用二 n 分之一的归一化；这是必要的，因为改变归一化也会改变梯度和有效的惩罚尺度。X 是训练特征，y 是中心化响应，w 是系数。每种求解器接收完全相同的变换后输入。特征使用训练均值和总体标准差进行中心化、标准化，再把同样统计量应用到测试集。响应使用训练均值中心化，预测时恢复这个均值，因此截距不受惩罚，也不会泄露测试信息。常数训练特征会被移除。这一步控制很关键，否则尺度差异可能被误认为求解器差异。固定这些建模选择，才能把计算差异归因于算法，而不是不同的训练问题。",
+    "visual_cues": [
+      "Point to loss, then penalty; pause 3 s on the training-only preprocessing flow."
+    ],
+    "source_refs": [
+      "Report §2.1, Eq. (1)"
+    ],
+    "main_takeaway": "Fixing the objective and preprocessing makes solver comparisons meaningful.",
+    "body": [
+      "F(w) = ‖Xw − y‖₂²/(2n) + λ‖w‖₁",
+      "X ∈ ℝⁿˣᵈ; centered y; coefficients w; λ > 0",
+      "Fit scaling and centering on training rows only",
+      "Restore the training-response mean for an unpenalized intercept"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "objective",
+    "english_word_count": 141,
+    "planned_elapsed_start_seconds": 150,
+    "planned_elapsed_end_seconds": 225,
+    "english_words_per_allocated_minute": 112.8
+  },
+  {
+    "id": 6,
+    "title": "Related Regression Penalties",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 45,
+    "main_timing": true,
+    "english_notes": "Several regression models share the same squared loss but use different penalties. Ridge applies quadratic shrinkage and usually retains a dense coefficient vector. Lasso uses the L one norm and permits exact zeros. Elastic net combines both penalties and can encourage grouped selection of correlated predictors. Adaptive Lasso uses coordinate-specific weights estimated from an initial fit; with finite positive weights fixed, its objective remains convex. These choices change the statistical estimator. In our solver benchmark, we keep the unweighted Lasso objective fixed and compare four ways of computing its solution.",
+    "chinese_notes": "几种回归模型可以使用相同平方损失，但惩罚项不同。Ridge 施加二次收缩，通常保留稠密系数。Lasso 使用 L1 范数，允许精确为零。Elastic net 结合两种惩罚，可以鼓励相关变量成组选择。Adaptive Lasso 使用从初始拟合估计的特征权重；只要固定有限的正权重，目标仍然是凸的。这些选择会改变统计估计量。我们的求解器比较固定使用未加权 Lasso，只比较计算同一解的四种方式。",
+    "visual_cues": [
+      "Read one distinction per row; leave formulas visible without expanding derivations."
+    ],
+    "source_refs": [
+      "Report §1.2, Table 1; Hoerl & Kennard (1970); Tibshirani (1996); Zou & Hastie (2005); Zou (2006)"
+    ],
+    "main_takeaway": "Changing the penalty changes the estimator; changing the solver does not.",
+    "body": [
+      "Ridge: α‖w‖₂²/2",
+      "Lasso: λ‖w‖₁",
+      "Elastic net: λ‖w‖₁ + α‖w‖₂²/2",
+      "Adaptive Lasso: λΣⱼωⱼ|wⱼ|, with fixed positive weights"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "penalties",
+    "english_word_count": 90,
+    "planned_elapsed_start_seconds": 225,
+    "planned_elapsed_end_seconds": 270,
+    "english_words_per_allocated_minute": 120.0
+  },
+  {
+    "id": 7,
+    "title": "Convexity and Sparse Optimality",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 75,
+    "main_timing": true,
+    "english_notes": "The least-squares Hessian is X transpose X divided by n, which is positive semidefinite. The L one norm is also convex, so the full objective is convex. With a positive lambda, the objective grows when the coefficient norm grows without bound, ensuring a minimizer exists. Full column rank is sufficient for a unique coefficient vector, although uniqueness can also hold in other cases. The optimality condition balances the loss gradient against a penalty subgradient. For a nonzero coefficient, the gradient must equal minus lambda times its sign. At zero, the absolute-value subgradient is the interval from minus one to one, so a gradient magnitude below lambda is compatible with optimality. These conditions apply jointly to the complete vector. The constrained formulation provides an equivalent geometric view at a corresponding norm budget. They explain exact zeros, but they do not establish correct support recovery.",
+    "chinese_notes": "最小二乘损失的 Hessian 是 X 转置乘 X 再除以 n，因此半正定。L1 范数也是凸函数，所以整个目标是凸的。当 lambda 为正时，系数范数无限增长会使目标无限增长，因此最优解存在。满列秩足以保证系数唯一，但并不是唯一性的必要条件。最优性条件要求损失梯度与惩罚次梯度相互平衡。对于非零系数，梯度必须等于负 lambda 乘其符号；在零点，绝对值次梯度包含负一到一的整个区间，因此梯度绝对值不超过 lambda 就可以满足最优性。条件必须对整个向量共同成立。约束形式还可以在对应范数预算下提供等价的几何视角。它解释精确零，但不能证明找回了真实支持集。",
+    "visual_cues": [
+      "Point to the two coefficient cases; pause 3 s at the zero-coefficient interval."
+    ],
+    "source_refs": [
+      "Report §2.2, Eqs. (3)–(4); Tibshirani (2013)"
+    ],
+    "main_takeaway": "Convexity gives global optimality; the subgradient interval permits zeros.",
+    "body": [
+      "∇²g(w) = XᵀX/n ⪰ 0; the ℓ₁ norm is convex",
+      "0 ∈ ∇g(w*) + λ∂‖w*‖₁",
+      "w*ⱼ ≠ 0: ∇ⱼg(w*) = −λ sign(w*ⱼ)",
+      "w*ⱼ = 0: |∇ⱼg(w*)| ≤ λ"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "kkt",
+    "english_word_count": 143,
+    "planned_elapsed_start_seconds": 270,
+    "planned_elapsed_end_seconds": 345,
+    "english_words_per_allocated_minute": 114.4
+  },
+  {
+    "id": 8,
+    "title": "Soft Thresholding",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 65,
+    "main_timing": true,
+    "english_notes": "Soft thresholding turns the subgradient argument into a concrete operation. It subtracts the threshold from the input magnitude and clips negative results to zero, while retaining the sign of the remaining values. With threshold zero point five, one point two becomes zero point seven, minus zero point eight becomes minus zero point three, and zero point two becomes zero. The flat middle segment therefore creates exact sparsity. This operation solves a separable proximal problem: remain near the input while paying an absolute-value penalty. For appropriately normalized orthogonal features, it gives the full Lasso solution in one step. General predictors interact, so thresholding becomes a repeated building block. All four methods will use it, but at different points in their updates.",
+    "chinese_notes": "软阈值把次梯度条件变成具体操作：从输入的绝对值减去阈值，把负结果截断为零，并保留其余数值的符号。阈值为零点五时，一点二变成零点七，负零点八变成负零点三，零点二变成零。因此图中间的水平段产生精确稀疏性。它求解一个可分离的近端问题：尽量接近输入，同时支付绝对值惩罚。对于适当归一化的正交特征，一次软阈值就能给出完整 Lasso 解；一般特征会相互作用，所以阈值成为反复使用的基本步骤。四种算法都会用到它，但使用的位置不同。",
+    "visual_cues": [
+      "Trace the flat interval, then the three numeric examples; pause 3 s before the orthogonal-design exception."
+    ],
+    "source_refs": [
+      "Report §2.3, Eq. (5); Parikh & Boyd (2014)"
+    ],
+    "main_takeaway": "Small inputs become zero; larger inputs keep their sign and shrink.",
+    "body": [
+      "Sτ(v) = sign(v) max(|v| − τ, 0)",
+      "Solves minᵤ ½‖u − v‖₂² + τ‖u‖₁",
+      "At τ = 0.5: 1.2 → 0.7; −0.8 → −0.3; 0.2 → 0",
+      "Orthogonal design: w* = Sλ(Xᵀy/n)"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "soft_threshold",
+    "layout": "soft_threshold",
+    "english_word_count": 120,
+    "planned_elapsed_start_seconds": 345,
+    "planned_elapsed_end_seconds": 410,
+    "english_words_per_allocated_minute": 110.8
+  },
+  {
+    "id": 9,
+    "title": "Research Questions and Solver Map",
+    "part": "Part I",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 40,
+    "main_timing": true,
+    "english_notes": "We can now map the four solvers onto three mechanisms. ISTA and FISTA update the whole coefficient vector using a gradient and thresholding. Coordinate descent minimizes one scalar problem at a time. ADMM separates the loss and penalty, then couples their solutions through a constraint. Our comparison asks which mechanism reaches the same stationarity target efficiently, how data geometry changes the answer, and why the model penalty lambda must be distinguished from ADMM's algorithmic penalty beta. Xue will now explain the implementations and protocol.",
+    "chinese_notes": "现在可以把四种求解器归为三类机制。ISTA 和 FISTA 使用梯度与阈值更新整个系数向量；坐标下降每次精确求解一个标量问题；ADMM 把损失和惩罚分开，再用约束连接两者。我们比较哪种机制能更高效地达到同一平稳性目标，数据结构如何改变答案，以及为什么模型惩罚 lambda 必须与 ADMM 的算法惩罚 beta 区分。接下来由XUE Pengyu介绍实现和实验方案。",
+    "visual_cues": [
+      "Make the three mechanism groups visually distinct; hand over to XUE."
+    ],
+    "source_refs": [
+      "Report §§1, 3"
+    ],
+    "main_takeaway": "One model supports three complementary computational mechanisms.",
+    "body": [
+      "ISTA / FISTA: vector gradient and thresholding",
+      "Cyclic CD: exact scalar minimization",
+      "ADMM: splitting, linear solve and thresholding",
+      "Compare efficiency, data sensitivity, and λ versus β"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "solver_map",
+    "english_word_count": 84,
+    "planned_elapsed_start_seconds": 410,
+    "planned_elapsed_end_seconds": 450,
+    "english_words_per_allocated_minute": 126.0
+  },
+  {
+    "id": 10,
+    "title": "PART II — Algorithms and Experimental Design",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 10,
+    "main_timing": true,
+    "english_notes": "I will explain the four updates, their costs, and the common accuracy and timing rules used in our experiments.",
+    "chinese_notes": "下面我介绍四种更新、各自成本，以及实验统一使用的精度和计时规则。",
+    "visual_cues": [],
+    "source_refs": [
+      "Report §§3–4"
+    ],
+    "main_takeaway": "The same target is solved through different update mechanisms.",
+    "body": [],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "divider",
+    "english_word_count": 19,
+    "planned_elapsed_start_seconds": 450,
+    "planned_elapsed_end_seconds": 460,
+    "english_words_per_allocated_minute": 114.0
+  },
+  {
+    "id": 11,
+    "title": "ISTA: Gradient Step, Then Threshold",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 70,
+    "main_timing": true,
+    "english_notes": "ISTA begins at the current coefficient vector. A gradient step reduces the smooth squared loss, and soft thresholding then handles the nonsmooth penalty exactly. The gradient is Lipschitz continuous with constant L, the squared spectral norm of X divided by n. We use the reciprocal of L as the step size. This gives a quadratic upper bound on the loss, whose minimizer together with the penalty is the displayed update. With a valid step, the objective is nonincreasing. For dense data, the dominant operations are a prediction and a transposed matrix-vector product, so one round costs order n d. The code does not store a full Gram matrix. We use the same initialization for every method. ISTA's appeal is its simple structure and predictable progress, but weak-curvature directions can require many rounds.",
+    "chinese_notes": "ISTA 从当前系数向量开始。先用梯度步降低光滑平方损失，再通过软阈值精确处理非光滑惩罚。梯度的 Lipschitz 常数 L 等于 X 的谱范数平方除以 n，我们采用它的倒数作为步长。这样可以构造损失的二次上界；把上界与惩罚一起最小化，就得到展示的更新。有效步长下，目标值不会增加。对于稠密数据，主要操作是预测和转置矩阵向量乘法，因此每轮成本为 n d 的量级。代码不存储完整 Gram 矩阵。所有方法使用相同初始点。ISTA 的优点是结构简单、进展较平稳，但弱曲率方向可能需要很多轮。",
+    "visual_cues": [
+      "Point to gradient then threshold; pause 3 s on the cost statement."
+    ],
+    "source_refs": [
+      "Report §3.1, Eq. (7); src/optimizers.py; Daubechies et al. (2004)"
+    ],
+    "main_takeaway": "ISTA uses a quadratic upper bound and an exact proximal step.",
+    "body": [
+      "L = ‖X‖₂²/n; η = 1/L",
+      "wᵏ⁺¹ = Sηλ(wᵏ − η∇g(wᵏ))",
+      "Nonincreasing objective for a valid step",
+      "O(nd) dense work per round; no stored Gram matrix"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "ista",
+    "english_word_count": 132,
+    "planned_elapsed_start_seconds": 460,
+    "planned_elapsed_end_seconds": 530,
+    "english_words_per_allocated_minute": 113.1
+  },
+  {
+    "id": 12,
+    "title": "FISTA: Add Extrapolation",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 80,
+    "main_timing": true,
+    "english_notes": "FISTA uses the same gradient and thresholding step, but evaluates it at an extrapolated vector. The extrapolation combines the current solution with the direction from the previous solution, weighted by the momentum sequence. We initialize the momentum at one and apply the standard recursion. The dominant matrix-vector products remain similar to ISTA, while extra vectors and arithmetic maintain the momentum. Under the stated convexity and smoothness assumptions, ISTA has an order one over k objective-error bound and FISTA has an order one over k squared bound. These are worst-case bounds on objective error. They do not directly bound our stationarity residual, coefficient error, or wall-clock time. Standard FISTA can also be nonmonotone. We deliberately use the standard algorithm without restart, so the method being compared is clear. A favorable theoretical bound is therefore a reason to test acceleration, rather than a measured timing result. The results will show why this distinction matters.",
+    "chinese_notes": "FISTA 使用相同的梯度和阈值步骤，但计算位置变成一个外推向量。外推把当前解与前后两次解的移动方向结合，权重由动量序列控制。我们把动量初始化为一，采用标准递推。主要矩阵向量乘法与 ISTA 类似，但需要额外向量和运算维护动量。在给定的凸性与光滑性条件下，ISTA 的目标误差界是 k 分之一量级，FISTA 则是 k 平方分之一。这些是目标误差的最坏情况界，并不直接约束我们的平稳性残差、系数误差或者实际时间。标准 FISTA 的进展还可能非单调。因此，有利理论界是检验加速效果的理由，还需要实际计时验证。我们不使用重启，保证比较对象明确；之后会看到这种区别为什么重要。",
+    "visual_cues": [
+      "Show proximal and extrapolation steps separately; pause 4 s beside the two rates."
+    ],
+    "source_refs": [
+      "Report §3.1, Eqs. (8)–(11); Beck & Teboulle (2009)"
+    ],
+    "main_takeaway": "A stronger objective-error bound does not guarantee faster measured stopping.",
+    "body": [
+      "Apply the proximal step at an extrapolated vector",
+      "Update momentum tₖ and reuse the previous direction",
+      "Objective-error bounds: ISTA O(1/k); FISTA O(1/k²)",
+      "Standard FISTA here: no restart and no monotonicity modification"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "fista",
+    "english_word_count": 152,
+    "planned_elapsed_start_seconds": 530,
+    "planned_elapsed_end_seconds": 610,
+    "english_words_per_allocated_minute": 114.0
+  },
+  {
+    "id": 13,
+    "title": "Cyclic Coordinate Descent",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 75,
+    "main_timing": true,
+    "english_notes": "Coordinate descent fixes every coefficient except one and minimizes the resulting scalar Lasso problem exactly. The partial residual removes the contribution of the current coordinate from the fitted response. Thresholding the feature-residual inner product, then dividing by the feature's squared norm, gives the new coefficient. Standardization makes that denominator one, but our code retains the general formula. We maintain the residual throughout the sweep, adding back the old coordinate contribution and subtracting the new one after each update. This avoids recomputing a full prediction for every coefficient. One coordinate costs order n, and a complete sweep costs order n d. Exact scalar minimization makes the objective nonincreasing. However, a sweep contains d sequential updates, implemented here in a Python loop. Our comparison does not transfer randomized-coordinate rates to this cyclic implementation. A small sweep count must therefore be interpreted alongside elapsed time.",
+    "chinese_notes": "坐标下降固定除一个系数以外的所有系数，精确最小化对应的标量 Lasso 问题。部分残差先从拟合中移除当前坐标的贡献。对特征与残差的内积做阈值，再除以该特征的平方范数，就得到新系数。标准化使分母为一，但代码保留通用公式。整个扫描过程中持续维护残差：先加回旧坐标贡献，更新后再减去新贡献，避免每个系数都重新计算完整预测。单个坐标成本是 n 的量级，一整轮是 n d。精确最小化使目标非增。我们不会把随机坐标算法的速率直接用于这个循环实现。不过，一轮包含 d 次顺序更新，而且这里使用 Python 循环，因此较少轮数必须结合实际耗时理解。",
+    "visual_cues": [
+      "Animate one coordinate and its residual update; emphasize “complete sweep”."
+    ],
+    "source_refs": [
+      "Report §3.2, Eq. (12); Friedman et al. (2010); Wu & Lange (2008)"
+    ],
+    "main_takeaway": "Exact scalar minimization can use few sweeps, while each sweep visits every feature.",
+    "body": [
+      "r⁽ʲ⁾ = y − Σℓ≠ⱼxℓwℓ",
+      "wⱼ ← Sλ(xⱼᵀr⁽ʲ⁾/n)/(‖xⱼ‖₂²/n)",
+      "Maintain and update the residual after each coordinate",
+      "One round = one complete cyclic sweep over d variables"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "coordinate_descent",
+    "english_word_count": 142,
+    "planned_elapsed_start_seconds": 610,
+    "planned_elapsed_end_seconds": 685,
+    "english_words_per_allocated_minute": 113.6
+  },
+  {
+    "id": 14,
+    "title": "ADMM: Split the Loss and Penalty",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 90,
+    "main_timing": true,
+    "english_notes": "ADMM introduces two coefficient copies. The squared loss uses x, the L one penalty uses z, and the equality constraint requires them to agree. The augmented Lagrangian adds a quadratic agreement penalty with positive parameter beta and a scaled dual vector u. Each iteration first solves a regularized least-squares system for x. It then applies soft thresholding to x plus u, with threshold lambda divided by beta, to obtain z. Finally, the dual update accumulates the disagreement between the two copies. All three vectors start at zero. We use beta for the algorithmic penalty because rho already denotes feature correlation in the experiments. Changing beta changes the iteration, while changing lambda changes the statistical model. When the split constraint holds, the formulation is exactly the original Lasso problem. The extra dual state records agreement progress between iterations, while leaving the training inputs unchanged. Convex ADMM theory supports convergence with fixed positive beta and exact subproblem solves, but does not promise that ADMM will beat every other method in finite time.",
+    "chinese_notes": "ADMM 引入两个系数副本：平方损失使用 x，L1 惩罚使用 z，并要求 x 与 z 相等。增广拉格朗日加入正参数 beta 控制的二次一致性惩罚，以及缩放对偶变量 u。每轮先通过一个正则化最小二乘线性系统更新 x，再对 x 加 u 做阈值为 lambda 除以 beta 的软阈值，得到 z；最后把两个副本的差异累加到对偶变量。三个向量都从零开始。我们用 beta 表示算法参数，因为 rho 已用于实验中的特征相关性。改变 beta 会改变迭代过程，改变 lambda 才会改变统计模型。约束满足时，这就是原来的 Lasso 问题。额外对偶状态记录副本一致性的迭代进展，训练输入仍然相同。固定正 beta、精确子问题求解下，凸 ADMM 理论支持收敛，但不保证有限时间内优于所有方法。",
+    "visual_cues": [
+      "Trace x → z → u once; pause 4 s on λ versus β."
+    ],
+    "source_refs": [
+      "Report §3.3, Eqs. (13)–(16); Boyd et al. (2011); src/optimizers.py"
+    ],
+    "main_takeaway": "ADMM solves the same Lasso objective through an equality-constrained split.",
+    "body": [
+      "Minimize g(x) + λ‖z‖₁ subject to x = z",
+      "(XᵀX/n + βI)xᵏ⁺¹ = Xᵀy/n + β(zᵏ − uᵏ)",
+      "zᵏ⁺¹ = Sλ/β(xᵏ⁺¹ + uᵏ)",
+      "uᵏ⁺¹ = uᵏ + xᵏ⁺¹ − zᵏ⁺¹"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "admm",
+    "english_word_count": 170,
+    "planned_elapsed_start_seconds": 685,
+    "planned_elapsed_end_seconds": 775,
+    "english_words_per_allocated_minute": 113.3
+  },
+  {
+    "id": 15,
+    "title": "ADMM Implementation and Correct Evaluation",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 55,
+    "main_timing": true,
+    "english_notes": "The implementation forms the normalized Gram matrix and factors the regularized system once per cold solve. It then reuses that Cholesky factor for the subsequent x updates, without explicitly computing an inverse. The factorization is inside the timed region and is repeated for every timing repetition. We return z because it is the thresholded coefficient vector. Both terms of the plotted objective are evaluated at z, and the common stationarity residual is also evaluated at z. Using the loss at x and the penalty at z before agreement would not be the original objective. We additionally save primal and dual residuals as diagnostics. The main comparison fixes beta at one.",
+    "chinese_notes": "实现会在每次冷启动求解内部构造归一化 Gram 矩阵，并对正则化系统做一次 Cholesky 分解。后续 x 更新复用这个因子，不显式求逆。分解成本包含在计时中，每次重复计时都会重新执行。我们返回经过阈值处理的 z，目标函数两项都在 z 上计算，共同平稳性残差也在 z 上计算。如果两个副本尚未一致，就把 x 的损失与 z 的惩罚拼在一起，那并不是原目标值。此外，我们保存原始与对偶残差用于诊断。主比较固定 beta 为一。",
+    "visual_cues": [
+      "Highlight “inside timed solve” and “F(z), R(z)”; pause 3 s."
+    ],
+    "source_refs": [
+      "Report §3.3; src/optimizers.py; experiment_plan_admm.md"
+    ],
+    "main_takeaway": "Count factorization cost and evaluate the original objective at one returned vector.",
+    "body": [
+      "Build XᵀX/n and a Cholesky factor once inside each solve",
+      "Reuse the factor within that solve; never form an inverse",
+      "Return w = z; report F(z) and R(z)",
+      "β = 1 for the main comparison; save primal and dual diagnostics"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "admm_implementation",
+    "english_word_count": 110,
+    "planned_elapsed_start_seconds": 775,
+    "planned_elapsed_end_seconds": 830,
+    "english_words_per_allocated_minute": 120.0
+  },
+  {
+    "id": 16,
+    "title": "Algorithm Trade-offs and Fair Comparison",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 50,
+    "main_timing": true,
+    "english_notes": "All four methods perform different work within a round. ISTA and FISTA mainly use matrix-vector products. A CD sweep also has order n d work, but visits every coordinate sequentially. Dense ADMM first constructs and factors a d by d system, giving a larger preparation cost and extra quadratic storage. Its monitored rounds combine triangular solves with evaluation of the original objective and residual. Reusing a factor within one solve helps, but we do not reuse it across cold solves. These differences are why we report preparation, rounds, and total elapsed time together. A smaller number of rounds alone cannot establish a faster implementation.",
+    "chinese_notes": "四种方法每一轮所做的工作不同。ISTA 和 FISTA 主要使用矩阵向量乘法。CD 一整轮也是 n d 量级，但要顺序访问所有坐标。稠密 ADMM 首先构造并分解 d 乘 d 系统，因此准备成本更高，还需要额外平方量级存储。其监测轮次结合三角求解，以及原目标和残差计算。同一次求解内复用分解有帮助，但我们不跨冷启动求解复用。因此要同时报告准备、轮数和总时间，不能仅凭轮数较少判断实现更快。",
+    "visual_cues": [
+      "Use a compact cost table; pause 3 s on ADMM preparation versus rounds."
+    ],
+    "source_refs": [
+      "Report §3.4, Table 2"
+    ],
+    "main_takeaway": "Round counts compare different work; setup and runtime must be explicit.",
+    "body": [
+      "ISTA / FISTA: O(nd) per dense round",
+      "Cyclic CD: O(nd) per complete sweep",
+      "ADMM: O(nd² + d³) preparation; O(nd + d²) per monitored round",
+      "Dense ADMM uses O(d²) extra storage"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "tradeoffs",
+    "english_word_count": 104,
+    "planned_elapsed_start_seconds": 830,
+    "planned_elapsed_end_seconds": 880,
+    "english_words_per_allocated_minute": 124.8
+  },
+  {
+    "id": 17,
+    "title": "Data and Controlled Studies",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 60,
+    "main_timing": true,
+    "english_notes": "The main comparison uses three saved synthetic datasets and one saved Diabetes split. Synthetic data have fifty independent features and five nonzero generating coefficients, with training and test sizes of two hundred forty and sixty. Diabetes has ten predictors, three hundred fifty-three training rows, and eighty-nine test rows. Its true support is unknown. Two paired studies then vary data geometry. The correlation study changes within-block correlation while sharing underlying random draws and splits within each seed. The dimension study uses prefixes of the same widest feature matrix, with a shared response within each seed. There are three instances per controlled setting. These pairings help isolate the changing design factor. The main model penalty is always one tenth of the training-derived maximum penalty.",
+    "chinese_notes": "主比较使用三个保存的合成数据集和一个保存的 Diabetes 划分。合成数据有五十个独立特征、五个非零生成系数，训练和测试样本数为二百四十与六十。Diabetes 有十个特征，训练三百五十三行，测试八十九行，真实支持集未知。随后两组配对研究改变数据几何：相关性研究在同一种子内共享基础随机抽样和划分，只改变块内相关性；维度研究使用同一最宽矩阵的前缀，并共享响应。每个受控设置有三个实例。这样的配对有助于隔离设计因素。主比较的模型惩罚始终为训练数据导出的最大惩罚的十分之一。",
+    "visual_cues": [
+      "Point to the main data sizes, then the two paired sensitivity arrows."
+    ],
+    "source_refs": [
+      "Report §4.1; data/manifest.json; extended/configuration.json"
+    ],
+    "main_takeaway": "Fixed splits and paired designs isolate computational changes.",
+    "body": [
+      "Main synthetic: 3 instances; ntrain = 240, d = 50",
+      "Diabetes: one saved 353/89 train/test split; d = 10",
+      "Correlation: ρ = 0, 0.5, 0.9, 0.99; 480 training rows, d = 60",
+      "Dimension: d = 50, 100, 300, 600; 800 training rows",
+      "All main comparisons: λ = 0.1λmax; zero initialization"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "data",
+    "english_word_count": 122,
+    "planned_elapsed_start_seconds": 880,
+    "planned_elapsed_end_seconds": 940,
+    "english_words_per_allocated_minute": 122.0
+  },
+  {
+    "id": 18,
+    "title": "One Common Stopping Rule and Timing Protocol",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 65,
+    "main_timing": true,
+    "english_notes": "A fair accuracy comparison needs more than small changes between iterates. We use the same normalized proximal-gradient mapping for every solver, evaluated at its returned coefficients after a complete round. For ADMM, these coefficients are z. The threshold is ten to the minus six, with a cap of ten thousand rounds. The mapping is zero exactly at the Lasso optimality condition, but its numerical size is not an upper bound on objective error. Each instance-method pair has five timings, with the method order rotated between repetitions. We retain the median and summarize three-instance variation separately. Runtime includes solver preparation, ADMM factorization, objective and residual monitoring, and history recording. Loading, preprocessing, shared spectral calculation, and plotting are excluded. All four methods were rerun on the same host.",
+    "chinese_notes": "公平的精度比较不能只看相邻迭代变化很小。我们对每种求解器使用同一个归一化近端梯度映射，并在完整一轮后，于返回系数上计算；对 ADMM 来说就是 z。阈值为十的负六次方，上限一万轮。映射为零等价于 Lasso 最优性条件，但残差数值本身并不是目标误差上界。每个实例和算法进行五次计时，轮换执行顺序，保留中位数，再单独汇总三个实例之间的变化。时间包含准备、ADMM 分解、目标和残差监测、历史记录；排除读取、预处理、共同谱计算和绘图。四种方法均在同一主机重新运行。",
+    "visual_cues": [
+      "Keep the common R formula central; pause 3 s at included/excluded cost columns."
+    ],
+    "source_refs": [
+      "Report §4.2, common proximal-gradient mapping and normalized residual; experiment_plan_admm.md"
+    ],
+    "main_takeaway": "Every method is measured at the same original-objective stationarity target.",
+    "body": [
+      "R(w) = ‖GL(w)‖∞ / max{1, ‖Xᵀy/n‖∞} ≤ 10⁻⁶",
+      "Check returned coefficients after each complete round; cap = 10,000",
+      "Five rotated-order timings → one median per instance",
+      "Include solver setup and monitoring; exclude shared spectral setup",
+      "Small R is a stationarity check, not an objective-error bound"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "protocol",
+    "english_word_count": 126,
+    "planned_elapsed_start_seconds": 940,
+    "planned_elapsed_end_seconds": 1005,
+    "english_words_per_allocated_minute": 116.3
+  },
+  {
+    "id": 19,
+    "title": "Validation and Reproducibility",
+    "part": "Part II",
+    "speaker": "XUE Pengyu",
+    "student_id": "26022951R",
+    "seconds": 45,
+    "main_timing": true,
+    "english_notes": "Before timing, we validate the updates against an orthogonal closed form and a tight independent Lasso reference. Six tests also cover ADMM normalization, its returned vector, different beta values, the zero-solution threshold, a rank-deficient design, and invalid beta. All five hundred sixty primary timing runs and forty-five separate ADMM sensitivity timings converge. We retain input hashes, configurations, source snapshots, coefficient arrays, complete traces, and raw timings. The repository and README provide the reproduction commands. These correctness checks support the implementations; they do not establish a universal speed ranking. Zhou will now explain what the experiments show.",
+    "chinese_notes": "计时前，我们用正交闭式解和独立的高精度 Lasso 参考验证更新。六项测试还覆盖 ADMM 归一化、返回向量、不同 beta、零解阈值、秩亏设计和非法参数。五百六十次主计时以及另外四十五次 ADMM 敏感性计时全部收敛。我们保留输入哈希、配置、源码快照、系数数组、完整轨迹和原始时间。仓库与 README 提供复现命令。这些检查支持实现正确性，但不能证明普遍的速度排名。下面由ZHOU Xiyu介绍实验发现。",
+    "visual_cues": [
+      "Point to the evidence chain; hand over to ZHOU."
+    ],
+    "source_refs": [
+      "Report §4.3; tests/test_optimizers.py; main/validation.json; https://github.com/Caiyangxiao/COMP6704-Group9-Project"
+    ],
+    "main_takeaway": "Numerical checks precede timing; saved evidence supports reproduction.",
+    "body": [
+      "Six numerical tests passed",
+      "Analytic orthogonal check; independent tight Lasso reference",
+      "560 primary timings + 45 ADMM sensitivity timings converged",
+      "Saved inputs, hashes, source snapshots, configurations and raw CSVs",
+      "GitHub: Caiyangxiao/COMP6704-Group9-Project"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "validation",
+    "english_word_count": 96,
+    "planned_elapsed_start_seconds": 1005,
+    "planned_elapsed_end_seconds": 1050,
+    "english_words_per_allocated_minute": 128.0
+  },
+  {
+    "id": 20,
+    "title": "PART III — Experimental Results and Conclusions",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 10,
+    "main_timing": true,
+    "english_notes": "I will first compare the fitted solutions, then explain how data geometry and parameter choices change computational cost.",
+    "chinese_notes": "下面先比较拟合解，再说明数据结构和参数选择如何改变计算成本。",
+    "visual_cues": [],
+    "source_refs": [
+      "Report §§5–6"
+    ],
+    "main_takeaway": "Compare converged solutions first, then their computational costs.",
+    "body": [],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "divider",
+    "english_word_count": 18,
+    "planned_elapsed_start_seconds": 1050,
+    "planned_elapsed_end_seconds": 1060,
+    "english_words_per_allocated_minute": 108.0
+  },
+  {
+    "id": 21,
+    "title": "Nearly Identical Final Lasso Solutions",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 70,
+    "main_timing": true,
+    "english_notes": "We begin with solution quality to check whether the runtime comparison is meaningful. At the main model penalty, all four methods retain five coefficients on every original instance. Their synthetic mean test errors all round to zero point three nine six, and the Diabetes errors all lie near two thousand nine hundred sixty-seven. The Diabetes spread is less than zero point zero zero two, so it does not establish a predictive advantage for any optimizer. Final objectives are also nearly identical; the largest controlled-study relative objective spread is about eight point six times ten to the minus eleven. These observations are consistent with accurate methods solving the same training objective. They do not mean the selected variables are causally important, or that this penalty is best for prediction. We can therefore focus on the computation required to reach these comparable fits.",
+    "chinese_notes": "首先比较解的质量，确认时间比较有共同精度基础。在主模型惩罚下，四种方法在每个原始实例都保留五个系数。合成数据的平均测试误差都四舍五入为零点三九六，Diabetes 误差都接近二千九百六十七，差异小于零点零零二，因此不能据此说某个优化器预测更好。最终目标值也几乎相同，受控研究最大相对目标差约为八点六乘十的负十一次方。这与准确方法求解同一训练目标一致，但不意味着选中变量有因果意义，也不说明该惩罚最适合预测。因此可以把重点放在达到这些相近拟合结果需要多少计算。",
+    "visual_cues": [
+      "Show fit-quality table before discussing speed; pause 3 s at “no predictive ranking”."
+    ],
+    "source_refs": [
+      "Report §5.2; main/optimization_results.csv; extended/summary.json"
+    ],
+    "main_takeaway": "Comparable final fits shift attention to the cost of reaching them.",
+    "body": [
+      "Every main fit retains 5 coefficients",
+      "Synthetic mean test MSE ≈ 0.396 for all four methods",
+      "Diabetes test MSE ≈ 2966.94; spread below 0.002",
+      "Maximum controlled relative objective spread: 8.61 × 10⁻¹¹"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "solution_quality",
+    "table": {
+      "columns": [
+        "Method",
+        "Synthetic MSE",
+        "Diabetes MSE",
+        "Nonzero"
+      ],
+      "rows": [
+        [
+          "ISTA",
+          "0.396",
+          "2966.935",
+          "5"
+        ],
+        [
+          "FISTA",
+          "0.396",
+          "2966.936",
+          "5"
+        ],
+        [
+          "Cyclic CD",
+          "0.396",
+          "2966.937",
+          "5"
+        ],
+        [
+          "ADMM",
+          "0.396",
+          "2966.937",
+          "5"
+        ]
+      ]
+    },
+    "english_word_count": 141,
+    "planned_elapsed_start_seconds": 1060,
+    "planned_elapsed_end_seconds": 1130,
+    "english_words_per_allocated_minute": 120.9
+  },
+  {
+    "id": 22,
+    "title": "Main Runtime Depends on the Dataset",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 75,
+    "main_timing": true,
+    "english_notes": "The main timing results show that the fastest implementation depends on the data. On the three independent-feature synthetic instances, ISTA has the lowest mean time, about zero point four five milliseconds. FISTA and ADMM have close means near zero point six milliseconds, while the Python coordinate loop takes about zero point nine six. On the saved Diabetes split, ADMM has the lowest median at zero point five eight milliseconds, followed by CD at zero point six eight. The vector methods take around one point five milliseconds. These are cold-solve times, including ADMM preparation and factorization. Synthetic error bars describe variation across three instance medians, not confidence intervals. The Diabetes panel represents one split. Because these operations are very short, implementation overhead and runtime variability matter. The observed ordering should not be generalized to production libraries or all Lasso problems.",
+    "chinese_notes": "主计时说明最快实现依赖数据。在三个独立特征合成实例上，ISTA 平均最快，约零点四五毫秒。FISTA 与 ADMM 的均值都接近零点六毫秒，而 Python 坐标循环约零点九六毫秒。在保存的 Diabetes 划分上，ADMM 中位数最低，约零点五八毫秒，CD 其次，约零点六八；两种向量方法约一点五毫秒。这些是冷启动时间，包含 ADMM 准备和分解。合成误差棒表示三个实例中位数之间的变化，不是置信区间；Diabetes 只有一个划分。操作时间很短，因此实现开销和运行波动都很重要。这个排名不能推广到所有 Lasso 问题或生产库。",
+    "visual_cues": [
+      "Point to synthetic first, then Diabetes; pause 4 s before implementation limitation."
+    ],
+    "source_refs": [
+      "Report §5.1; main/optimization_results.csv; figure efficiency_summary"
+    ],
+    "main_takeaway": "ISTA is fastest on the original synthetic designs; ADMM is fastest on this Diabetes split.",
+    "body": [
+      "Synthetic mean time (ms): ISTA 0.448; FISTA 0.608; CD 0.959; ADMM 0.618",
+      "Diabetes time (ms): ISTA 1.510; FISTA 1.449; CD 0.677; ADMM 0.582",
+      "ADMM preparation and factorization are included",
+      "Five timings per instance; synthetic bars summarize three instance medians"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "efficiency_summary",
+    "layout": "chart",
+    "english_word_count": 139,
+    "planned_elapsed_start_seconds": 1130,
+    "planned_elapsed_end_seconds": 1205,
+    "english_words_per_allocated_minute": 111.2
+  },
+  {
+    "id": 23,
+    "title": "Convergence at a Common Residual Target",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 90,
+    "main_timing": true,
+    "english_notes": "The two panels show the same normalized stationarity residual against complete rounds, on synthetic seed zero and the fixed Diabetes split. The dashed horizontal line is our stopping threshold of ten to the minus six. Every curve is consistently evaluated at the returned coefficient vector; for ADMM, that vector is z. One coordinate descent round contains a complete sweep, whereas ISTA, FISTA, and ADMM use vector or split updates. FISTA's residual can oscillate, so quick early progress does not necessarily give the smallest round count to this threshold. Its theoretical guarantee concerns objective error, which is a different quantity from the residual shown here. On the synthetic panel, ISTA reaches the threshold after about twenty-five updates, ADMM after twenty-five, and CD after five sweeps. These round counts do not compare equal computational work. ADMM also pays preparation and factorization costs before iterating. The curves therefore explain stopping behavior, while the preceding timing results establish the measured runtime comparison. These are instance-specific traces, not an objective-error certificate or an asymptotic rate estimate.",
+    "chinese_notes": "这两个面板分别在合成种子零和固定 Diabetes 划分上，展示同一个归一化平稳性残差随完整轮数的变化。水平虚线是十的负六次方停止阈值。所有曲线都在返回系数上计算；对于 ADMM，这个向量是 z。坐标下降一轮包含完整扫描，而 ISTA、FISTA 和 ADMM 执行向量或分裂更新。FISTA 残差可能振荡，因此早期下降快不一定意味着达到阈值所需轮数最少。它的理论保证针对目标误差，与这里画出的残差是不同的量。合成面板中，ISTA 约二十五轮达到阈值，ADMM 也是二十五轮，CD 则是五次扫描。但这些轮数对应的计算工作并不相等；ADMM 在迭代前还支付准备和分解成本。因此这些曲线解释停止行为，前一页计时结果则提供实际耗时比较。它们是具体实例的轨迹，不是目标误差证书或渐近速率估计。",
+    "visual_cues": [
+      "Point to the synthetic and Diabetes residual panels, then the dashed R = 1e-6 line. Pause 5 s while comparing FISTA oscillations and complete CD sweeps; discuss runtime using the preceding timing slide."
+    ],
+    "source_refs": [
+      "Report §§5.1–5.2; main/trace_*.csv; figures convergence and stationarity"
+    ],
+    "main_takeaway": "Objective reduction, residual stopping and elapsed time are different measurements.",
+    "body": [
+      "Objective curves use each method’s median-time repetition",
+      "Residuals are checked at returned coefficients",
+      "One CD round is a complete sweep",
+      "FISTA’s objective-error guarantee does not directly bound R or time",
+      "ADMM plots F(z), not a mixed split objective"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "stationarity",
+    "layout": "Full-width stationarity figure with common-threshold interpretation",
+    "english_word_count": 171,
+    "planned_elapsed_start_seconds": 1205,
+    "planned_elapsed_end_seconds": 1295,
+    "english_words_per_allocated_minute": 114.0
+  },
+  {
+    "id": 24,
+    "title": "Strong Correlation Changes the Ranking",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 105,
+    "main_timing": true,
+    "english_notes": "We next increase within-block correlation while keeping the paired study structure. The mean full-Gram condition number rises from about four to almost two thousand five hundred, exposing weak-curvature directions. ISTA's fixed step becomes much slower, and the independent-feature ranking does not persist. ADMM has the smallest mean time at the three positive correlation levels. At correlation zero point nine nine, its mean is seventeen point five milliseconds, compared with about twenty-four for FISTA, one hundred two for CD, and one hundred seventy-eight for ISTA. The important qualification is FISTA's large instance variation. FISTA is actually faster than ADMM on two of the three most-correlated instances; one slower instance raises its mean. Therefore the displayed average does not establish uniform ADMM dominance. Acceleration still improves sharply over ISTA in this setting. The condition number helps describe the geometry, but cannot predict the complete runtime: the selected support, effective penalty, monitoring cost, and update mechanism also contribute. Error bars here are sample standard deviations across three instance medians, each obtained from five timings; they do not summarize independent timing uncertainty. We should interpret the full table and individual traces together rather than declaring one solver universally best.",
+    "chinese_notes": "接下来增加块内相关性，并保持配对研究结构。完整 Gram 矩阵的平均条件数从约四上升到接近二千五百，暴露弱曲率方向。ISTA 固定步长显著变慢，独立特征上的排名不再保持。ADMM 在三个正相关水平的平均时间最低。相关性零点九九时，ADMM 平均约十七点五毫秒，FISTA 约二十四，CD 约一百零二，ISTA 约一百七十八。关键限定是 FISTA 的实例间波动很大：它实际上在三个最高相关实例中的两个比 ADMM 快，一个较慢实例抬高了均值。因此平均排名不代表 ADMM 每个实例都占优。与此同时，加速在这里仍然明显优于 ISTA。条件数有助于描述几何，但无法完整预测时间；支持集、惩罚尺度、监测成本和更新机制同样影响结果。这里误差棒是三个实例中位数的样本标准差，每个中位数来自五次计时；它不表示独立计时不确定性。应结合表格和各实例轨迹理解，而不是宣布一个普遍最优求解器。",
+    "visual_cues": [
+      "Show the time curve, then the ρ=.99 uncertainty callout; pause 5 s on “FISTA wins 2/3 instances”."
+    ],
+    "source_refs": [
+      "Report §5.4; extended/aggregated_results.csv; extended/optimization_results.csv"
+    ],
+    "main_takeaway": "ADMM has the lowest mean at ρ = 0.99, while FISTA is faster on 2 of the 3 instances.",
+    "body": [
+      "Mean Gram condition number: 4.1 → 2492.8",
+      "At ρ = 0.99, time (ms): ISTA 177.997; FISTA 24.041; CD 101.630; ADMM 17.457",
+      "FISTA: 24.041 ± 23.123 ms; ADMM: 17.457 ± 1.401 ms",
+      "A mean ranking is not a uniform instance-by-instance ranking"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "correlation_comparison",
+    "layout": "chart",
+    "english_word_count": 195,
+    "planned_elapsed_start_seconds": 1295,
+    "planned_elapsed_end_seconds": 1400,
+    "english_words_per_allocated_minute": 111.4
+  },
+  {
+    "id": 25,
+    "title": "More Features Increase Work and Setup Cost",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 80,
+    "main_timing": true,
+    "english_notes": "The dimension study holds the sample count fixed and increases the number of independent features. ISTA has the smallest mean time at every tested width. CD uses four complete sweeps throughout, but each sweep visits more coordinates, so its elapsed time rises. ADMM also illustrates why rounds alone can mislead. At six hundred features, it uses fewer rounds than ISTA, yet its mean total time is seventeen point four milliseconds compared with ISTA's ten point six. ADMM preparation takes about eight point three milliseconds, or forty-seven percent of its total, including Gram construction, Cholesky factorization, and the first common check. The factor is reused within each solve, but every cold repetition pays this cost again. Other workloads could amortize preparation differently. The observed setup share is the ratio of displayed means, rather than a separate causal profiling experiment. A warm-started path or a structure-aware ADMM implementation would require a separate benchmark.",
+    "chinese_notes": "维度研究固定样本数，增加独立特征数量。ISTA 在每个测试宽度的平均时间都最低。CD 始终只需四次完整扫描，但每轮访问的坐标增加，因此时间仍上升。ADMM 进一步说明轮数可能误导：六百个特征时，它的轮数少于 ISTA，但平均总时间约十七点四毫秒，ISTA 约十点六。ADMM 准备约八点三毫秒，占总时间百分之四十七，包含 Gram 构造、Cholesky 分解和第一次共同检查。同一次求解复用因子，但每次冷启动重复都重新支付成本。这里准备占比是所示均值的比值，不是另一个因果剖析实验。其他工作负载可能摊薄准备成本；热启动路径或利用结构的 ADMM 需要另行比较。",
+    "visual_cues": [
+      "Connect the width curve to the preparation/iteration breakdown; pause 4 s on 47.4%."
+    ],
+    "source_refs": [
+      "Report §5.5; extended/aggregated_results.csv; figure setup_cost"
+    ],
+    "main_takeaway": "ADMM uses fewer rounds at d = 600 but pays for dense preparation.",
+    "body": [
+      "800 training observations; d = 50, 100, 300, 600",
+      "ISTA has the smallest mean time at every tested width",
+      "CD stays at 4 complete sweeps; each sweep becomes more expensive",
+      "At d = 600: ADMM 17.413 ms total; 8.251 ms preparation (47.4%)"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "dimension_comparison",
+    "layout": "dimension_setup",
+    "english_word_count": 151,
+    "planned_elapsed_start_seconds": 1400,
+    "planned_elapsed_end_seconds": 1480,
+    "english_words_per_allocated_minute": 113.2
+  },
+  {
+    "id": 26,
+    "title": "ADMM’s β Changes the Algorithm, Not the Model",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 80,
+    "main_timing": true,
+    "english_notes": "ADMM's algorithmic penalty controls how the split copies reach agreement. We examine beta values of zero point one, one, and ten while keeping the Lasso model penalty and stopping tolerance fixed. This is a separate study with three timings per setting. Beta one is fastest among these choices on synthetic seed zero and Diabetes. In the highly correlated three-instance summary, beta zero point one has a lower mean time than beta one, although this is not true for every seed. Beta ten is much slower there, requiring roughly seven to eight thousand rounds. All settings still reach the common residual threshold. These outcomes show that one fixed default is not uniformly optimal. They do not retroactively tune the main comparison, which remains at beta one. The three-repeat sensitivity timings remain separate from the main five-repeat records. Changing beta modifies convergence behavior; it does not define a different Lasso estimator or establish a prediction advantage.",
+    "chinese_notes": "ADMM 的算法惩罚控制两个副本如何达到一致。我们在固定 Lasso 模型惩罚和停止容差下，比较 beta 为零点一、一、十。这是单独的研究，每个设置三次计时。在合成种子零和 Diabetes 上，beta 一在三个选择中最快。最高相关性的三个实例汇总中，beta 零点一平均时间低于一，但并非每个种子都如此。Beta 十在该设置明显较慢，需要约七千至八千轮，不过所有设置都达到共同残差阈值。这说明固定默认值不普遍最优。我们不会据此回头调整主比较；主比较仍用预先指定的 beta 一。三次重复的敏感性记录与五次重复的主计时保持分开。改变 beta 改变收敛过程，不会定义另一种 Lasso 估计量，也不能证明预测优势。",
+    "visual_cues": [
+      "Keep λ fixed visually while moving β; pause 4 s before the main-comparison caveat."
+    ],
+    "source_refs": [
+      "Report §5.6; sensitivity/sensitivity_results.csv; sensitivity/configuration.json"
+    ],
+    "main_takeaway": "A fixed β is not uniformly fastest, even when λ and final accuracy stay fixed.",
+    "body": [
+      "Separate sensitivity: β = 0.1, 1, 10; three timings per setting",
+      "Synthetic seed 0: 2.980 / 0.600 / 3.342 ms",
+      "Diabetes: 3.849 / 0.560 / 4.598 ms",
+      "ρ = 0.99 mean: 15.493 / 18.713 / 182.095 ms",
+      "The main comparison remains at the predeclared β = 1"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "admm_penalty_sensitivity",
+    "layout": "chart",
+    "english_word_count": 154,
+    "planned_elapsed_start_seconds": 1480,
+    "planned_elapsed_end_seconds": 1560,
+    "english_words_per_allocated_minute": 115.5
+  },
+  {
+    "id": 27,
+    "title": "Correct Support Can Still Have Shrinkage Error",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 65,
+    "main_timing": true,
+    "english_notes": "The coefficient plot separates variable selection from magnitude estimation. In the synthetic experiments, the fitted support matches the five generating variables, and all forty-five inactive variables are zero. However, the retained coefficients move toward zero. Their mean absolute active-coefficient error is about zero point two two one across the three instances. Thus exact support recovery does not remove Lasso shrinkage error. The plot uses a representative converged CD fit because the solver solutions are nearly identical. Synthetic coefficients are converted back to original feature units before comparison with the known values. The Diabetes panel instead uses standardized coefficients. Its selected features are sex, body mass index, blood pressure, s three, and s five, but there is no known true support for judging recovery accuracy.",
+    "chinese_notes": "系数图把变量选择和幅值估计分开。在合成实验中，拟合支持集匹配五个生成变量，四十五个非活动变量都为零。但保留的系数向零收缩，三个实例的活动系数平均绝对误差约零点二二一。因此精确恢复支持集并不能消除 Lasso 收缩误差。由于求解器解几乎相同，图中采用收敛 CD 解作为代表。合成系数先换回原特征单位，再与已知值比较；Diabetes 使用标准化系数。它选中 sex、bmi、bp、s3 和 s5，但没有已知真实支持集，不能据此判断恢复准确率。",
+    "visual_cues": [
+      "Compare generating and estimated synthetic bars, then switch to the distinct Diabetes interpretation."
+    ],
+    "source_refs": [
+      "Report §5.3; main/coefficients_*.npz; figure coefficient_analysis"
+    ],
+    "main_takeaway": "Variable selection and coefficient estimation are separate outcomes.",
+    "body": [
+      "Synthetic: all 5 generating variables retained; 45 inactive coefficients zero",
+      "Mean active estimates: (1.801, −1.260, 0.736, −1.810, 1.287)",
+      "Mean absolute active-coefficient error: 0.221 ± 0.025",
+      "Diabetes selection describes one standardized fit, not known ground truth"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "coefficient_analysis",
+    "layout": "chart",
+    "english_word_count": 124,
+    "planned_elapsed_start_seconds": 1560,
+    "planned_elapsed_end_seconds": 1625,
+    "english_words_per_allocated_minute": 114.5
+  },
+  {
+    "id": 28,
+    "title": "The Model Penalty Trades Fit Against Sparsity",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 70,
+    "main_timing": true,
+    "english_notes": "Now we change the model penalty lambda rather than ADMM's algorithmic penalty. CD solves four prespecified ratios of lambda to lambda maximum. On synthetic data, the mean selected count falls from about twenty-two variables to five, then four, and finally zero as the penalty grows. Meanwhile, mean test error rises from zero point two three six to zero point three nine six and then much more sharply. The five-variable fit recovers the generating support, but does not have the lowest prediction error among these settings. At lambda maximum, the zero vector is optimal, so predictions equal the training response mean. The saved coefficient paths give a finer view of the same change. These test scores describe fixed settings; we do not use them to choose a penalty and then claim unbiased prediction accuracy.",
+    "chinese_notes": "这里改变的是模型惩罚 lambda，而不是 ADMM 算法惩罚。CD 求解四个预先指定的 lambda 与 lambda 最大值之比。在合成数据上，惩罚增强时，平均选中数量从约二十二个降为五个、约四个，最终为零；同时平均测试误差从零点二三六升为零点三九六，之后明显增加。五变量拟合恢复生成支持集，却不是这些设置中预测误差最低的。达到 lambda 最大值时，零向量最优，预测等于训练响应均值。保存的系数路径更细致地显示了同一变化。这些测试分数只是固定设置的描述，没有用它们选惩罚后再宣称无偏预测精度。",
+    "visual_cues": [
+      "Move from the nonzero-count panels to MSE panels; pause 4 s at λmax and the zero solution."
+    ],
+    "source_refs": [
+      "Report §5.3; main/regularization_results.csv; extended/path_results.csv"
+    ],
+    "main_takeaway": "A smaller selected model need not have lower test error.",
+    "body": [
+      "CD illustrates λ/λmax = 0.01, 0.1, 0.5, 1",
+      "Synthetic mean nonzeros: 22.3 → 5.0 → 4.3 → 0",
+      "Synthetic mean test MSE: 0.236 → 0.396 → 5.506 → 11.945",
+      "At λ = λmax, zero coefficients are optimal",
+      "Test scores are descriptive; no penalty was selected with them"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "regularization",
+    "layout": "chart",
+    "english_word_count": 133,
+    "planned_elapsed_start_seconds": 1625,
+    "planned_elapsed_end_seconds": 1695,
+    "english_words_per_allocated_minute": 114.0
+  },
+  {
+    "id": 29,
+    "title": "Conclusions and Limits",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 75,
+    "main_timing": true,
+    "english_notes": "The main conclusion is conditional rather than a universal ranking. All four implementations reach nearly identical Lasso solutions. ISTA is fastest on our tested independent-feature designs. ADMM is fastest on the saved Diabetes split and has the lowest mean time at positive block correlations, but FISTA wins on two of the three most-correlated instances. ADMM's preparation becomes substantial as feature count grows, and its beta parameter changes computational progress. Lambda instead changes the estimator's sparsity and shrinkage. Our limits include small dense matrices, one real-data split, three synthetic instances, Python coordinate loops, and a specific monitoring and timing convention. A small stationarity residual is not an objective-error certificate. These extensions would test how robust the present conclusions are under changed implementations and workloads. Future work should compare compiled coordinate descent, restarted FISTA, structure-aware or adaptive ADMM, dual-gap stopping, and validation-selected penalties over repeated real-data splits.",
+    "chinese_notes": "主要结论是有条件的排名，而不是普遍优胜者。四种实现达到几乎相同的 Lasso 解。ISTA 在测试的独立特征设计中最快；ADMM 在保存的 Diabetes 划分上最快，并在正块相关设置中平均时间最低，但 FISTA 在三个最高相关实例中的两个获胜。特征增加时，ADMM 准备成本明显，其 beta 参数改变计算进展；lambda 则改变估计量的稀疏与收缩。局限包括小型稠密矩阵、单一真实数据划分、三个合成实例、Python 坐标循环，以及特定监测和计时口径。小平稳性残差不是目标误差证书。这些扩展可以检验实现和工作负载改变后，目前结论是否仍然稳健。后续可比较编译 CD、重启 FISTA、结构化或自适应 ADMM、对偶间隙停止，并在重复真实划分上用验证集选惩罚。",
+    "visual_cues": [
+      "Summarize one advantage per method; pause 4 s on the limitations box."
+    ],
+    "source_refs": [
+      "Report §6; Tables and figures in §5"
+    ],
+    "main_takeaway": "The best measured solver depends on data geometry, implementation and cost convention.",
+    "body": [
+      "Nearly identical final solutions; different costs to reach them",
+      "ISTA: fastest tested independent-feature designs",
+      "ADMM: fastest saved Diabetes split; lowest positive-correlation means",
+      "FISTA: faster on 2 of 3 highest-correlation instances",
+      "Limits: small dense designs, one real split, few instances, monitored Python implementations"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "conclusions",
+    "english_word_count": 145,
+    "planned_elapsed_start_seconds": 1695,
+    "planned_elapsed_end_seconds": 1770,
+    "english_words_per_allocated_minute": 116.0
+  },
+  {
+    "id": 30,
+    "title": "Contributions and Discussion",
+    "part": "Part III",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 30,
+    "main_timing": true,
+    "english_notes": "To close, the four implementation responsibilities are shown here. All four members contributed to report writing, revision, experimental design, and evaluation. Zhang also designed the slides and introduced the work. Our repository contains the code, figures, and saved evidence behind the comparison. Thank you for listening. We now welcome questions, and all four members will participate in the discussion.",
+    "chinese_notes": "最后，这里列出四种算法的实现分工。四位成员共同参与报告撰写与修改、实验设计和实验评估；ZHANG Kejia另外负责 PPT 设计和工作介绍。仓库保存了比较所依据的代码、图片和实验记录。感谢大家聆听。接下来欢迎提问，四位成员都会参与讨论。",
+    "visual_cues": [
+      "Finish the main presentation at 30:00; transition to the separate 10-minute Q&A."
+    ],
+    "source_refs": [
+      "Report §6, Author contributions; https://github.com/Caiyangxiao/COMP6704-Group9-Project"
+    ],
+    "main_takeaway": "Four implementations and shared analysis support the final conclusions.",
+    "body": [
+      "ISTA — ZHOU Xiyu · FISTA — XUE Pengyu",
+      "Cyclic CD — ZHANG Kejia · ADMM — CAI Yangxiao",
+      "Report writing/revision, experimental design/evaluation — all four",
+      "PPT design and introduction/work overview — ZHANG Kejia",
+      "Thank you. We welcome questions."
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "contributions",
+    "english_word_count": 59,
+    "planned_elapsed_start_seconds": 1770,
+    "planned_elapsed_end_seconds": 1800,
+    "english_words_per_allocated_minute": 118.0
+  },
+  {
+    "id": 31,
+    "title": "Questions and Answers",
+    "part": "Q&A",
+    "speaker": "All four members",
+    "student_id": "",
+    "seconds": 600,
+    "main_timing": false,
+    "english_notes": "This slide begins the separate ten-minute question period and is not part of the thirty-minute presentation. Invite questions first rather than reading the prompts aloud. All four members should participate. Suggested first responders are Zhou for ISTA, Xue for FISTA, Zhang for coordinate descent, and Cai for ADMM; experimental design and interpretation are shared responsibilities. For rate questions, distinguish objective bounds from the measured residual. For ADMM accuracy, explain evaluation at z and the common threshold. For factorization, explain cold setup and possible amortization in a different workload. For prediction, distinguish numerical convergence, support recovery, shrinkage, and validation-based model selection. Use the backup slides only when a question calls for them.",
+    "chinese_notes": "这一页开始单独的十分钟问答，不计入三十分钟展示。先邀请现场提问，不要逐条朗读提示。四位成员都应参与。建议算法问题分别由ZHOU Xiyu回应 ISTA、XUE Pengyu回应 FISTA、ZHANG Kejia回应 CD、CAI Yangxiao回应 ADMM；实验设计和解释由全体共同负责。收敛率问题要区分目标界与测量残差；ADMM 精度问题说明在 z 上计算共同阈值；分解问题说明冷启动成本，以及其他负载可能摊薄该成本；预测问题区分数值收敛、支持恢复、收缩和验证选模型。仅在问题需要时使用备份页。",
+    "visual_cues": [
+      "Q&A clock: 30:00–40:00; do not rehearse this page as an extra talk segment."
+    ],
+    "source_refs": [
+      "Report §§3–6"
+    ],
+    "main_takeaway": "A separate 10-minute discussion follows the 30-minute presentation.",
+    "body": [
+      "Why can FISTA be slower despite its stronger rate?",
+      "How is ADMM compared at the same accuracy?",
+      "When can factorization reuse change the conclusion?",
+      "What do sparsity and test error establish?"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "qa",
+    "english_word_count": 111
+  },
+  {
+    "id": 32,
+    "title": "Backup — ADMM Residual Diagnostics",
+    "part": "Backup",
+    "speaker": "CAI Yangxiao",
+    "student_id": "26023041R",
+    "seconds": 0,
+    "main_timing": false,
+    "english_notes": "Use this backup only if asked about ADMM feasibility or stopping. The primal residual measures disagreement between x and z; the dual residual measures the beta-scaled change in z. They need not decrease at the same rate. We save both traces to diagnose the split iteration, but the same original-objective stationarity criterion at z controls stopping for every method. We do not add stricter ADMM-only tests to the primary timing comparison. A split objective evaluated at two unequal vectors can be misleading, which is why every reported Lasso objective uses z for both terms. The saved diagnostics allow readers to inspect this distinction directly.",
+    "chinese_notes": "仅在询问 ADMM 可行性或停止规则时使用本页。原始残差衡量 x 与 z 的差异，对偶残差衡量 beta 缩放后的 z 变化，两者不一定以同样速率下降。我们保存两条轨迹诊断分裂迭代，但所有方法仍由 z 上同一个原目标平稳性指标决定停止，没有给 ADMM 额外加更严格条件。两个不相等向量上的分裂目标可能误导，因此报告的 Lasso 目标两项都使用 z。保存的诊断可以让读者直接检查这种区别。",
+    "visual_cues": [
+      "Optional backup; no allocated main-talk time."
+    ],
+    "source_refs": [
+      "Report §§3.3, 4.2, 5.6; main/admm_diagnostics_*.csv; extended/admm_diagnostics_*.csv"
+    ],
+    "main_takeaway": "Split residuals diagnose ADMM; the common R(z) decides stopping.",
+    "body": [
+      "Primal: rᵏ = xᵏ − zᵏ",
+      "Dual: sᵏ = β(zᵏ − zᵏ⁻¹)",
+      "Saved diagnostics do not add stopping conditions",
+      "Compare F(z) and R(z), not a mixed split objective"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "admm_diagnostics",
+    "english_word_count": 104
+  },
+  {
+    "id": 33,
+    "title": "Backup — Raw Timing Repetitions",
+    "part": "Backup",
+    "speaker": "ZHOU Xiyu",
+    "student_id": "26025265R",
+    "seconds": 0,
+    "main_timing": false,
+    "english_notes": "Use this backup if asked whether small timing differences are reliable. Every point is a saved cold-solve timing, with medians used for the main table. Some short repetitions show substantial runtime variability, so the synthetic mean difference between FISTA and ADMM should not be treated as a robust ranking. On the saved Diabetes split, the five ADMM times range from about zero point five two four to zero point five nine eight milliseconds; the CD range is about zero point six five seven to zero point six eight three. These recorded ranges are disjoint, but five timings on one split still do not establish universal algorithm superiority. We make no confidence-interval or significance claim.",
+    "chinese_notes": "若被问到很小的时间差是否可靠，可使用本页。每个点都是保存的冷启动时间，主表采用中位数。有些短运行波动明显，因此不能把合成数据上 FISTA 与 ADMM 的小均值差当成稳健排名。保存的 Diabetes 划分上，五次 ADMM 时间约零点五二四至零点五九八毫秒，CD 约零点六五七至零点六八三；范围不重叠，但一个划分上的五次时间仍不能证明普遍算法优势。我们没有声称置信区间或显著性。",
+    "visual_cues": [
+      "Optional backup; point to ranges and median markers."
+    ],
+    "source_refs": [
+      "Report §5.2; main/timing_repeats.csv"
+    ],
+    "main_takeaway": "Short timings describe recorded execution variability, not statistical certainty.",
+    "body": [
+      "Five timings per main instance-method pair; black bars are medians",
+      "Timing repeats are not independent datasets",
+      "Diabetes ADMM range: 0.524–0.598 ms; CD: 0.657–0.683 ms",
+      "No confidence interval or significance claim"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "figure": "timing_repetitions",
+    "layout": "chart",
+    "english_word_count": 114
+  },
+  {
+    "id": 34,
+    "title": "Selected References and Reproduction",
+    "part": "References",
+    "speaker": "All four members",
+    "student_id": "",
+    "seconds": 0,
+    "main_timing": false,
+    "english_notes": "This reference page is available for questions and is not an additional timed presentation segment. The report provides the complete bibliography and primary-source links. The repository contains code, the frozen dependencies, data and saved splits, raw results, figure-generation code, report sources, and documented reproduction commands. Citations support the mathematical mechanisms; the speed conclusions come from our own saved experiments and remain limited to that experimental setting.",
+    "chinese_notes": "这一页用于答问和查阅，不是额外计时展示。完整参考文献和原始来源链接在报告中。仓库包含代码、固定依赖、数据与保存划分、原始结果、绘图程序、报告源文件，以及复现命令。文献支持算法数学机制；速度结论来自我们保存的实验，并限定在该实验设置中。",
+    "visual_cues": [
+      "Optional reference page; no allocated main-talk time."
+    ],
+    "source_refs": [
+      "Report References and §4.3",
+      "https://doi.org/10.1111/j.2517-6161.1996.tb02080.x",
+      "https://doi.org/10.1137/080716542",
+      "https://doi.org/10.18637/jss.v033.i01",
+      "https://doi.org/10.1561/2200000016",
+      "https://doi.org/10.1561/2400000003",
+      "https://github.com/Caiyangxiao/COMP6704-Group9-Project"
+    ],
+    "main_takeaway": "The full bibliography and reproducibility instructions are in the report.",
+    "body": [
+      "Tibshirani (1996) — Lasso",
+      "Beck & Teboulle (2009) — FISTA",
+      "Friedman et al. (2010) — coordinate descent",
+      "Boyd et al. (2011) — ADMM",
+      "Parikh & Boyd (2014) — proximal algorithms",
+      "Repository: github.com/Caiyangxiao/COMP6704-Group9-Project"
+    ],
+    "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
+    "layout": "references",
+    "english_word_count": 66
+  }
+]

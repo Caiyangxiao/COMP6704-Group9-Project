@@ -540,6 +540,15 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 54.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
+4.
+ (t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
@@ -552,17 +561,7 @@ ithms ([]Parikh and Boyd[], []2014[]) ex-plain ISTA;
 
 [1
 
-] [2] [3] [4] [5]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-25.
- (t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
- [6]
+] [2] [3] [4] [5] [6]
 File: output/figures/four_solvers//convergence.pdf Graphic file (type pdf)
 <use output/figures/four_solvers//convergence.pdf>
 File: output/figures/four_solvers//stationarity.pdf Graphic file (type pdf)
@@ -592,15 +591,15 @@ pdf)
 File: output/figures/four_solvers//admm_penalty_sensitivity.pdf Graphic file (t
 ype pdf)
 <use output/figures/four_solvers//admm_penalty_sensitivity.pdf>
- [12] [13]
-Underfull \hbox (badness 1142) in paragraph at lines 520--523
+ [12] [13] [14]
+Underfull \hbox (badness 1142) in paragraph at lines 532--535
 []\T1/ptm/m/n/9 Hui Zou. 2006. []The adap-tive lasso and its or-a-cle prop-er-t
 ies[]. \T1/ptm/m/it/9 Jour-nal of the Amer-i-can Sta-tis-ti-cal As-so-ci-a-tion
 \T1/ptm/m/n/9 ,
  []
 
-[14] (report.aux)
+[15] (report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 2E3FF6B6FD9CC39F5238AB2ADBAEB2C7;5778.
  )
-Output written on report.xdv (14 pages, 85144 bytes).
+Output written on report.xdv (15 pages, 86628 bytes).

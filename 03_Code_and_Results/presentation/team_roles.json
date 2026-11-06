@@ -1,0 +1,13 @@
+{
+  "confirmed_by_group": true,
+  "members": [
+    {"name":"CAI Yangxiao","student_id":"26023041R","algorithm":"ADMM","speaking":"Part I: Background"},
+    {"name":"XUE Pengyu","student_id":"26022951R","algorithm":"FISTA","speaking":"Part II: Algorithms and experimental design"},
+    {"name":"ZHANG Kejia","student_id":"26049131R","algorithm":"Cyclic CD","speaking":"Introduction and work overview","presentation_design":true},
+    {"name":"ZHOU Xiyu","student_id":"26025265R","algorithm":"ISTA","speaking":"Part III: Results and conclusions"}
+  ],
+  "report_writing_and_revision":"All four members",
+  "experimental_design_and_evaluation":"All four members",
+  "presentation_design":"ZHANG Kejia",
+  "repository":"https://github.com/Caiyangxiao/COMP6704-Group9-Project"
+}

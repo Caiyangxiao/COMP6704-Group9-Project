@@ -1,7 +1,7 @@
 ﻿COMP6704 Group 9 — 四算法报告（2026-11-06）
 
 当前文件：Lasso_Project_Report.pdf
-14页（含参考文献），9幅Python生成的图，8张表，20条参考文献。
+15页（含参考文献），9幅Python生成的图，9张表，20条参考文献。
 英文风格沿用原报告；补充ADMM推导、归一化、复杂度与实际实验分析。
 
 编辑源在 ../03_Code_and_Results/report.tex。
@@ -15,6 +15,8 @@
 另有16次模型惩罚拟合和68次路径拟合，均达到规定阈值。
 报告页数及每页渲染、公式/引用、表格数值与独立保存记录已检查。
 
-提交前仍需补入真实GitHub链接；链接位于首页脚注的明确占位位置。
-个人独立实现/验证分工须由四位成员按实际情况确认，未编造分工。
-PPT、之前的合并PDF和01_Chinese_Guide仍为旧三算法版本，需要同步后再合并提交。
+项目GitHub链接已加入首页脚注：
+https://github.com/Caiyangxiao/COMP6704-Group9-Project
+第14页已加入小组确认的成员分工：四人共同撰写修改报告和设计评估实验；四种算法实现者及演讲分工均已明确。
+PPT已同步为四算法版，位于../05_Presentation/；最终合并PDF为../06_Submission/Group9.pdf。
+01_Chinese_Guide仍保留历史辅助材料，当前讲稿以05_Presentation的双语备注为准。

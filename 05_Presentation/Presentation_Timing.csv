@@ -1,0 +1,35 @@
+﻿slide,title,speaker,student_id,main_seconds,start,end,category
+1,Classical Optimization Algorithms for Lasso Regression,ZHANG Kejia,26049131R,35,00:00,00:35,main
+2,Our Work and Presentation Plan,ZHANG Kejia,26049131R,55,00:35,01:30,main
+3,PART I — Foundations,CAI Yangxiao,26023041R,10,01:30,01:40,main
+4,Why Study Lasso?,CAI Yangxiao,26023041R,50,01:40,02:30,main
+5,The Same Lasso Objective for Every Solver,CAI Yangxiao,26023041R,75,02:30,03:45,main
+6,Related Regression Penalties,CAI Yangxiao,26023041R,45,03:45,04:30,main
+7,Convexity and Sparse Optimality,CAI Yangxiao,26023041R,75,04:30,05:45,main
+8,Soft Thresholding,CAI Yangxiao,26023041R,65,05:45,06:50,main
+9,Research Questions and Solver Map,CAI Yangxiao,26023041R,40,06:50,07:30,main
+10,PART II — Algorithms and Experimental Design,XUE Pengyu,26022951R,10,07:30,07:40,main
+11,"ISTA: Gradient Step, Then Threshold",XUE Pengyu,26022951R,70,07:40,08:50,main
+12,FISTA: Add Extrapolation,XUE Pengyu,26022951R,80,08:50,10:10,main
+13,Cyclic Coordinate Descent,XUE Pengyu,26022951R,75,10:10,11:25,main
+14,ADMM: Split the Loss and Penalty,XUE Pengyu,26022951R,90,11:25,12:55,main
+15,ADMM Implementation and Correct Evaluation,XUE Pengyu,26022951R,55,12:55,13:50,main
+16,Algorithm Trade-offs and Fair Comparison,XUE Pengyu,26022951R,50,13:50,14:40,main
+17,Data and Controlled Studies,XUE Pengyu,26022951R,60,14:40,15:40,main
+18,One Common Stopping Rule and Timing Protocol,XUE Pengyu,26022951R,65,15:40,16:45,main
+19,Validation and Reproducibility,XUE Pengyu,26022951R,45,16:45,17:30,main
+20,PART III — Experimental Results and Conclusions,ZHOU Xiyu,26025265R,10,17:30,17:40,main
+21,Nearly Identical Final Lasso Solutions,ZHOU Xiyu,26025265R,70,17:40,18:50,main
+22,Main Runtime Depends on the Dataset,ZHOU Xiyu,26025265R,75,18:50,20:05,main
+23,Convergence at a Common Residual Target,ZHOU Xiyu,26025265R,90,20:05,21:35,main
+24,Strong Correlation Changes the Ranking,ZHOU Xiyu,26025265R,105,21:35,23:20,main
+25,More Features Increase Work and Setup Cost,ZHOU Xiyu,26025265R,80,23:20,24:40,main
+26,"ADMM’s β Changes the Algorithm, Not the Model",ZHOU Xiyu,26025265R,80,24:40,26:00,main
+27,Correct Support Can Still Have Shrinkage Error,ZHOU Xiyu,26025265R,65,26:00,27:05,main
+28,The Model Penalty Trades Fit Against Sparsity,ZHOU Xiyu,26025265R,70,27:05,28:15,main
+29,Conclusions and Limits,ZHOU Xiyu,26025265R,75,28:15,29:30,main
+30,Contributions and Discussion,ZHOU Xiyu,26025265R,30,29:30,30:00,main
+31,Questions and Answers,All four members,,0,,,Q&A
+32,Backup — ADMM Residual Diagnostics,CAI Yangxiao,26023041R,0,,,backup
+33,Backup — Raw Timing Repetitions,ZHOU Xiyu,26025265R,0,,,backup
+34,Selected References and Reproduction,All four members,,0,,,backup

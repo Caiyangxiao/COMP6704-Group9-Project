@@ -23,7 +23,7 @@
 \widowpenalty=10000\clubpenalty=10000\raggedbottom
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \newcommand{\R}{\mathbb{R}}\newcommand{\soft}{\mathcal{S}}
-\newcommand{\projectrepository}{\textit{[GitHub URL to be supplied by Group 9 before submission]}}
+\newcommand{\projectrepository}{\url{https://github.com/Caiyangxiao/COMP6704-Group9-Project}}
 \begin{document}
 \begin{center}
 \hrule height4pt\vspace{.15in}
@@ -319,6 +319,18 @@ The study covers small dense designs, four block-correlation levels, and feature
 The shared residual gives a consistent stopping rule, not a bound on objective error. ADMM setup is included while the shared spectral calculation is excluded; other cost conventions may change end-to-end conclusions. No penalty was selected by test error, and no confidence interval or significance claim is inferred from the small timing samples.
 
 @@CONCLUSION@@
+
+\subsection*{Author contributions}
+All four members contributed to report writing and revision, experimental design, and experimental evaluation. The individual implementation and presentation responsibilities are listed below.
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l l Y@{}}\toprule
+Member (student ID) & Algorithm implementation & Presentation and slide responsibilities\\\midrule
+\shortstack[l]{CAI Yangxiao\\26023041R} & ADMM & Part I\\[3pt]
+\shortstack[l]{XUE Pengyu\\26022951R} & FISTA & Part II\\[3pt]
+\shortstack[l]{ZHANG Kejia\\26049131R} & Cyclic CD & Introduction and work overview; PPT design\\[3pt]
+\shortstack[l]{ZHOU Xiyu\\26025265R} & ISTA & Part III\\\bottomrule
+\end{tabularx}
+\end{center}
 
 \subsection*{Generative AI assistance}
 Generative AI tools assisted with literature organization, implementation, drafting, and language and formatting revision. The four-solver measurements were executed locally and retained with configurations, inputs, code snapshots, and validation outputs.

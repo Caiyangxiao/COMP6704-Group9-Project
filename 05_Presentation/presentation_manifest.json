@@ -1,0 +1,75 @@
+{
+  "slide_count": 34,
+  "main_slide_count": 30,
+  "main_presentation_seconds": 1800,
+  "qa_seconds": 600,
+  "backup_slide_count": 3,
+  "team_roles": {
+    "confirmed_by_group": true,
+    "members": [
+      {
+        "name": "CAI Yangxiao",
+        "student_id": "26023041R",
+        "algorithm": "ADMM",
+        "speaking": "Part I: Background"
+      },
+      {
+        "name": "XUE Pengyu",
+        "student_id": "26022951R",
+        "algorithm": "FISTA",
+        "speaking": "Part II: Algorithms and experimental design"
+      },
+      {
+        "name": "ZHANG Kejia",
+        "student_id": "26049131R",
+        "algorithm": "Cyclic CD",
+        "speaking": "Introduction and work overview",
+        "presentation_design": true
+      },
+      {
+        "name": "ZHOU Xiyu",
+        "student_id": "26025265R",
+        "algorithm": "ISTA",
+        "speaking": "Part III: Results and conclusions"
+      }
+    ],
+    "report_writing_and_revision": "All four members",
+    "experimental_design_and_evaluation": "All four members",
+    "presentation_design": "ZHANG Kejia",
+    "repository": "https://github.com/Caiyangxiao/COMP6704-Group9-Project"
+  },
+  "source_content_sha256": "0654a33281689213d2ce81f626d3c203d104e2da414d3495107bf04d772db326",
+  "presentation_sha256": "a7b180df4c4200cdc8aec4e997ec1e3c4548958bfaa4f91c1994895b8d1e3e4b",
+  "used_assets": {
+    "output\\figures\\presentation_four_solvers\\admm_beta.png": "67088bee89e4e14dda7a8a241fc30823ae5ae5a12d78da87c6541ece03ff374c",
+    "output\\figures\\presentation_four_solvers\\admm_diagnostics.png": "5def29af1f7ceecefe3bee03e94a92b71baa4830c42bc13ac4ea014901552627",
+    "output\\figures\\presentation_four_solvers\\coefficient_analysis.png": "d1945ba6f6659b82b51253528587600bde21deb234951eebe61f33f0e1b3113a",
+    "output\\figures\\presentation_four_solvers\\correlation_time.png": "b064f1b94d83d079b6f4e048707728dd3609d656caf36547af936fdc9103a388",
+    "output\\figures\\presentation_four_solvers\\dimension_time.png": "723651c70375f93cd56dafce32d72299f7d04a82ccbfe151a7aa52d1183d1054",
+    "output\\figures\\presentation_four_solvers\\eq_admm.png": "5149c4c4541d9ee6a661d652b7720d8b31f31ad74a17cdc547d9766f16759a8a",
+    "output\\figures\\presentation_four_solvers\\eq_cd.png": "c972fc96f604e16b4d1b59840fb992c1defdf56bd3f09c8ac3d017517a38cc70",
+    "output\\figures\\presentation_four_solvers\\eq_fista.png": "ff8ac14ebd8bb76306ad015233e0e9e11c967b5316b675920ff7ec1399e3775b",
+    "output\\figures\\presentation_four_solvers\\eq_ista.png": "a5db92fb6ef3cb3021b58ef58fd07beb3b2743b894bb48faedae2016f33ea5bf",
+    "output\\figures\\presentation_four_solvers\\eq_kkt.png": "beec770b1f7fd15d4dff6611a08dea7ccb4029e25118e08543d945962fbd7dfb",
+    "output\\figures\\presentation_four_solvers\\eq_objective.png": "dafaf2ae76cb658ef7ccf6ca23c2e1b5bd442f13cc65b454f7ee6dacf825ea5b",
+    "output\\figures\\presentation_four_solvers\\eq_residual.png": "9cc48648acf9b9311b4f01bd51219cdca583e3c64384181630fb2dc8fb4dabd2",
+    "output\\figures\\presentation_four_solvers\\eq_soft.png": "1b50bbdb8aa4798d81f8e0c1d989e733e6665f5ecbf9e42591dbcb26335f2a78",
+    "output\\figures\\presentation_four_solvers\\main_runtime.png": "36b15b2ed25fd729d87a9b703496504e67a1f7c586437f9ae447d5ed38dc6ba4",
+    "output\\figures\\presentation_four_solvers\\regularization.png": "dd36dc17e4984ffe3580363eb6862db04483544cc9ee3352f6de05ad5a3391ae",
+    "output\\figures\\presentation_four_solvers\\soft_threshold.png": "fba84e3af0855b6e7b7815723019d1222369a79f9a5fa6f35aa4ededae07097b",
+    "output\\figures\\presentation_four_solvers\\stationarity.png": "62b619fc7725c86f3ecb564d5dbafd16385a71c17751de8b3f86536f4271f941",
+    "output\\figures\\presentation_four_solvers\\timing_repetitions.png": "5d9c9b12d437c42d475dbe737d39108118c7acaab9a8e858d1a81a91a730f09e",
+    "output\\figures\\presentation_four_solvers\\truth_support.png": "545fd444bcb74e6b3fc9e95c93dabe60e653916959f430936d0b13385d7f1273"
+  },
+  "presentation_pdf_sha256": "1b9e3d3300ffd3beb99f7516797a26b8bdd145d3dc31c18aa98fd8eb0506062b",
+  "presentation_pdf_pages": 34,
+  "all_pages_visually_reviewed": true,
+  "all_notes_match_source": true,
+  "script_sha256": "f751125ff6d3f705f6eec54bfe88efa477ca97fbc020726b788ecf107c766faf",
+  "actual_speaker_seconds": {
+    "ZHANG Kejia": 90,
+    "CAI Yangxiao": 360,
+    "XUE Pengyu": 600,
+    "ZHOU Xiyu": 750
+  }
+}

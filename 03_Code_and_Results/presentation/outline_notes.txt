@@ -1,0 +1,22 @@
+Group 9 presentation timing and notes
+
+Main presentation: slides 1–30, exactly 1,800 allocated seconds = 30:00.
+Introduction/work overview, ZHANG Kejia: 90 seconds (slides 1–2).
+Part I, CAI Yangxiao: 360 seconds (slides 3–9).
+Part II, XUE Pengyu: 600 seconds (slides 10–19).
+Part III, ZHOU Xiyu: 750 seconds (slides 20–30).
+Slide 31: separate 10-minute Q&A; not part of main 30-minute total.
+Slides 32–34: optional backup/reference pages; zero allocated main time.
+
+English slide text. English and Chinese speaker notes are alternative scripts: read one language only.
+Main non-divider English scripts average approximately 110–130 words per allocated minute, leaving the visual cues for brief pauses at a normal speaking pace. Rehearse with the displayed per-slide timings; the allocation is exact, actual delivery still requires rehearsal.
+Chinese notes use the members' confirmed Latin names rather than introducing unverified Chinese character spellings.
+
+Confirmed implementations: ISTA—ZHOU Xiyu; FISTA—XUE Pengyu; cyclic CD—ZHANG Kejia; ADMM—CAI Yangxiao.
+All four share report writing/revision, experimental design, and experimental evaluation.
+ZHANG Kejia also owns PPT design and the introduction/work overview.
+
+Numerical claims refer only to the latest 2026-11-06-four-solvers CSV records and current report sections.
+The main comparison uses beta=1; three-repeat beta sensitivity is separate from five-repeat primary timing.
+At correlation .99 ADMM has the lowest mean time, but FISTA is faster on two of the three individual instances.
+ADMM Gram/Cholesky preparation is included; all objectives and common residuals use returned z.

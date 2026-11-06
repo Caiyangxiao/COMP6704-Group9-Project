@@ -74,7 +74,7 @@ tectonic --keep-logs --outdir ../02_Report report.tex
 
 会产生 ../02_Report/report.pdf；审核后可保存为 Lasso_Project_Report.pdf。
 修改模板后，先运行 build_four_solver_report.py 再编译；直接改 report.tex 会在下次构建时覆盖。
-GitHub 链接可替换模板中的 projectrepository 宏，再构建并编译。
+GitHub 链接已写入模板中的 projectrepository 宏；修改后需重新构建并编译。
 提交前必须核对总页数（包括参考文献）不超过 15 页。
 
 6. ADMM 与比较口径
@@ -103,9 +103,34 @@ output/four_solver_independent_audit.json：独立复核结果和需要保留的
 历史 update_report_extended_figures.py 只适用于旧三算法 TikZ 报告，
 不要对当前四算法 report.tex 执行它；新报告使用 build_four_solver_report.py。
 
-8. 提交前事项
+8. 当前提交文件与确认分工
 
-GitHub URL 按小组要求暂留明确占位，须补入实际仓库链接后重新构建 PDF。
-四种算法本身不能证明每个人独立实现；请据真实工作记录个人实现、验证与讲解分工。
-现有 PPT 和中文讲稿没有自动改成四算法版，需要与新报告同步后再合并提交。
-作业要求 30 分钟展示、10 分钟 Q&A，四位成员均参与。
+最终合并PDF：../06_Submission/Group9.pdf。
+报告15页（包含参考文献），PPT34页（30页主讲、1页Q&A、3页备份）。
+GitHub：https://github.com/Caiyangxiao/COMP6704-Group9-Project；已写入报告和PPT。
+
+PPT制作及引言/工作概述：ZHANG Kejia。
+Part I：CAI Yangxiao；Part II：XUE Pengyu；Part III：ZHOU Xiyu。
+ISTA：ZHOU Xiyu；FISTA：XUE Pengyu；循环CD：ZHANG Kejia；ADMM：CAI Yangxiao。
+报告撰写修改、实验设计及评估：四人共同协作。
+这些分工由小组明确提供，已在报告与PPT一致记录。
+主讲计划30分钟，另有四人共同参与的10分钟Q&A。
+
+9. PPT与提交文件的复现（不重新拟合）
+
+PPT及其双语讲稿、时间表位于../05_Presentation/。
+数值实验使用requirements-admm.txt记录的环境；PPT制作使用requirements-presentation.txt。
+后一环境仅读取冻结的CSV/NPZ，不改变报告中记录的数值实验环境或结果。
+
+python -m pip install -r requirements-presentation.txt
+python scripts/plot_presentation_assets.py
+python scripts/build_presentation.py
+
+在安装PowerPoint的Windows环境中导出：
+powershell -NoProfile -File scripts/export_presentation.ps1
+python scripts/combine_submission.py
+
+可编辑标题/备注/主讲时间见presentation/slide_content.json；
+确认分工见presentation/team_roles.json；布局和可编辑正文见scripts/build_presentation.py。
+PPT专用图位于output/figures/presentation_four_solvers/，镜像到04_Figures同名目录。
+合并脚本保留横竖页面尺寸、可搜索文字、链接及书签，并检查报告<=15页、合并文件<40MB。
