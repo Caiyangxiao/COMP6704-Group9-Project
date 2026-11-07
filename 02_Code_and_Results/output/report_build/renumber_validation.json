@@ -1,0 +1,15 @@
+{
+  "report_pages": 15,
+  "size_bytes": 268092,
+  "canonical_path": "C:\\Users\\25244\\Desktop\\Codex\\COMP6704\\Group Project\\COMP6704_Group9_Lasso_Package\\01_Report\\Lasso_Project_Report.pdf",
+  "source_sha256": "b8017cfa7e6bd47c4f943b391e51e442936859a450364821a02f33ff4635e57a",
+  "canonical_sha256": "a4160fb4e5ee6d914bb4c72530e9fd52de499e13cce824710105bb93015111e8",
+  "compiled_successfully": true,
+  "code_directory_reference": "02_Code_and_Results",
+  "code_directory_reference_page": 6,
+  "text_identical_except_directory_renumbering": true,
+  "repository_url_preserved": true,
+  "confirmed_contributions_preserved": true,
+  "layout_overflow": false,
+  "undefined_references": false
+}

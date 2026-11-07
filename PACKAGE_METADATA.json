@@ -1,29 +1,29 @@
 {
-  "date": "2026-11-06",
+  "date": "2026-11-07",
   "group": 9,
   "topic": "Convex Optimization",
-  "revision": "four-solvers-final-report-and-presentation",
+  "revision": "four-solvers-final-report-and-presentation-renumbered",
   "methods": [
     "ISTA",
     "FISTA",
     "CD",
     "ADMM"
   ],
-  "report": "02_Report/Lasso_Project_Report.pdf",
+  "report": "01_Report/Lasso_Project_Report.pdf",
   "report_pages": 15,
   "report_figures": 9,
   "report_tables": 9,
   "reference_entries": 20,
-  "report_source_sha256": "516f908eddef10ca6c5065f7812f220a90e059a89b53f32b268cfdec3df27447",
-  "report_pdf_sha256": "90b8076ae8f59837583649be7db64d94545ef29231b59b633fbd1fe45834b513",
-  "report_pdf_bytes": 268114,
+  "report_source_sha256": "b8017cfa7e6bd47c4f943b391e51e442936859a450364821a02f33ff4635e57a",
+  "report_pdf_sha256": "a4160fb4e5ee6d914bb4c72530e9fd52de499e13cce824710105bb93015111e8",
+  "report_pdf_bytes": 268092,
   "generated_figure_groups": 11,
   "figure_formats": [
     "png",
     "svg",
     "pdf"
   ],
-  "current_result_root": "03_Code_and_Results/results/2026-11-06-four-solvers",
+  "current_result_root": "02_Code_and_Results/results/2026-11-06-four-solvers",
   "csv_rows": {
     "main": {
       "optimization_results.csv": 16,
@@ -75,11 +75,10 @@
   "repository_url_source": "provided by the group",
   "pending_submission_items": [],
   "historical_materials": [
-    "01_Chinese_Guide",
-    "04_Figures/presentation",
-    "04_Figures/original_benchmark",
-    "03_Code_and_Results/results/2026-10-06",
-    "03_Code_and_Results/results/2026-10-07-extended"
+    "03_Figures/presentation",
+    "03_Figures/original_benchmark",
+    "02_Code_and_Results/results/2026-10-06",
+    "02_Code_and_Results/results/2026-10-07-extended"
   ],
   "manifest_excludes": [
     "FILE_MANIFEST_SHA256.csv",
@@ -89,16 +88,16 @@
     ".venv",
     ".pytest_cache"
   ],
-  "presentation_file": "05_Presentation/COMP6704_Group9_Lasso_Presentation.pptx",
+  "presentation_file": "04_Presentation/COMP6704_Group9_Lasso_Presentation.pptx",
   "presentation_slides": 34,
   "main_presentation_slides": 30,
   "main_presentation_seconds": 1800,
   "qa_seconds": 600,
   "backup_slides": 3,
-  "submission_file": "06_Submission/Group9.pdf",
+  "submission_file": "05_Submission/Group9.pdf",
   "submission_pages": 49,
-  "submission_bytes": 2082727,
-  "submission_sha256": "d58d0cac08c4526037ea2e0ee03b5a11d935c2bfe5dc0ded6cc1ff2987d622d9",
+  "submission_bytes": 2082703,
+  "submission_sha256": "4a8fe06f6f465a73b232547decd03602da6d788b8b56e92b3b61591f4e877004",
   "confirmed_team_roles": {
     "confirmed_by_group": true,
     "members": [
@@ -135,5 +134,20 @@
   },
   "primary_readme": "README.md",
   "readme_language": "English",
-  "git_byte_preservation": ".gitattributes: * -text"
+  "git_byte_preservation": ".gitattributes: * -text",
+  "numerical_results_date": "2026-11-06",
+  "directory_layout": [
+    "01_Report",
+    "02_Code_and_Results",
+    "03_Figures",
+    "04_Presentation",
+    "05_Submission"
+  ],
+  "directory_revision": {
+    "date": "2026-11-07",
+    "guide_removed": true,
+    "active_directory_references_checked": true,
+    "preserved_data_result_and_archive_files": 556,
+    "pdf_content_preserved_except_directory_references": true
+  }
 }
