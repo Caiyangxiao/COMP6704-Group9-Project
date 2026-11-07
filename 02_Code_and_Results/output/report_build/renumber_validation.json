@@ -11,5 +11,7 @@
   "repository_url_preserved": true,
   "confirmed_contributions_preserved": true,
   "layout_overflow": false,
-  "undefined_references": false
+  "undefined_references": false,
+  "validation_scope": "Historical directory-renumbering audit before the final coursework corrections; hashes identify the version checked at that stage.",
+  "current_audit_record_package_relative": "05_Submission/final_pdf_audit.json"
 }

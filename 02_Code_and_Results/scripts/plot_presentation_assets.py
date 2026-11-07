@@ -35,6 +35,33 @@ MARKERS = {"ISTA": "o", "FISTA": "s", "CD": "^", "ADMM": "D"}
 STYLES = {"ISTA": "-", "FISTA": "--", "CD": "-.", "ADMM": ":"}
 
 
+def render_formula_asset(text, path):
+    """Render on a roomy canvas, then crop actual alpha ink with safe padding.
+
+    Matplotlib's tight text bbox can omit the top/bottom of a fraction or sum.
+    Cropping the rendered alpha channel preserves the complete mathematical glyphs.
+    """
+    from io import BytesIO
+    from PIL import Image
+    with plt.rc_context({"mathtext.fontset": "dejavuserif", "font.family": "DejaVu Serif"}):
+        fig = plt.figure(figsize=(14, 4))
+        fig.patch.set_alpha(0)
+        fig.text(.5, .5, text, ha="center", va="center", fontsize=28,
+                 color="#17232d", linespacing=1.65, clip_on=False)
+        buffer = BytesIO()
+        fig.savefig(buffer, format="png", dpi=180, transparent=True)
+        plt.close(fig)
+        buffer.seek(0)
+        rgba = Image.open(buffer).convert("RGBA")
+        box = rgba.getchannel("A").getbbox()
+        if box is None or box[0] == 0 or box[1] == 0 or box[2] == rgba.width or box[3] == rgba.height:
+            raise RuntimeError("Formula ink reaches the rendering canvas boundary")
+        pad = 20
+        crop = (max(0, box[0]-pad), max(0, box[1]-pad),
+                min(rgba.width, box[2]+pad), min(rgba.height, box[3]+pad))
+        rgba.crop(crop).save(path, dpi=(180, 180))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", default="results/2026-11-06-four-solvers")
@@ -344,13 +371,8 @@ def main():
     formula_records = []
     with plt.rc_context({"mathtext.fontset":"dejavuserif","font.family":"DejaVu Serif"}):
         for name, text in formulas.items():
-            fig = plt.figure(figsize=(12, 2.5 if "\n" in text else 1.2))
-            fig.patch.set_alpha(0)
-            fig.text(.5,.5,text,ha="center",va="center",fontsize=28,
-                     color="#17232d",linespacing=1.65)
             path=target/f"{name}.png"
-            fig.savefig(path,dpi=180,bbox_inches="tight",pad_inches=.08,transparent=True)
-            plt.close(fig)
+            render_formula_asset(text, path)
             formula_records.append({"name":name,"file":path.name,"bytes":path.stat().st_size,
                                     "sha256":hashlib.sha256(path.read_bytes()).hexdigest(),
                                     "transparent_background":True,"dpi":180})

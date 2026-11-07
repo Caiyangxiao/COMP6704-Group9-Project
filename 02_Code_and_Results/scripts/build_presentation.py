@@ -279,7 +279,7 @@ def main():
             takeaway(s,'Tiny test-error differences at fixed λ provide no evidence of optimizer predictive superiority.')
             source(s,'Report Section 5.2, Table 4; synthetic values are means ± sample SD across three instances.')
         elif i==22:
-            headline(s,'ISTA is fastest on the synthetic inputs; ADMM is fastest on Diabetes here.')
+            headline(s,'ISTA has the lowest synthetic mean; ADMM is fastest on Diabetes here.')
             picture(s,'main_runtime',.7,1.74,11.95,4.37)
             takeaway(s,'Time includes ADMM preparation. The conclusion concerns these implementations and this host.')
             source(s,'Report Section 5.1, Table 3; 5 timings per instance. Synthetic: means ± sample SD of three instance medians.')

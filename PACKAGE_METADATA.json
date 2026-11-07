@@ -2,7 +2,7 @@
   "date": "2026-11-07",
   "group": 9,
   "topic": "Convex Optimization",
-  "revision": "four-solvers-final-report-and-presentation-renumbered",
+  "revision": "four-solvers-final-coursework-audited",
   "methods": [
     "ISTA",
     "FISTA",
@@ -14,9 +14,9 @@
   "report_figures": 9,
   "report_tables": 9,
   "reference_entries": 20,
-  "report_source_sha256": "b8017cfa7e6bd47c4f943b391e51e442936859a450364821a02f33ff4635e57a",
-  "report_pdf_sha256": "a4160fb4e5ee6d914bb4c72530e9fd52de499e13cce824710105bb93015111e8",
-  "report_pdf_bytes": 268092,
+  "report_source_sha256": "b5351468de9894c24ba79dc20fc011d61092a1f4b17ca2134827c89eb1cf1782",
+  "report_pdf_sha256": "a8faa9fcb7a817101928fbf06f98dd470a4a23317b4be008d876c1922ff1aeb3",
+  "report_pdf_bytes": 268085,
   "generated_figure_groups": 11,
   "figure_formats": [
     "png",
@@ -59,7 +59,11 @@
     "bilingual_notes_match_all_34_slides": true,
     "combined_49_pages_rendered": true,
     "presentation_all_pages_visually_reviewed": true,
-    "submission_text_links_and_page_sizes_preserved": true
+    "submission_text_links_and_page_sizes_preserved": true,
+    "final_coursework_requirements_checked": true,
+    "all_49_pages_visually_reviewed": true,
+    "formula_clipping_corrected": true,
+    "tables_and_ranking_qualifiers_rechecked": true
   },
   "runtime": {
     "python": "3.10.12",
@@ -96,8 +100,8 @@
   "backup_slides": 3,
   "submission_file": "05_Submission/Group9.pdf",
   "submission_pages": 49,
-  "submission_bytes": 2082703,
-  "submission_sha256": "4a8fe06f6f465a73b232547decd03602da6d788b8b56e92b3b61591f4e877004",
+  "submission_bytes": 2075125,
+  "submission_sha256": "9d69275c733be824d45ee626fae319c14f4991ea65848a13234a635c54f1ca48",
   "confirmed_team_roles": {
     "confirmed_by_group": true,
     "members": [
@@ -149,5 +153,13 @@
     "active_directory_references_checked": true,
     "preserved_data_result_and_archive_files": 556,
     "pdf_content_preserved_except_directory_references": true
+  },
+  "final_coursework_audit": {
+    "date": "2026-11-07",
+    "record": "05_Submission/final_pdf_audit.json",
+    "all_pages_visually_reviewed": true,
+    "file_level_requirements_passed": true,
+    "corrections_applied": 4,
+    "numerical_results_unchanged": true
   }
 }

@@ -306,10 +306,12 @@ Preparation can be amortized in other workloads, but no factorization is shared 
 \subsection{ADMM penalty sensitivity}
 @@SENSITIVITY_TABLE@@
 @@SENSITIVITY_ANALYSIS@@
+
 \begin{figure}[!htb]\centering
 \includegraphics[width=\linewidth]{admm_penalty_sensitivity.pdf}
 \caption{ADMM algorithmic-penalty sensitivity at fixed Lasso $\lambda$ and stopping tolerance. Main inputs have one fixed instance each; the highly correlated summary uses three instance medians. Each setting has three timing repetitions.}\label{fig:admm_sensitivity}
 \end{figure}
+
 The primal and dual residuals need not fall at the same rate. Their saved traces help diagnose the split iteration, while the common $R(z)$ determines accuracy for every solver. Changing $\beta$ changes the algorithm; changing $\lambda$ changes the estimator. Keeping those roles separate prevents a parameter-tuning advantage from being mistaken for a different predictive model.
 
 \FloatBarrier

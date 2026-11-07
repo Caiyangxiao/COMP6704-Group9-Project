@@ -688,7 +688,7 @@
     "source_refs": [
       "Report §5.1; main/optimization_results.csv; figure efficiency_summary"
     ],
-    "main_takeaway": "ISTA is fastest on the original synthetic designs; ADMM is fastest on this Diabetes split.",
+    "main_takeaway": "ISTA has the lowest synthetic mean; ADMM is fastest on this Diabetes split.",
     "body": [
       "Synthetic mean time (ms): ISTA 0.448; FISTA 0.608; CD 0.959; ADMM 0.618",
       "Diabetes time (ms): ISTA 1.510; FISTA 1.449; CD 0.677; ADMM 0.582",
@@ -900,8 +900,8 @@
     "student_id": "26025265R",
     "seconds": 75,
     "main_timing": true,
-    "english_notes": "The main conclusion is conditional rather than a universal ranking. All four implementations reach nearly identical Lasso solutions. ISTA is fastest on our tested independent-feature designs. ADMM is fastest on the saved Diabetes split and has the lowest mean time at positive block correlations, but FISTA wins on two of the three most-correlated instances. ADMM's preparation becomes substantial as feature count grows, and its beta parameter changes computational progress. Lambda instead changes the estimator's sparsity and shrinkage. Our limits include small dense matrices, one real-data split, three synthetic instances, Python coordinate loops, and a specific monitoring and timing convention. A small stationarity residual is not an objective-error certificate. These extensions would test how robust the present conclusions are under changed implementations and workloads. Future work should compare compiled coordinate descent, restarted FISTA, structure-aware or adaptive ADMM, dual-gap stopping, and validation-selected penalties over repeated real-data splits.",
-    "chinese_notes": "主要结论是有条件的排名，而不是普遍优胜者。四种实现达到几乎相同的 Lasso 解。ISTA 在测试的独立特征设计中最快；ADMM 在保存的 Diabetes 划分上最快，并在正块相关设置中平均时间最低，但 FISTA 在三个最高相关实例中的两个获胜。特征增加时，ADMM 准备成本明显，其 beta 参数改变计算进展；lambda 则改变估计量的稀疏与收缩。局限包括小型稠密矩阵、单一真实数据划分、三个合成实例、Python 坐标循环，以及特定监测和计时口径。小平稳性残差不是目标误差证书。这些扩展可以检验实现和工作负载改变后，目前结论是否仍然稳健。后续可比较编译 CD、重启 FISTA、结构化或自适应 ADMM、对偶间隙停止，并在重复真实划分上用验证集选惩罚。",
+    "english_notes": "The main conclusion is conditional rather than a universal ranking. All four implementations reach nearly identical Lasso solutions. ISTA has the lowest mean time on our tested independent-feature designs. ADMM is fastest on the saved Diabetes split and has the lowest mean time at positive block correlations, but FISTA wins on two of the three most-correlated instances. ADMM's preparation becomes substantial as feature count grows, and its beta parameter changes computational progress. Lambda instead changes the estimator's sparsity and shrinkage. Our limits include small dense matrices, one real-data split, three synthetic instances, Python coordinate loops, and a specific monitoring and timing convention. A small stationarity residual is not an objective-error certificate. These extensions would test how robust the present conclusions are under changed implementations and workloads. Future work should compare compiled coordinate descent, restarted FISTA, structure-aware or adaptive ADMM, dual-gap stopping, and validation-selected penalties over repeated real-data splits.",
+    "chinese_notes": "主要结论是有条件的排名，而不是普遍优胜者。四种实现达到几乎相同的 Lasso 解。ISTA 在测试的独立特征设计中平均时间最低；ADMM 在保存的 Diabetes 划分上最快，并在正块相关设置中平均时间最低，但 FISTA 在三个最高相关实例中的两个获胜。特征增加时，ADMM 准备成本明显，其 beta 参数改变计算进展；lambda 则改变估计量的稀疏与收缩。局限包括小型稠密矩阵、单一真实数据划分、三个合成实例、Python 坐标循环，以及特定监测和计时口径。小平稳性残差不是目标误差证书。这些扩展可以检验实现和工作负载改变后，目前结论是否仍然稳健。后续可比较编译 CD、重启 FISTA、结构化或自适应 ADMM、对偶间隙停止，并在重复真实划分上用验证集选惩罚。",
     "visual_cues": [
       "Summarize one advantage per method; pause 4 s on the limitations box."
     ],
@@ -911,17 +911,17 @@
     "main_takeaway": "The best measured solver depends on data geometry, implementation and cost convention.",
     "body": [
       "Nearly identical final solutions; different costs to reach them",
-      "ISTA: fastest tested independent-feature designs",
+      "ISTA: lowest mean time on tested independent-feature designs",
       "ADMM: fastest saved Diabetes split; lowest positive-correlation means",
       "FISTA: faster on 2 of 3 highest-correlation instances",
       "Limits: small dense designs, one real split, few instances, monitored Python implementations"
     ],
     "notes_language_policy": "English and Chinese are alternative scripts; read one language only.",
     "layout": "conclusions",
-    "english_word_count": 145,
+    "english_word_count": 148,
     "planned_elapsed_start_seconds": 1695,
     "planned_elapsed_end_seconds": 1770,
-    "english_words_per_allocated_minute": 116.0
+    "english_words_per_allocated_minute": 118.4
   },
   {
     "id": 30,

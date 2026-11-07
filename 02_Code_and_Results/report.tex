@@ -261,7 +261,7 @@ FISTA & $1.449$ & 85 & $1812.178$ & $0.31$\\
 CD & $0.677$ & 14 & $1812.178$ & $0.40$\\
 ADMM & $0.582$ & 28 & $1812.178$ & $0.75$\\
 \bottomrule\end{tabular*}
-\par\vspace{2pt}{\footnotesize Synthetic entries: mean $\pm$ sample SD across three instances. Time per instance is the median of five runs. All preparation is included.}
+\par\vspace{2pt}{\footnotesize Synthetic entries: mean $\pm$ sample SD across three instances. Time per instance is the median of five runs. All solver-specific preparation is included; shared spectral setup is excluded.}
 \end{table}
 
 ISTA has the smallest synthetic mean time, $0.448 \pm 0.004$ ms. FISTA and ADMM take $0.608 \pm 0.044$ and $0.618 \pm 0.069$ ms; their nearby means do not establish a robust distinction. CD uses only five sweeps but makes 50 sequential scalar updates per sweep. Vectorized NumPy kernels and Python coordinate loops have different overheads, which this study does not separately profile.
@@ -405,10 +405,12 @@ Correlation 0.99 & 0.1 & $15.493 \pm 2.991$ & $656.0 \pm 174.0$\\
 \end{table}
 
 Among the three tested settings, $\beta=1$ has the smallest time and round count on synthetic seed 0 and Diabetes. The highly correlated three-instance mean is lower at $\beta=0.1$ than at $1$, but this is not true on every seed. At $\beta=10$, the highly correlated fits need roughly 7,200--8,300 rounds and are much slower, although all meet the same accuracy threshold. Thus a fixed default is not uniformly optimal. The sensitivity outcomes do not retroactively tune the main comparison, and runtime changes do not establish changes in predictive quality.
+
 \begin{figure}[!htb]\centering
 \includegraphics[width=\linewidth]{admm_penalty_sensitivity.pdf}
 \caption{ADMM algorithmic-penalty sensitivity at fixed Lasso $\lambda$ and stopping tolerance. Main inputs have one fixed instance each; the highly correlated summary uses three instance medians. Each setting has three timing repetitions.}\label{fig:admm_sensitivity}
 \end{figure}
+
 The primal and dual residuals need not fall at the same rate. Their saved traces help diagnose the split iteration, while the common $R(z)$ determines accuracy for every solver. Changing $\beta$ changes the algorithm; changing $\lambda$ changes the estimator. Keeping those roles separate prevents a parameter-tuning advantage from being mistaken for a different predictive model.
 
 \FloatBarrier
@@ -417,7 +419,7 @@ The study covers small dense designs, four block-correlation levels, and feature
 
 The shared residual gives a consistent stopping rule, not a bound on objective error. ADMM setup is included while the shared spectral calculation is excluded; other cost conventions may change end-to-end conclusions. No penalty was selected by test error, and no confidence interval or significance claim is inferred from the small timing samples.
 
-The four methods reach nearly identical Lasso solutions while exposing distinct computational trade-offs. ISTA is fastest on the tested independent-feature designs. ADMM is fastest on the saved Diabetes split and has the smallest mean at positive block correlations, while FISTA wins on two of the three most-correlated instances. ADMM's dense preparation becomes material as feature count grows, and its algorithmic penalty changes convergence speed. The statistical penalty instead changes sparsity and shrinkage, often trading a smaller model for higher test error. Future comparisons should examine compiled CD, adaptive or structure-aware ADMM, restarted FISTA, dual-gap certificates, and validation-selected penalties over repeated real-data splits.
+The four methods reach nearly identical Lasso solutions while exposing distinct computational trade-offs. ISTA has the lowest mean time on the tested independent-feature designs. ADMM is fastest on the saved Diabetes split and has the smallest mean at positive block correlations, while FISTA wins on two of the three most-correlated instances. ADMM's dense preparation becomes material as feature count grows, and its algorithmic penalty changes convergence speed. The statistical penalty instead changes sparsity and shrinkage, often trading a smaller model for higher test error. Future comparisons should examine compiled CD, adaptive or structure-aware ADMM, restarted FISTA, dual-gap certificates, and validation-selected penalties over repeated real-data splits.
 
 \subsection*{Author contributions}
 All four members contributed to report writing and revision, experimental design, and experimental evaluation. The individual implementation and presentation responsibilities are listed below.

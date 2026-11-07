@@ -153,7 +153,7 @@
     },
     {
       "name": "main_runtime",
-      "caption": "All four solvers rerun on the same host. Synthetic bars: mean ± sample SD over three instance medians (five repeats per instance). Diabetes bars: median of five repeats, with all five timing points shown. Solver setup and monitoring are included; shared spectral setup is excluded.",
+      "caption": "All four solvers rerun on the same host. Synthetic bars: mean \u00b1 sample SD over three instance medians (five repeats per instance). Diabetes bars: median of five repeats, with all five timing points shown. Solver setup and monitoring are included; shared spectral setup is excluded.",
       "files": [
         {
           "name": "main_runtime.png",
@@ -321,7 +321,7 @@
     },
     {
       "name": "coefficient_analysis",
-      "caption": "CD coefficients at lambda/lambda_max=0.1. Synthetic: first ten of fifty coefficients, generating values versus mean ± sample SD across three instances in original units. Diabetes: standardized coefficients, with no known true support. The CD fit represents the converged model shared numerically by all four solvers.",
+      "caption": "CD coefficients at lambda/lambda_max=0.1. Synthetic: first ten of fifty coefficients, generating values versus mean \u00b1 sample SD across three instances in original units. Diabetes: standardized coefficients, with no known true support. The CD fit represents the converged model shared numerically by all four solvers.",
       "files": [
         {
           "name": "coefficient_analysis.png",
@@ -469,10 +469,12 @@
     {
       "name": "eq_cd",
       "file": "eq_cd.png",
-      "bytes": 21599,
-      "sha256": "c972fc96f604e16b4d1b59840fb992c1defdf56bd3f09c8ac3d017517a38cc70",
+      "bytes": 23841,
+      "sha256": "93d9046e7076821e35dc0a20e522d41e8594f74084b5c6a77024f70bdffe63d2",
       "transparent_background": true,
-      "dpi": 180
+      "dpi": 180,
+      "generator_sha256": "d1d0f5c0984dcdc9deabf43307e13f8d9c8e215a2655c2ceb7af29e737f387a4",
+      "rendering": "Large transparent canvas followed by alpha-ink cropping with 20-pixel padding"
     },
     {
       "name": "eq_admm",
@@ -504,5 +506,13 @@
     "date": "2026-11-07",
     "generator_sha256_after_path_update": "3280f97b0b6368a6231b90f3afb7571efa51d296396049ca8ece29a7af292dd0",
     "description": "Only the mirrored output directory changed from 04_Figures to 03_Figures. Existing figures were not regenerated; generator_sha256 records the original figure-generation source."
+  },
+  "formula_revision": {
+    "date": "2026-11-07",
+    "regenerated_files": [
+      "eq_cd.png"
+    ],
+    "generator_sha256_after_formula_fix": "d1d0f5c0984dcdc9deabf43307e13f8d9c8e215a2655c2ceb7af29e737f387a4",
+    "description": "Only the CD equation image was regenerated to restore clipped fraction and summation glyphs. Existing numerical charts and other equation images were preserved."
   }
 }

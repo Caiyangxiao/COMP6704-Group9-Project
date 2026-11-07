@@ -96,7 +96,7 @@ def main():
         body.append(f"{method} & ${float(r['time_seconds'])*1000:.3f}$ & {int(r['rounds'])} & ${float(r['objective']):.3f}$ & ${float(r['residual'])*1e6:.2f}$" + r'\\')
     fields['MAIN_TABLE'] = tabular('Four-solver comparison at $\\lambda=0.1\\lambda_{\\max}$ and $R\\leq10^{-6}$.', 'tab:main', 'lrrrr',
         'Method & Time (ms) & Rounds & Final $F$ & $R$ ($10^{-6}$)', body,
-        'Synthetic entries: mean $\\pm$ sample SD across three instances. Time per instance is the median of five runs. All preparation is included.')
+        'Synthetic entries: mean $\\pm$ sample SD across three instances. Time per instance is the median of five runs. All solver-specific preparation is included; shared spectral setup is excluded.')
     fields['MAIN_ANALYSIS'] = (
         f"ISTA has the smallest synthetic mean time, ${mm('ISTA','time_seconds',scale=1000)}$ ms. "
         f"FISTA and ADMM take ${mm('FISTA','time_seconds',scale=1000)}$ and ${mm('ADMM','time_seconds',scale=1000)}$ ms; "
@@ -198,7 +198,7 @@ def main():
         "At $\\beta=10$, the highly correlated fits need roughly 7,200--8,300 rounds and are much slower, although all meet the same accuracy threshold. "
         "Thus a fixed default is not uniformly optimal. The sensitivity outcomes do not retroactively tune the main comparison, and runtime changes do not establish changes in predictive quality.")
     fields['CONCLUSION'] = (
-        "The four methods reach nearly identical Lasso solutions while exposing distinct computational trade-offs. ISTA is fastest on the tested independent-feature designs. "
+        "The four methods reach nearly identical Lasso solutions while exposing distinct computational trade-offs. ISTA has the lowest mean time on the tested independent-feature designs. "
         "ADMM is fastest on the saved Diabetes split and has the smallest mean at positive block correlations, while FISTA wins on two of the three most-correlated instances. "
         "ADMM's dense preparation becomes material as feature count grows, and its algorithmic penalty changes convergence speed. "
         "The statistical penalty instead changes sparsity and shrinkage, often trading a smaller model for higher test error. "

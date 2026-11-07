@@ -38,8 +38,8 @@
     "presentation_design": "ZHANG Kejia",
     "repository": "https://github.com/Caiyangxiao/COMP6704-Group9-Project"
   },
-  "source_content_sha256": "0654a33281689213d2ce81f626d3c203d104e2da414d3495107bf04d772db326",
-  "presentation_sha256": "32e2523da9bb17d75f062f936e2bba251d45caa16c7f53b143bf82d29c0b0696",
+  "source_content_sha256": "709c3d12ca48b0dcb2b41760bec0b96d6ddb7dd6cb9332b81b8df784d84cb3ad",
+  "presentation_sha256": "313219a7f666c59e700d030d74a6f6a9214278cf5b5a260402260b7df3aded5d",
   "used_assets": {
     "output\\figures\\presentation_four_solvers\\admm_beta.png": "67088bee89e4e14dda7a8a241fc30823ae5ae5a12d78da87c6541ece03ff374c",
     "output\\figures\\presentation_four_solvers\\admm_diagnostics.png": "5def29af1f7ceecefe3bee03e94a92b71baa4830c42bc13ac4ea014901552627",
@@ -47,7 +47,7 @@
     "output\\figures\\presentation_four_solvers\\correlation_time.png": "b064f1b94d83d079b6f4e048707728dd3609d656caf36547af936fdc9103a388",
     "output\\figures\\presentation_four_solvers\\dimension_time.png": "723651c70375f93cd56dafce32d72299f7d04a82ccbfe151a7aa52d1183d1054",
     "output\\figures\\presentation_four_solvers\\eq_admm.png": "5149c4c4541d9ee6a661d652b7720d8b31f31ad74a17cdc547d9766f16759a8a",
-    "output\\figures\\presentation_four_solvers\\eq_cd.png": "c972fc96f604e16b4d1b59840fb992c1defdf56bd3f09c8ac3d017517a38cc70",
+    "output\\figures\\presentation_four_solvers\\eq_cd.png": "93d9046e7076821e35dc0a20e522d41e8594f74084b5c6a77024f70bdffe63d2",
     "output\\figures\\presentation_four_solvers\\eq_fista.png": "ff8ac14ebd8bb76306ad015233e0e9e11c967b5316b675920ff7ec1399e3775b",
     "output\\figures\\presentation_four_solvers\\eq_ista.png": "a5db92fb6ef3cb3021b58ef58fd07beb3b2743b894bb48faedae2016f33ea5bf",
     "output\\figures\\presentation_four_solvers\\eq_kkt.png": "beec770b1f7fd15d4dff6611a08dea7ccb4029e25118e08543d945962fbd7dfb",
@@ -61,10 +61,10 @@
     "output\\figures\\presentation_four_solvers\\timing_repetitions.png": "5d9c9b12d437c42d475dbe737d39108118c7acaab9a8e858d1a81a91a730f09e",
     "output\\figures\\presentation_four_solvers\\truth_support.png": "545fd444bcb74e6b3fc9e95c93dabe60e653916959f430936d0b13385d7f1273"
   },
-  "pdf_sha256": "6afea7f4630fc515bf528af627f7ebd1ad7252338d1d7c1a08f8b62c3299499d",
+  "pdf_sha256": "183895be10bb4f610503a7c99c86bf5556d0ab456f4d263170b51c683bd02b5e",
   "pdf_page_count": 34,
-  "pdf_size_bytes": 1839490,
-  "notes_sha256": "02e8bc149567afcf72b38abd2846b3ec38562d777f9e2d3a45c4c1d5891a0e56",
+  "pdf_size_bytes": 1831933,
+  "notes_sha256": "70e43d68b52c0cafe588c189aa864964affdaee2599b844a4298d39a8635eaf7",
   "timing_sha256": "df94eafb9e6d646f97edde6c2e597e2a9b3d001159eee1cdef8f7636ffef3856",
   "validation": {
     "bilingual_notes_match_source": true,

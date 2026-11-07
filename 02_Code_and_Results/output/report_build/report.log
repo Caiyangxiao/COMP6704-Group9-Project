@@ -592,7 +592,7 @@ File: output/figures/four_solvers//admm_penalty_sensitivity.pdf Graphic file (t
 ype pdf)
 <use output/figures/four_solvers//admm_penalty_sensitivity.pdf>
  [12] [13] [14]
-Underfull \hbox (badness 1142) in paragraph at lines 532--535
+Underfull \hbox (badness 1142) in paragraph at lines 534--537
 []\T1/ptm/m/n/9 Hui Zou. 2006. []The adap-tive lasso and its or-a-cle prop-er-t
 ies[]. \T1/ptm/m/it/9 Jour-nal of the Amer-i-can Sta-tis-ti-cal As-so-ci-a-tion
 \T1/ptm/m/n/9 ,
@@ -602,4 +602,4 @@ ies[]. \T1/ptm/m/it/9 Jour-nal of the Amer-i-can Sta-tis-ti-cal As-so-ci-a-tion
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 2E3FF6B6FD9CC39F5238AB2ADBAEB2C7;5778.
  )
-Output written on report.xdv (15 pages, 86628 bytes).
+Output written on report.xdv (15 pages, 86712 bytes).

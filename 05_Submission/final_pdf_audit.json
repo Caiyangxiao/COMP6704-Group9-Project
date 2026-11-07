@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-07",
+  "source_requirements": "Original course assignment, Sections 3 and 4",
+  "report_pages": 15,
+  "presentation_slides": 34,
+  "combined_pages": 49,
+  "combined_bytes": 2075125,
+  "submission_sha256": "9d69275c733be824d45ee626fae319c14f4991ea65848a13234a635c54f1ca48",
+  "all_49_pages_visually_reviewed": true,
+  "confirmed_member_names_ids_and_roles_match": true,
+  "report_sections_literature_formulation_methods_results_conclusions_present": true,
+  "report_github_footnote_present": true,
+  "four_algorithms_common_objective_stopping_and_timing_checked": true,
+  "tables_and_main_claims_independently_checked_against_saved_results": true,
+  "main_presentation_seconds": 1800,
+  "qa_seconds": 600,
+  "all_four_have_presentation_and_qa_roles": true,
+  "all_bilingual_notes_match": true,
+  "preserved_data_result_and_archive_files": 556,
+  "corrected_findings": [
+    "Uncropped cyclic-CD formula in slide13",
+    "Paragraph boundaries around reportFigure9",
+    "Conclusion specifies lowest mean runtime for independent designs",
+    "Table3 distinguishes solver-specific preparation from excluded shared spectral setup"
+  ],
+  "all_fonts_embedded": true,
+  "text_within_media_boxes": true,
+  "no_placeholder_or_stale_path_hits": true,
+  "all_pages_have_searchable_text": true,
+  "remaining_file_level_blockers": [],
+  "requirements_requiring_real_world_execution": [
+    "Actual speaking and Q&A by all four members, timing, attendance and classroom participation",
+    "Submission by the actual presentation-week deadline and successful Canvas save",
+    "Independent implementation and academic integrity remain the responsibility of the team members"
+  ]
+}
